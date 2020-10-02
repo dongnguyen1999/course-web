@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng ký</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}" >
+
+
+</head>
+<body>
+<div th:replace="web/fragments/general :: header"></div>
+<div class="container">
+  <hr>
+  <div class="card bg-light">
+    <article class="card-body mx-auto" style="max-width: 430rem;">
+      <h1 class="card-title mt-3 text-center ">Đăng ký một tài khoản</h1>
+      <p class="text-center">Bắt đầu bằng việc tạo tài khoản miễn phí</p>
+      <form action="/register" method="post">
+        <!--Avatar image-->
+        <div class="mt-4 mb-4 avatar-container">
+          <img class="avatar" th:src="@{/web/img/default-avatar.png}" alt="default avatar">
+        </div>
+        <!--Username input-->
+        <div class="mb-3">
+          <div class="form-group input-group mb-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input name="username" class="form-control" placeholder="*Tên đăng nhập" type="text">
+          </div> <!--form-group.-->
+          <small id="usernameHelp" class="form-text text-primary hide"></small>
+        </div>
+
+        <!--Full name input-->
+        <div class="mb-3">
+          <div class="form-group input-group mb-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user-plus"></i> </span>
+            </div>
+            <input name="fullName" class="form-control" placeholder="*Tên đầy đủ" type="text">
+          </div> <!--form-group.-->
+          <small id="fullNameHelp" class="form-text text-primary hide"></small>
+        </div>
+
+        <!--Password input-->
+        <div class="mb-3">
+          <div class="form-group input-group mb-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+            </div>
+            <input name="password" class="form-control" placeholder="*Mật khẩu" type="password">
+          </div> <!--form-group.-->
+          <small id="passwordHelp" class="form-text text-primary hide"></small>
+        </div>
+
+        <!--Confirm password input-->
+        <div class="mb-3">
+          <div class="form-group input-group mb-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+            </div>
+            <input class="form-control" placeholder="*Xác nhận mật khẩu" type="password">
+          </div> <!--form-group.-->
+          <small id="confirmPassHelp" class="form-text text-primary hide"></small>
+        </div>
+
+        <!--Email input-->
+        <div class="mb-3">
+          <div class="form-group input-group mb-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+            </div>
+            <input name="email" class="form-control" placeholder="Email" type="email">
+          </div> <!--form-group.-->
+          <small id="emailHelp" class="form-text text-primary hide"></small>
+        </div>
+
+        <!--Phone number input-->
+        <div class="mb-3">
+          <div class="form-group input-group mb-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+            </div>
+            <span class="input-group-text bg-light ml-1" style="max-width: 100rem;">
+            +84
+          </span>
+            <input name="phone" class="form-control" placeholder="Số điện thoại" type="text">
+          </div> <!--form-group.-->
+          <small id="phoneHelp" class="form-text text-primary hide"></small>
+        </div>
+
+        <!--Birthday input-->
+        <div class="mb-3">
+          <div class="form-group input-group mb-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
+            </div>
+            <div class="form-control date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+              <input name="birth" class="text-dark" type="text" placeholder="Ngày sinh: dd/mm/yyyy" value="">
+              <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+              </div>
+            </div>
+          </div> <!--form-group.-->
+          <small id="birthHelp" class="form-text text-primary hide"></small>
+        </div>
+
+        <!--Work experience input-->
+        <div class="mb-3 mt">
+          <div class="form-group input-group mb-0">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-star"></i> </span>
+            </div>
+            <textarea name="workExperienceInfo" class="form-control" placeholder="Vài dòng về bản thân" type="text"></textarea>
+          </div> <!--form-group.-->
+          <small id="workExpHelp" class="form-text text-primary hide"></small>
+        </div>
+
+        <!--Submit button-->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">ĐĂNG KÝ TÀI KHOẢN</button>
+        </div> <!--form-group.-->
+
+        <p class="text-center">Đã có tài khoản? <a href="/login">Đăng nhập</a> </p>
+      </form>
+
+      <!--Message dialog-->
+      <div th:if="${registerStatus != null}" class="modal fade" id="messageDialog" tabindex="-1" role="dialog" aria-labelledby="messageDialogLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header" th:classappend="${registerStatus} ? 'bg-success' : 'bg-danger'">
+              <h5 class="modal-title text-white" id="messageDialogLabel" th:text="${registerStatus} ? 'Đăng ký thành công' : 'Đăng ký thất bại'">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" th:utext="${registerStatus} ? 'Chúc mừng bạn đã đăng ký thành công tài khoản<br>Vui lòng đăng nhập' : 'Có gì đó không ổn<br>Vui lòng thử lại sau'">
+              Message
+            </div>
+            <div class="modal-footer">
+              <a href="/login" class="btn btn-primary" th:if="${registerStatus}">Đăng nhập ngay</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+          </div>
+        </div>
+      </div><!--Modal.-->
+
+    </article><!--card-body.-->
+  </div><!--card.-->
+</div><!--container.-->
+
+<div th:replace="web/fragments/general :: footer"></div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<script th:if="${registerStatus != null}">
+  $('#messageDialog').modal('show');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Homepage</title>
+</head>
+<body>
+<h1 th:unless="${session.userModel}">Welcome!</h1>
+<h1 th:if="${session.userModel}">Welcome: <span th:text="${session.userModel.fullName}"></span></h1>
+<div th:replace="web/fragments/general :: header"></div>
+<ul>
+  <li><a href="/login">Login</a></li>
+  <li><a href="/register">Register</a></li>
+</ul>
+<div th:replace="web/fragments/general :: footer"></div>
+</body>
+</html>
