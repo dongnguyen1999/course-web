@@ -16,108 +16,108 @@
 <div class="container">
   <hr>
   <div class="card bg-light">
-    <article class="card-body mx-auto" style="max-width: 430rem;">
-      <h1 class="card-title mt-3 text-center ">Đăng ký một tài khoản</h1>
+    <h1 class="card-title mt-3 text-center ">Đăng ký một tài khoản</h1>
+    <article class="card-body mx-auto" style="width: 50vw; min-width: 15rem; max-width: 25rem;">
       <p class="text-center">Bắt đầu bằng việc tạo tài khoản miễn phí</p>
-      <form action="/register" method="post">
+      <form id="registerForm" action="/register" method="post" class="needs-validation" novalidate >
         <!--Avatar image-->
         <div class="mt-4 mb-4 avatar-container">
           <img class="avatar" th:src="@{/web/img/default-avatar.png}" alt="default avatar">
         </div>
+
         <!--Username input-->
-        <div class="mb-3">
-          <div class="form-group input-group mb-0">
+        <div class="form-row mb-2">
+          <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-user"></i> </span>
             </div>
-            <input name="username" class="form-control" placeholder="*Tên đăng nhập" type="text">
+            <input name="username" class="form-control" placeholder="*Tên đăng nhập" type="text" required>
+            <div class="valid-feedback"></div>
+            <div class="invalid-feedback">Tên tài khoản không được bỏ trống</div>
           </div> <!--form-group.-->
-          <small id="usernameHelp" class="form-text text-primary hide"></small>
         </div>
 
         <!--Full name input-->
-        <div class="mb-3">
-          <div class="form-group input-group mb-0">
+        <div class="form-row mb-2">
+          <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-user-plus"></i> </span>
             </div>
-            <input name="fullName" class="form-control" placeholder="*Tên đầy đủ" type="text">
+            <input name="fullName" class="form-control" placeholder="*Tên đầy đủ" type="text" required>
+            <div class="invalid-feedback">Tên đầy đủ không được bỏ trống</div>
           </div> <!--form-group.-->
-          <small id="fullNameHelp" class="form-text text-primary hide"></small>
         </div>
 
         <!--Password input-->
-        <div class="mb-3">
-          <div class="form-group input-group mb-0">
+        <div class="form-row mb-2">
+          <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
             </div>
-            <input name="password" class="form-control" placeholder="*Mật khẩu" type="password">
+            <input name="password" class="form-control" placeholder="*Mật khẩu" type="password" required>
+            <div class="invalid-feedback">Mật khẩu không được bỏ trống</div>
           </div> <!--form-group.-->
-          <small id="passwordHelp" class="form-text text-primary hide"></small>
         </div>
 
         <!--Confirm password input-->
-        <div class="mb-3">
-          <div class="form-group input-group mb-0">
+        <div class="form-row mb-2">
+          <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
             </div>
-            <input class="form-control" placeholder="*Xác nhận mật khẩu" type="password">
+            <input id="confirm-password" class="form-control" placeholder="*Xác nhận mật khẩu" type="password" required>
+            <div class="invalid-feedback">Hãy xác nhận mật khẩu</div>
           </div> <!--form-group.-->
-          <small id="confirmPassHelp" class="form-text text-primary hide"></small>
         </div>
 
         <!--Email input-->
-        <div class="mb-3">
-          <div class="form-group input-group mb-0">
+        <div class="form-row mb-2">
+          <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
             </div>
-            <input name="email" class="form-control" placeholder="Email" type="email">
+            <input name="email" class="form-control no-required" placeholder="Email" type="email">
+            <div class="invalid-feedback"></div>
           </div> <!--form-group.-->
-          <small id="emailHelp" class="form-text text-primary hide"></small>
         </div>
 
         <!--Phone number input-->
-        <div class="mb-3">
-          <div class="form-group input-group mb-0">
+        <div class="form-row mb-2">
+          <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
             </div>
-            <span class="input-group-text bg-light ml-1" style="max-width: 100rem;">
+            <span class="input-group-text bg-light phone-prefix" style="max-width: 100rem;">
             +84
-          </span>
-            <input name="phone" class="form-control" placeholder="Số điện thoại" type="text">
+            </span>
+            <input name="phone" class="form-control no-required" placeholder="Số điện thoại" type="text">
+            <div class="invalid-feedback"></div>
           </div> <!--form-group.-->
-          <small id="phoneHelp" class="form-text text-primary hide"></small>
         </div>
 
         <!--Birthday input-->
-        <div class="mb-3">
-          <div class="form-group input-group mb-0">
+        <div class="form-row mb-2">
+          <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
             </div>
-            <div class="form-control date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+            <div class="form-control date no-required" data-provide="datepicker" data-date-format="dd/mm/yyyy">
               <input name="birth" class="text-dark" type="text" placeholder="Ngày sinh: dd/mm/yyyy" value="">
               <div class="input-group-addon">
                 <span class="glyphicon glyphicon-th"></span>
               </div>
             </div>
           </div> <!--form-group.-->
-          <small id="birthHelp" class="form-text text-primary hide"></small>
         </div>
 
         <!--Work experience input-->
-        <div class="mb-3 mt">
-          <div class="form-group input-group mb-0">
+        <div class="form-row mb-2 mt">
+          <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-star"></i> </span>
             </div>
-            <textarea name="workExperienceInfo" class="form-control" placeholder="Vài dòng về bản thân" type="text"></textarea>
+            <textarea name="workExperienceInfo" class="form-control no-required" placeholder="Vài dòng về bản thân" type="text"></textarea>
           </div> <!--form-group.-->
-          <small id="workExpHelp" class="form-text text-primary hide"></small>
         </div>
 
         <!--Submit button-->
@@ -149,6 +149,7 @@
         </div>
       </div><!--Modal.-->
 
+
     </article><!--card-body.-->
   </div><!--card.-->
 </div><!--container.-->
@@ -162,6 +163,86 @@
 <script th:if="${registerStatus != null}">
   $('#messageDialog').modal('show');
 </script>
+
+<script>
+  $(document).ready(function (){
+
+    let submitForm = true;
+
+    function validateUsername(username) {
+      let usernamePattern = /^[a-z][a-z0-9]{7,31}$/g;
+      return usernamePattern.test(username);
+    }
+
+    function validatePassword(password) {
+      let passwordPattern = /^(?=.*?[a-zA-Z])(?=.*?[0-9]).{8,32}$/g;
+      return passwordPattern.test(password);
+    }
+
+    function showInvalid(inputTag, message){
+      inputTag.removeClass('is-valid');
+      inputTag.addClass('is-invalid');
+      inputTag.siblings('.invalid-feedback').html(message);
+      submitForm = false;
+    }
+
+    function showValid(inputTag, message) {
+      inputTag.removeClass('is-invalid');
+      inputTag.addClass('is-valid');
+      if (message !== undefined) inputTag.siblings('.valid-feedback').html(message);
+    }
+
+    $('#registerForm').submit(function (event) {
+      submitForm = true;
+      //Validate username
+      let usernameInp = $('input[name="username"]');
+      let username = usernameInp.val();
+      if (username.length === 0) {
+        showInvalid(usernameInp, 'Tên tài khoản không được bỏ trống');
+      }
+      else if (!validateUsername(username)) {
+        showInvalid(usernameInp, 'Tên tài khoản có độ dài từ 8-32 ký tự, gồm chữ thường, số và phải bắt đầu bằng chữ cái');
+      }
+      else showValid(usernameInp, 'Tên tài khoản hợp lệ');
+
+
+      //Validate full name
+      let fullNameInp = $('input[name="fullName"]');
+      let fullName = fullNameInp.val();
+      if (fullName.length === 0) {
+        showInvalid(fullNameInp, 'Tên đầy đủ không được bỏ trống');
+      }
+      else showValid(fullNameInp);
+
+      //Validate password
+      let passwordInp = $('input[name="password"]');
+      let password = passwordInp.val();
+      if (password.length === 0){
+        showInvalid(passwordInp, 'Mật khẩu không được bỏ trống');
+      }
+      else if (!validatePassword(password)) {
+        showInvalid(passwordInp, 'Mật khẩu có độ dài từ 8-32 ký tự, phải chứa ít nhất một chữ cái và ít nhất một số');
+      } else showValid(passwordInp);
+
+      //Validate password confirm
+      let confirmInp = $('#confirm-password');
+      let confirmPass = confirmInp.val();
+      if (confirmPass.length === 0) {
+        showInvalid(confirmInp, 'Hãy xác nhận mật khẩu');
+      }
+      else if (password !== confirmPass) {
+        showInvalid(confirmInp, 'Mật khẩu xác nhận không trùng khớp');
+      } else showValid(confirmInp);
+
+      if (!submitForm) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      return submitForm;
+    });
+  });
+</script>
+
 
 </body>
 </html>

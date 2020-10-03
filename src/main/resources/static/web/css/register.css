@@ -44,6 +44,29 @@
   align-items: center;
 }
 
+.card {
+  box-shadow: 0 0 3px #000000;
+}
+
+.form-control {
+  border-radius: 0 5px 5px 0 !important;
+  background: white !important;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none !important;
+  box-shadow:none !important;
+}
+
+.phone-prefix {
+  border-radius: 0 !important;
+}
+
+.form-control.is-invalid {
+  border-width: 2px;
+}
+
 
 
 
