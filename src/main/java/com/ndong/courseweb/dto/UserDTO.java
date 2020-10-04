@@ -1,6 +1,8 @@
-package com.ndong.courseweb.model;
+package com.ndong.courseweb.dto;
 
-public class UserModel {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+public class UserDTO {
   private Long id;
   private String username;
   private String password;

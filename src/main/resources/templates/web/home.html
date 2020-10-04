@@ -6,8 +6,8 @@
   <title>Homepage</title>
 </head>
 <body>
-<h1 th:unless="${session.userModel}">Welcome!</h1>
-<h1 th:if="${session.userModel}">Welcome: <span th:text="${session.userModel.fullName}"></span></h1>
+<h1 th:unless="${session.userDTO}">Welcome!</h1>
+<h1 th:if="${session.userDTO}">Welcome: <span th:text="${session.userDTO.fullName}"></span></h1>
 <div th:replace="web/fragments/general :: header"></div>
 <ul>
   <li><a href="/login">Login</a></li>

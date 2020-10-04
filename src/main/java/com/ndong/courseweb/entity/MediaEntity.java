@@ -22,8 +22,8 @@ public class MediaEntity {
 
   @ManyToOne
   @JoinColumns({
-          @JoinColumn(name = "course_id", nullable = false, referencedColumnName = "course_id"),
-          @JoinColumn(name = "lesson_no", nullable = false, referencedColumnName = "no"),
+          @JoinColumn(name = "course_id", nullable = true, referencedColumnName = "course_id"),
+          @JoinColumn(name = "lesson_no", nullable = true, referencedColumnName = "no"),
   })
   private LessonEntity lesson;
 

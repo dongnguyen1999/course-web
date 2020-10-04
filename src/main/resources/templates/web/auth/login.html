@@ -6,6 +6,7 @@
   <title>Đăng nhập</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}" >
   <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}" >
 
 
@@ -15,10 +16,10 @@
 <div class="container">
   <hr>
   <div class="card bg-light">
-    <article class="card-body mx-auto" style="max-width: 430rem;">
+    <article class="card-body mx-auto">
       <h1 class="card-title mt-3 text-center ">Đăng nhập tài khoản</h1>
       <p class="text-center">Đăng nhập và bắt đầu chia sẻ khóa học của riêng mình</p>
-      <form action="/login" method="post">
+      <form id="loginForm" action="/login" method="post">
         <!--Avatar image-->
         <div class="mt-5 mb-5 avatar-container">
           <img class="avatar" th:src="@{/web/img/default-avatar.png}" alt="default avatar">

@@ -1,8 +1,8 @@
 package com.ndong.courseweb.controller.web;
 
 import com.ndong.courseweb.constant.SystemConstant;
+import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.entity.UserEntity;
-import com.ndong.courseweb.model.UserModel;
 import com.ndong.courseweb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,17 +34,17 @@ public class HomeController {
   }
 
   @RequestMapping(path = "/register", method = RequestMethod.POST)
-  public ModelAndView register(UserModel userModel) {
+  public ModelAndView register(UserDTO userDTO) {
     ModelAndView view = new ModelAndView("/web/auth/register");
-    boolean registerStatus = userService.tryRegisterAccount(userModel);
+    boolean registerStatus = userService.tryRegisterAccount(userDTO);
     view.addObject(SystemConstant.REGISTER_STATUS, registerStatus);
     return view;
   }
 
   @RequestMapping(path = "/login", method = RequestMethod.POST)
-  public ModelAndView login(UserModel userModel, HttpSession session) {
+  public ModelAndView login(UserDTO userDTO, HttpSession session) {
     ModelAndView view = new ModelAndView("/web/auth/login");
-    UserEntity user = userService.findByUsernameAndPassword(userModel.getUsername(), userModel.getPassword());
+    UserDTO user = userService.findOneUser(userDTO.getUsername(), userDTO.getPassword());
     if (user != null) {
       session.setAttribute(SystemConstant.USER_MODEL, user);
       String redirectView = "redirect:/index";
