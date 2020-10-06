@@ -15,10 +15,10 @@
     <div class="container-fluid p-5">
       <form id="editCourseForm" action="/course/new" method="post" novalidate>
         <div class="row">
-          <div class="col-md-4 details text-center mb-3 left">
-            <img class="img-thumbnail bg-dark" th:src="@{/web/img/default-thumbnail.png}" alt="default thumbnail"
-                 src="">
-            <button type="button" class="btn btn-secondary btn-sm mt-3">Chọn hình ảnh</button>
+          <div class="col-md-4 details mb-3 w-25 h-25">
+            <i id="camera-icon" class="d-none fas fa-camera"></i>
+            <img id="imgThumbnail" class="w-100 h-100 img-thumbnail bg-dark" alt="default thumbnail"
+                 th:src="@{/web/img/default-thumbnail.png}" src="" />
           </div>
           <div class="col-md-8 right">
             <div class="form-body">
@@ -85,7 +85,8 @@
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script" />
 <script src="https://cdn.ckeditor.com/4.15.0/basic/ckeditor.js"></script>
-<script th:src="@{web/js/thumbnail-picker.js}"></script>
+<script th:src="@{/web/js/thumbnail-picker.js}"></script>
+
 <script th:replace="web/fragments/modal :: informationModalController(showCondition=${openCourseStatus == false})"></script>
 <script>
   CKEDITOR.replace('shortDescription');
@@ -97,6 +98,7 @@
       }
       $(this).addClass('was-validated');
     })
+    setThumbnailPicker();
   })
 </script>
 </body>
