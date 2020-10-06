@@ -2,7 +2,9 @@ package com.ndong.courseweb.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class UserDTO {
+import java.io.Serializable;
+
+public class UserDTO implements Serializable {
   private Long id;
   private String username;
   private String password;

@@ -11,6 +11,13 @@
     display: none !important;
 }
 
+.modal-dialog {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: gray;
     opacity: 1; /* Firefox */

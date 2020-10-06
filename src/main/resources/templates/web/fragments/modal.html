@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Modal</title>
+</head>
+<body>
+<!--General-->
+<!--Information modal-->
+<th:block th:fragment="informationModal">
+  <!--Information modal-->
+  <!--/*@thymesVar id="showCondition" type="java.lang.Boolean"*/-->
+  <div th:if="${showCondition}" class="modal fade" id="messageDialog" tabindex="-1" role="dialog" aria-labelledby="messageDialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!--/*@thymesVar id="headerColor" type="java.lang.String"*/-->
+        <div class="modal-header" th:classappend="${headerColor}">
+          <!--/*@thymesVar id="title" type="java.lang.String"*/-->
+          <h5 class="modal-title text-white" id="messageDialogLabel" th:text="${title}">Title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!--/*@thymesVar id="content" type="java.lang.String"*/-->
+        <div class="modal-body" th:utext="${content}">
+          Content
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div><!--Information modal.-->
+</th:block>
+<th:block th:fragment="informationModalController">
+  <!--/*@thymesVar id="showCondition" type="java.lang.Boolean"*/-->
+  <script th:if="${showCondition}">
+    $('#messageDialog').modal('show');
+  </script>
+</th:block>
+
+<!--Register modal-->
+<th:block th:fragment="registerModal">
+  <!--Register modal-->
+  <!--/*@thymesVar id="registerStatus" type="java.lang.Boolean"*/-->
+  <div th:if="${registerStatus != null}" class="modal fade" id="registerDialog" tabindex="-1" role="dialog" aria-labelledby="messageDialogLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" th:classappend="${registerStatus} ? 'bg-success' : 'bg-danger'">
+          <h5 class="modal-title text-white" id="registerDialogLabel" th:text="${registerStatus} ? 'Đăng ký thành công' : 'Đăng ký thất bại'">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" th:utext="${registerStatus} ? 'Chúc mừng bạn đã đăng ký thành công tài khoản<br>Vui lòng đăng nhập' : 'Có gì đó không ổn<br>Vui lòng thử lại sau'">
+          Message
+        </div>
+        <div class="modal-footer">
+          <a href="/login" class="btn btn-primary" th:if="${registerStatus}">Đăng nhập ngay</a>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div><!--Register modal.-->
+</th:block>
+<th:block th:fragment="registerModalController">
+  <!--/*@thymesVar id="registerStatus" type="java.lang.Boolean"*/-->
+  <script th:if="${registerStatus != null}">
+    $('#registerDialog').modal('show');
+  </script>
+</th:block>
+
+
+
+
+
+</body>
+</html>

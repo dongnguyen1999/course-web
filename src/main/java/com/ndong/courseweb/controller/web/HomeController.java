@@ -46,7 +46,7 @@ public class HomeController {
     ModelAndView view = new ModelAndView("/web/auth/login");
     UserDTO user = userService.findOneUser(userDTO.getUsername(), userDTO.getPassword());
     if (user != null) {
-      session.setAttribute(SystemConstant.USER_MODEL, user);
+      session.setAttribute(SystemConstant.USER_DTO, user);
       String redirectView = "redirect:/index";
       return new ModelAndView(redirectView);
     } else view.addObject(SystemConstant.LOGIN_FAILED, true);

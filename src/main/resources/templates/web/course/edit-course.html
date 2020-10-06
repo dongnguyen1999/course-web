@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Thêm khóa học</title>
+  <th:block th:replace="web/fragments/general :: link" />
+  <link rel="stylesheet" th:href="@{/web/css/edit-course.css}">
+</head>
+<body>
+<div th:replace="web/fragments/general :: header"></div>
+<div class="container">
+  <div class="card bg-light">
+    <h1 class="card-header">Mở một khóa học mới</h1>
+    <div class="container-fluid p-5">
+      <form id="editCourseForm" action="/course/new" method="post" novalidate>
+        <div class="row">
+          <div class="col-md-4 details text-center mb-3 left">
+            <img class="img-thumbnail bg-dark" th:src="@{/web/img/default-thumbnail.png}" alt="default thumbnail"
+                 src="">
+            <button type="button" class="btn btn-secondary btn-sm mt-3">Chọn hình ảnh</button>
+          </div>
+          <div class="col-md-8 right">
+            <div class="form-body">
+              <div class="form-group">
+                <label class="control-label" for="title">Tên khóa học</label>
+                <input id="title" name="title" placeholder="Mọi người có thể tìm thấy khóa học của bạn qua tên"
+                       class="form-control input-md" required type="text">
+                <div class="invalid-feedback">
+                  Tựa đề khóa học không được bỏ trống
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-4">
+                  <label class="control-label" for="categoryCode">Thể loại:</label>
+                </div>
+                <div class="col-md-8">
+                  <select id="categoryCode" name="categoryCode" class="form-control custom-select w-75" required>
+                    <option value="">Chọn thể loại</option>
+                    <th:block th:each="category: ${categories}">
+                      <option th:value="${category.code}" th:text="${category.name}">Thể loại</option>
+                    </th:block>
+                  </select>
+                  <div class="invalid-feedback">
+                    Vui lòng chọn một thể loại
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-md-4">
+                  <label class="control-label" for="price">Giá bán:</label>
+                </div>
+                <div class="col-md-8">
+                  <input id="price" name="price" placeholder="" class="form-control w-50" value="0" required
+                         type="number" min="0" step="500">
+                  <div class="invalid-feedback">
+                    Giá tiền không được bỏ trống và phải đúng định dạng tiền việt
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="shortDescription">Mô tả ngắn:</label>
+                <textarea class="form-control" id="shortDescription" name="shortDescription"></textarea>
+              </div>
+            </div><!--form-body.-->
+          </div><!--row-inner-left.-->
+        </div><!--row.-->
+        <div class="row justify-content-center mt-3">
+          <button type="submit" class="btn btn-primary btn-lg">MỞ KHÓA HỌC MỚI</button>
+        </div>
+      </form>
+
+      <div th:replace="web/fragments/modal :: informationModal(
+        showCondition=${openCourseStatus == false},
+        headerColor='bg-danger',
+        title='Mở khóa học thất bại',
+        content='Có gì đó sai sai<br>Có thể do hệ thống quá tải, vui lòng thử lại sau'
+      )"></div>
+
+    </div><!--container-fluid.-->
+  </div>
+</div>
+<div th:replace="web/fragments/general :: footer"></div>
+<th:block th:replace="web/fragments/general :: script" />
+<script src="https://cdn.ckeditor.com/4.15.0/basic/ckeditor.js"></script>
+<script th:src="@{web/js/thumbnail-picker.js}"></script>
+<script th:replace="web/fragments/modal :: informationModalController(showCondition=${openCourseStatus == false})"></script>
+<script>
+  CKEDITOR.replace('shortDescription');
+  $(function () {
+    $('#editCourseForm').submit(function (event) {
+      if (this.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      $(this).addClass('was-validated');
+    })
+  })
+</script>
+</body>
+</html>

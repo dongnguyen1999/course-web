@@ -1,0 +1,9 @@
+.control-label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+ .was-validated .form-control:invalid {
+  border-width: 2px;
+}
+

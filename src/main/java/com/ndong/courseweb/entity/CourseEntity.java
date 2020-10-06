@@ -28,13 +28,12 @@ public class CourseEntity {
   @Column(name = "open_time", nullable = false, columnDefinition = "timestamp")
   private Timestamp openTime;
 
+  @Column(name = "status", nullable = false, columnDefinition = "varchar(256)")
+  private String status;
+
   @ManyToOne
   @JoinColumn(name = "category_id", nullable = false)
   private CategoryEntity category;
-
-  @ManyToOne
-  @JoinColumn(name = "status_id", nullable = false)
-  private CourseStatusEntity status;
 
   @OneToMany(mappedBy = "course")
   private final Set<PurchaseDetailEntity> purchaseDetailSet = new HashSet<>();
@@ -87,20 +86,20 @@ public class CourseEntity {
     this.openTime = openTime;
   }
 
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
   public CategoryEntity getCategory() {
     return category;
   }
 
   public void setCategory(CategoryEntity category) {
     this.category = category;
-  }
-
-  public CourseStatusEntity getStatus() {
-    return status;
-  }
-
-  public void setStatus(CourseStatusEntity status) {
-    this.status = status;
   }
 
   public Set<PurchaseDetailEntity> getPurchaseDetailSet() {
