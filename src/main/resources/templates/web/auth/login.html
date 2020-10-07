@@ -2,9 +2,9 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
   <title>Đăng nhập</title>
-  <link th:replace="web/fragments/general :: link"/>
+  <th:block th:replace="web/fragments/general :: meta" />
+  <th:block th:replace="web/fragments/general :: link"/>
   <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}" >
   <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}" >
 
@@ -64,7 +64,7 @@
 </div><!--container.-->
 
 <div th:replace="web/fragments/general :: footer"></div>
-<script th:replace="web/fragments/general :: script"></script>
+<th:block th:replace="web/fragments/general :: script"/>
 <script th:replace="web/fragments/modal :: informationModalController(showCondition=${loginFailed})"></script>
 
 </body>
