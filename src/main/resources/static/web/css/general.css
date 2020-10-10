@@ -11,6 +11,10 @@
     display: none !important;
 }
 
+.was-validated .form-control:invalid {
+    border-width: 2px;
+}
+
 .modal-dialog {
     height: 80%;
     width: 100%;

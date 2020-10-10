@@ -52,10 +52,9 @@
   align-items: center;
 }
 
-#registerForm {
+#registerForm, #loginForm {
   display: flex;
   flex-direction: column;
-  width: 50vw;
   min-width: 15rem;
   max-width: 25rem;
 }

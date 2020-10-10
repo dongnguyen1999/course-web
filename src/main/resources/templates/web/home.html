@@ -6,15 +6,16 @@
   <th:block th:replace="web/fragments/general :: meta" />
 </head>
 <body>
-
 <div th:replace="web/fragments/general :: header"></div>
 
 <h1 th:unless="${session.user}">Welcome!</h1>
 <h1 th:if="${session.user}">Welcome: <span th:text="${session.user.fullName}"></span></h1>
+<h3>Demo forms:</h3>
 <ul>
   <li><a href="/login">Login</a></li>
   <li><a href="/register">Register</a></li>
   <li><a href="/course/new">Open new course</a></li>
+  <li><a href="/course/1/new-lesson">Create new lesson for courseId=1</a></li>
 </ul>
 <div th:replace="web/fragments/general :: footer"></div>
 </body>

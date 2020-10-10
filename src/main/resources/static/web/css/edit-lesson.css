@@ -1,0 +1,9 @@
+.card-img-thumbnail {
+    height: 18rem;
+    object-fit: cover;
+}
+
+.control-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}

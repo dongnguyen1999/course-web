@@ -3,7 +3,22 @@
   font-weight: bold;
 }
 
-.was-validated .form-control:invalid {
-  border-width: 2px;
+.price-input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  z-index: 1;
 }
 
+.price-append {
+  background: #e9ecef;
+  border: 1px solid #ced4da;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  height: 2.4rem;
+  padding: 0 0.5rem;
+  z-index: 0;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}

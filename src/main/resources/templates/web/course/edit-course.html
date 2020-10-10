@@ -55,11 +55,9 @@
                   <label class="control-label" for="price">Giá bán:</label>
                 </div>
                 <div class="col-md-8 row m-0">
-                  <input id="price" name="price" placeholder="" class="form-control w-50" value="0" required
+                  <input id="price" name="price" placeholder="" class="form-control w-50 price-input" value="0" required
                          type="number" min="0" step="500">
-                  <div class="input-group-prepend ml-1">
-                    <div class="input-group-text">VNĐ</div>
-                  </div>
+                  <span class="rounded price-append">VNĐ</span>
                   <div class="invalid-feedback">
                     Giá tiền không được bỏ trống và phải đúng định dạng tiền việt
                   </div>
@@ -91,19 +89,14 @@
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script" />
 <script src="https://cdn.ckeditor.com/4.15.0/basic/ckeditor.js"></script>
+<script th:src="@{/web/js/common.js}"></script>
 <script th:src="@{/web/js/thumbnail-picker.js}"></script>
-
 <script th:replace="web/fragments/modal :: informationModalController(showCondition=${openCourseStatus == false})"></script>
+
 <script>
   CKEDITOR.replace('shortDescription');
   $(function () {
-    $('#editCourseForm').submit(function (event) {
-      if (this.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      $(this).addClass('was-validated');
-    })
+    simpleFormValidation('editCourseForm');
     setThumbnailPicker();
   })
 </script>

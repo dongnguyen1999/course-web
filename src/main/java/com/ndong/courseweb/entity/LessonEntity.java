@@ -33,6 +33,9 @@ public class LessonEntity {
   @Column(name = "duration", nullable = true, columnDefinition = "int")
   private Integer duration;
 
+  @Column(name = "enable_free_trail", nullable = false, columnDefinition = "bool")
+  private Boolean enableFreeTrial;
+
   @OneToMany(mappedBy = "lesson")
   private final Set<MediaEntity> mediaSet = new HashSet<>();
 
@@ -94,5 +97,13 @@ public class LessonEntity {
 
   public Set<MediaEntity> getMediaSet() {
     return mediaSet;
+  }
+
+  public Boolean getEnableFreeTrial() {
+    return enableFreeTrial;
+  }
+
+  public void setEnableFreeTrial(Boolean enableFreeTrial) {
+    this.enableFreeTrial = enableFreeTrial;
   }
 }

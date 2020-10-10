@@ -20,6 +20,8 @@ public class CourseDTO {
 
   private String categoryCode;
 
+  private Integer nextAvailableLessonNo;
+
   public Long getId() {
     return id;
   }
@@ -82,5 +84,13 @@ public class CourseDTO {
 
   public void setCategoryCode(String categoryCode) {
     this.categoryCode = categoryCode;
+  }
+
+  public Integer getNextAvailableLessonNo() {
+    return nextAvailableLessonNo;
+  }
+
+  public void setNextAvailableLessonNo(Integer nextAvailableLessonNo) {
+    this.nextAvailableLessonNo = nextAvailableLessonNo;
   }
 }
