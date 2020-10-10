@@ -3,7 +3,7 @@
   font-weight: bold;
 }
 
- .was-validated .form-control:invalid {
+.was-validated .form-control:invalid {
   border-width: 2px;
 }
 

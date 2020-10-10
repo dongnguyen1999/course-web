@@ -9,7 +9,7 @@ function setThumbnailPicker() {
         });
         cameraIcon.css({
           "position": "absolute",
-          "font-size": "8rem",
+          "font-size": "6rem",
           "left": "50%",
           "top": "50%",
           "transform": "translate(-50%, -50%)",
