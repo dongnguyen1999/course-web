@@ -7,4 +7,6 @@ import java.util.List;
 public interface ICategoryService {
   CategoryDTO findByCode(String code);
   List<CategoryDTO> findAll();
+  CategoryDTO updateCategory(CategoryDTO model);
+  Boolean deleteCategories(Long[] ids);
 }
