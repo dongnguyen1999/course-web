@@ -11,6 +11,10 @@
   display: none !important;
 }
 
+.is-invalid {
+  border-width: 2px;
+}
+
 .was-validated .form-control:invalid {
   border-width: 2px;
 }
