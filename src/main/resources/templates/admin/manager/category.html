@@ -6,7 +6,7 @@
   <th:block th:replace="admin/fragments/general :: meta"/>
   <th:block th:replace="admin/fragments/general :: link"/>
   <link rel="stylesheet" th:href="@{/admin/css/general.css}">
-  <link rel="stylesheet" th:href="@{/admin/css/category.css}">
+  <link rel="stylesheet" th:href="@{/admin/css/manager.css}">
 </head>
 <body>
 <div th:replace="admin/fragments/general :: header"></div>
@@ -87,9 +87,9 @@
 <script>
   $(function (){
     useBtnCheckbox();
-    setEditButtons();
-    setAddNewButtons();
-    setDeleteButtons();
+    setEditButtons('CATEGORY');
+    setAddNewButtons('CATEGORY');
+    setDeleteButtons('CATEGORY');
   })
 </script>
 
