@@ -1,5 +1,7 @@
 package com.ndong.courseweb.entity;
 
+import org.springframework.util.DigestUtils;
+
 import javax.persistence.*;
 
 //Reference composite pk mapping: https://vladmihalcea.com/the-best-way-to-map-a-composite-primary-key-with-jpa-and-hibernate/
@@ -15,6 +17,9 @@ public class MediaEntity {
 
   @Column(name = "source", nullable = false, columnDefinition = "varchar(266)")
   private String source;
+
+  @Column(name = "code", nullable = false, columnDefinition = "varchar(266)")
+  private String code;
 
   @ManyToOne
   @JoinColumn(name = "media_type_id", nullable = false)
@@ -49,6 +54,7 @@ public class MediaEntity {
 
   public void setSource(String source) {
     this.source = source;
+    this.code = DigestUtils.md5DigestAsHex(source.getBytes());
   }
 
   public MediaTypeEntity getMediaType() {
@@ -65,5 +71,13 @@ public class MediaEntity {
 
   public void setLesson(LessonEntity lesson) {
     this.lesson = lesson;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
   }
 }

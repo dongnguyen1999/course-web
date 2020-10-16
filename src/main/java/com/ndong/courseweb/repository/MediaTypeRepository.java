@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MediaTypeRepository extends JpaRepository<MediaTypeEntity, Long> {
   MediaTypeEntity findOneByCode(String code);
+  MediaTypeEntity findTopByExtensionContaining(String extension);
 }

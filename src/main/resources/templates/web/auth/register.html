@@ -3,10 +3,10 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Đăng ký</title>
-  <th:block th:replace="web/fragments/general :: meta" />
+  <th:block th:replace="web/fragments/general :: meta"/>
   <th:block th:replace="web/fragments/general :: link"/>
-  <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}" >
-  <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}" >
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}">
 
 
 </head>
@@ -18,15 +18,15 @@
     <article class="card-body mx-auto">
       <h1 class="card-title mt-3 text-center ">Đăng ký một tài khoản</h1>
       <p class="text-center">Bắt đầu bằng việc tạo tài khoản miễn phí</p>
-      <form id="registerForm" action="/register" method="post" class="needs-validation col-md-4" novalidate >
+      <form id="registerForm" action="/register" method="post" class="needs-validation col-md-4" novalidate enctype="multipart/form-data">
         <!--Avatar image-->
-        <div class="mt-4 mb-4 avatar-container">
-          <img class="avatar" th:src="@{/web/img/default-avatar.png}" alt="default avatar">
-          <input class="hide" id="avatarInput" type="file">
-          <div class="avatar-replace hide">
-            <i class="fas fa-camera"></i>
-          </div>
-        </div>
+        <label class="form-group mt-4 mb-4 avatar-container position-relative" for="avatarInput" role="button">
+          <img id="user-image" class="img-fluid border border-dark avatar"
+               src="" th:src="@{/web/img/default-avatar.png}" alt="default avatar">
+          <i class="d-none position-absolute fas fa-camera" id="camera-icon"></i>
+          <input class="form-control hide is-invalid" id="avatarInput" type="file" name="avatar">
+          <div class="invalid-feedback text-center avatar-feedback"></div>
+        </label>
 
         <!--Username input-->
         <div class="form-row mb-2">
@@ -119,7 +119,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-star"></i> </span>
             </div>
-            <textarea name="workExperienceInfo" class="form-control no-required" placeholder="Vài dòng về bản thân" type="text"></textarea>
+            <textarea name="workExperienceInfo" class="form-control no-required" placeholder="Vài dòng về bản thân"
+                      type="text"></textarea>
           </div> <!--form-group.-->
         </div>
 
@@ -128,7 +129,7 @@
           <button type="submit" class="btn btn-primary btn-block">ĐĂNG KÝ TÀI KHOẢN</button>
         </div> <!--form-group.-->
 
-        <p class="text-center">Đã có tài khoản? <a href="/login">Đăng nhập</a> </p>
+        <p class="text-center">Đã có tài khoản? <a href="/login">Đăng nhập</a></p>
       </form>
 
       <div th:replace="web/fragments/modal :: registerModal(registerStatus=${registerStatus})"></div>
@@ -147,14 +148,8 @@
 <script th:replace="web/fragments/modal :: registerModalController(registerStatus=${registerStatus})"></script>
 
 <script>
-  $(function() {
-    $('input[name="username"]').keyup(validateUsername);
-    $('input[name="password"]').keyup(validatePassword);
-    $('input[name="fullName"]').keyup(validateFullName);
-    $('#confirm-password').keyup(validateConfirmPassword);
-    $('input[name="email"]').keyup(validateEmail);
-    $('input[name="phone"]').keyup(validatePhone);
-    $('#registerForm').submit(registerFormValidation);
+  $(function () {
+    useValidation();
     setAvatarPicker();
   })
 </script>

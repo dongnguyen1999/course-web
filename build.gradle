@@ -23,6 +23,8 @@ dependencies {
   // More libraries:
   // MySQL database connector driver for java
   compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
+  // https://mvnrepository.com/artifact/commons-io/commons-io
+  compile group: 'commons-io', name: 'commons-io', version: '2.6'
   compile 'org.modelmapper:modelmapper:1.1.0'
 
   developmentOnly 'org.springframework.boot:spring-boot-devtools'

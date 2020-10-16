@@ -1,4 +1,4 @@
-package com.ndong.courseweb.converter;
+package com.ndong.courseweb.utils;
 
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;

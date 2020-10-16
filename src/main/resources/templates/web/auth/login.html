@@ -20,7 +20,7 @@
       <form id="loginForm" action="/login" method="post" class="col-md-4">
         <!--Avatar image-->
         <div class="mt-5 mb-5 avatar-container">
-          <img class="avatar" th:src="@{/web/img/default-avatar.png}" alt="default avatar">
+          <img id="user-image" class="avatar" th:src="@{/web/img/default-avatar.png}" alt="default avatar">
         </div>
         <!--Username input-->
         <div class="mb-3">
@@ -65,7 +65,15 @@
 
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script"/>
+<script th:src="@{/web/js/register-form-validation.js}"></script>
 <script th:replace="web/fragments/modal :: informationModalController(showCondition=${loginFailed})"></script>
+
+
+<script>
+  $('input[name="username"]').change(function () {
+    getUserAvatar($(this).val());
+  });
+</script>
 
 </body>
 </html>

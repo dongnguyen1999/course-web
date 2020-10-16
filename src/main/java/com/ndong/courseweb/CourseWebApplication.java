@@ -1,6 +1,6 @@
 package com.ndong.courseweb;
 
-import com.ndong.courseweb.converter.ConverterFactory;
+import com.ndong.courseweb.utils.ConverterFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

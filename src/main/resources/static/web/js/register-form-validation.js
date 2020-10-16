@@ -20,6 +20,12 @@ function checkPhone(phone) {
   return phonePattern.test(phone);
 }
 
+function checkAvatarExtension(filePath) {
+  let extension = filePath.split('.').pop();
+  let supportedExtension = ['jpeg','jpg','png'];
+  return supportedExtension.includes(extension);
+}
+
 
 function showInvalid(inputTag, message){
   inputTag.removeClass('is-valid');
@@ -37,6 +43,24 @@ function showValid(inputTag, message) {
 function removeValidation(inputTag) {
   inputTag.removeClass('is-invalid');
   inputTag.removeClass('is-valid');
+}
+
+function getUserAvatar(username) {
+  $.ajax({
+    contentType: "application/json",
+    dataType: "json",
+    url: "/web/api/user",
+    type: "GET",
+    data: {
+      username: username,
+    },
+    success: (response, status) => {
+      $('#user-image').attr("src", `/resource/${response.avatar}`);
+    },
+    error: (error) => {
+      $('#user-image').attr("src", '/web/img/default-avatar.png');
+    },
+  });
 }
 
 function checkUsernameExist(username) {
@@ -57,6 +81,17 @@ function checkUsernameExist(username) {
       showValid(usernameInp, 'Tên đăng nhập hợp lệ')
     },
   });
+}
+
+function validateAvatar() {
+  let avatarInp = $('input[type="file"]');
+  let filePath = avatarInp.val();
+  if (filePath.length !== 0) {
+    if (!checkAvatarExtension(filePath)) {
+      showInvalid(avatarInp, 'Chỉ hỗ trợ định dạng ảnh JPEG và PNG');
+    } else showValid(avatarInp);
+  }
+  else removeValidation(avatarInp);
 }
 
 function validateUsername() {
@@ -126,6 +161,9 @@ function validatePhone() {
 
 function registerFormValidation(event) {
   submitForm = true;
+  //Validate avatar
+  validateAvatar();
+
   //Validate username
   validateUsername();
 
@@ -150,4 +188,15 @@ function registerFormValidation(event) {
     event.stopPropagation();
   }
   return submitForm;
+}
+
+function useValidation() {
+  $('input[type="file"]').change(validateAvatar);
+  $('input[name="username"]').keyup(validateUsername);
+  $('input[name="password"]').keyup(validatePassword);
+  $('input[name="fullName"]').keyup(validateFullName);
+  $('#confirm-password').keyup(validateConfirmPassword);
+  $('input[name="email"]').keyup(validateEmail);
+  $('input[name="phone"]').keyup(validatePhone);
+  $('#registerForm').submit(registerFormValidation);
 }

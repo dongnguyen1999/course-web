@@ -1,6 +1,7 @@
 package com.ndong.courseweb.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 
@@ -16,6 +17,7 @@ public class UserDTO implements Serializable {
   private String birth;
   private String avatar;
   private Double coin;
+  private MultipartFile avatarFile;
 
   public Long getId() {
     return id;
@@ -103,5 +105,13 @@ public class UserDTO implements Serializable {
 
   public void setCoin(Double coin) {
     this.coin = coin;
+  }
+
+  public MultipartFile getAvatarFile() {
+    return avatarFile;
+  }
+
+  public void setAvatarFile(MultipartFile avatarFile) {
+    this.avatarFile = avatarFile;
   }
 }

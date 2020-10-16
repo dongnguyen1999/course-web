@@ -9,4 +9,5 @@ public class SystemConstant {
   public static final String COURSE_DTO = "course";
   public static final String CATEGORY_DTO_LIST = "categories";
   public static final String MEDIA_TYPE_DTO_LIST = "mediaTypes";
+
 }

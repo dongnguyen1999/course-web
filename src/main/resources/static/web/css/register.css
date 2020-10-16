@@ -14,24 +14,9 @@
 .avatar {
   width: 10rem;
   height: 10rem;
-  border-radius: 5rem;
-  border: solid 2px black;
-}
-
-.avatar-replace {
-  position: absolute;
-  width: 10rem;
-  height: 10rem;
-  border-radius: 5rem;
-  border: solid 2px black;
-  background: rgba(160,160,160,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.avatar-replace i {
-  font-size: 5rem;
+  border-radius: 5rem !important;
+  border: solid 2px black !important;
+  object-fit: cover;
 }
 
 .avatar-container {
@@ -39,6 +24,11 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.avatar-feedback {
+  position: absolute;
+  top: -2rem;
 }
 
 .card {
@@ -67,7 +57,7 @@
 
 .form-control:focus {
   outline: none !important;
-  box-shadow:none !important;
+  box-shadow: none !important;
 }
 
 .phone-prefix {
