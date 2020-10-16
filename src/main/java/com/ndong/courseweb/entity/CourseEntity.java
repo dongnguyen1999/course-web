@@ -19,6 +19,9 @@ public class CourseEntity {
   @Column(name = "thumbnail", nullable = false, columnDefinition = "varchar(256)")
   private String thumbnail;
 
+  @Column(name = "code", nullable = false, columnDefinition = "varchar(256)")
+  private String code;
+
   @Column(name = "short_description", nullable = true, columnDefinition = "varchar(512)")
   private String shortDescription;
 
@@ -37,6 +40,18 @@ public class CourseEntity {
 
   @OneToMany(mappedBy = "course")
   private final Set<PurchaseDetailEntity> purchaseDetailSet = new HashSet<>();
+
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  private UserEntity user;
+
+  public UserEntity getUser() {
+    return user;
+  }
+
+  public void setUser(UserEntity user) {
+    this.user = user;
+  }
 
   public Long getId() {
     return id;
@@ -104,5 +119,14 @@ public class CourseEntity {
 
   public Set<PurchaseDetailEntity> getPurchaseDetailSet() {
     return purchaseDetailSet;
+  }
+
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
   }
 }

@@ -1,5 +1,7 @@
 package com.ndong.courseweb.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.HashSet;
@@ -47,6 +49,17 @@ public class UserEntity {
 //  Reference fetch type usage: https://stackjava.com/hibernate/hibernate-fetchtype-la-gi-phan-biet-fetchtype-lazy-voi-eager.html
   @OneToMany(mappedBy = "user")
   private final Set<PurchaseDetailEntity> purchaseDetailEntitySet = new HashSet<>();
+
+  @OneToMany(mappedBy = "user")
+  private final Set<CourseEntity> courseEntitySet = new HashSet<>();
+
+  public Set<PurchaseDetailEntity> getPurchaseDetailEntitySet() {
+    return purchaseDetailEntitySet;
+  }
+
+  public Set<CourseEntity> getCourseEntitySet() {
+    return courseEntitySet;
+  }
 
   public Long getId() {
     return id;

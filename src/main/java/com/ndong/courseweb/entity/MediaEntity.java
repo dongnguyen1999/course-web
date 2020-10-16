@@ -54,7 +54,6 @@ public class MediaEntity {
 
   public void setSource(String source) {
     this.source = source;
-    this.code = DigestUtils.md5DigestAsHex(source.getBytes());
   }
 
   public MediaTypeEntity getMediaType() {

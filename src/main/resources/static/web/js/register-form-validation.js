@@ -1,5 +1,3 @@
-var submitForm = true;
-
 function checkUsername(username) {
   let usernamePattern = /^[a-z][a-z0-9]{7,31}$/g;
   return usernamePattern.test(username);
@@ -18,26 +16,6 @@ function checkEmail(email) {
 function checkPhone(phone) {
   let phonePattern = /^0?[89375][0-9]{8}$/g;
   return phonePattern.test(phone);
-}
-
-function checkAvatarExtension(filePath) {
-  let extension = filePath.split('.').pop();
-  let supportedExtension = ['jpeg','jpg','png'];
-  return supportedExtension.includes(extension);
-}
-
-
-function showInvalid(inputTag, message){
-  inputTag.removeClass('is-valid');
-  inputTag.addClass('is-invalid');
-  inputTag.siblings('.invalid-feedback').html(message);
-  submitForm = false;
-}
-
-function showValid(inputTag, message) {
-  inputTag.removeClass('is-invalid');
-  inputTag.addClass('is-valid');
-  if (message !== undefined) inputTag.siblings('.valid-feedback').html(message);
 }
 
 function removeValidation(inputTag) {
@@ -83,27 +61,14 @@ function checkUsernameExist(username) {
   });
 }
 
-function validateAvatar() {
-  let avatarInp = $('input[type="file"]');
-  let filePath = avatarInp.val();
-  if (filePath.length !== 0) {
-    if (!checkAvatarExtension(filePath)) {
-      showInvalid(avatarInp, 'Chỉ hỗ trợ định dạng ảnh JPEG và PNG');
-    } else showValid(avatarInp);
-  }
-  else removeValidation(avatarInp);
-}
-
 function validateUsername() {
   let usernameInp = $('input[name="username"]');
   let username = usernameInp.val();
   if (username.length === 0) {
     showInvalid(usernameInp, 'Tên tài khoản không được bỏ trống');
-  }
-  else if (!checkUsername(username)) {
+  } else if (!checkUsername(username)) {
     showInvalid(usernameInp, 'Tên tài khoản có độ dài từ 8-32 ký tự, gồm chữ thường, số và phải bắt đầu bằng chữ cái');
-  }
-  else checkUsernameExist(username);
+  } else checkUsernameExist(username);
 }
 
 function validateFullName() {
@@ -111,17 +76,15 @@ function validateFullName() {
   let fullName = fullNameInp.val();
   if (fullName.length === 0) {
     showInvalid(fullNameInp, 'Tên đầy đủ không được bỏ trống');
-  }
-  else showValid(fullNameInp);
+  } else showValid(fullNameInp);
 }
 
 function validatePassword() {
   let passwordInp = $('input[name="password"]');
   let password = passwordInp.val();
-  if (password.length === 0){
+  if (password.length === 0) {
     showInvalid(passwordInp, 'Mật khẩu không được bỏ trống');
-  }
-  else if (!checkPassword(password)) {
+  } else if (!checkPassword(password)) {
     showInvalid(passwordInp, 'Mật khẩu có độ dài từ 8-32 ký tự, phải chứa ít nhất một chữ cái và ít nhất một số');
   } else showValid(passwordInp);
 }
@@ -133,13 +96,12 @@ function validateConfirmPassword() {
   let confirmPass = confirmInp.val();
   if (confirmPass.length === 0) {
     showInvalid(confirmInp, 'Hãy xác nhận mật khẩu');
-  }
-  else if (password !== confirmPass) {
+  } else if (password !== confirmPass) {
     showInvalid(confirmInp, 'Mật khẩu xác nhận không trùng khớp');
   } else showValid(confirmInp);
 }
 
-function validateEmail(){
+function validateEmail() {
   let emailInp = $('input[name="email"]');
   let email = emailInp.val();
   if (email.length !== 0) {
@@ -162,7 +124,7 @@ function validatePhone() {
 function registerFormValidation(event) {
   submitForm = true;
   //Validate avatar
-  validateAvatar();
+  validateImage();
 
   //Validate username
   validateUsername();
@@ -191,7 +153,9 @@ function registerFormValidation(event) {
 }
 
 function useValidation() {
-  $('input[type="file"]').change(validateAvatar);
+  $('input[type="file"]').change(function () {
+    validateImage();
+  });
   $('input[name="username"]').keyup(validateUsername);
   $('input[name="password"]').keyup(validatePassword);
   $('input[name="fullName"]').keyup(validateFullName);

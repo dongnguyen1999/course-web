@@ -34,13 +34,14 @@ public class UserService implements IUserService {
       UserEntity newUser = modelMapper.map(model, UserEntity.class);
       newUser.setStatusCode(UserStatusConstant.NORMAL_USER);
       newUser.setCoin(0d);
+      newUser = userRepository.save(newUser);
       MultipartFile avatarFile = model.getAvatarFile();
       if (avatarFile != null &&
           !Objects.requireNonNull(avatarFile.getOriginalFilename()).isBlank()) {
-        MediaDTO mediaDTO = mediaService.saveAvatar(avatarFile, model.getUsername());
+        MediaDTO mediaDTO = mediaService.saveAvatar(avatarFile, newUser);
         newUser.setAvatar(mediaDTO.getCode());
+        userRepository.save(newUser);
       }
-      userRepository.save(newUser);
       return true;
     } catch (Exception e) {
       System.out.println(e.getMessage());

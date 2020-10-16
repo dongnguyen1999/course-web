@@ -6,13 +6,16 @@ import com.ndong.courseweb.entity.CategoryEntity;
 import com.ndong.courseweb.entity.MediaTypeEntity;
 import com.ndong.courseweb.repository.MediaTypeRepository;
 import com.ndong.courseweb.service.IMediaTypeService;
+import com.ndong.courseweb.utils.MediaTextUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class MediaTypeService implements IMediaTypeService {
@@ -63,5 +66,12 @@ public class MediaTypeService implements IMediaTypeService {
   public MediaTypeDTO findByCode(String code) {
     MediaTypeEntity mediaType = mediaTypeRepository.findOneByCode(code);
     return (mediaType != null) ? modelMapper.map(mediaType, MediaTypeDTO.class) : null;
+  }
+
+  @Override
+  public MediaTypeEntity getMediaTypeFromFile(MultipartFile file) {
+    String filename = file.getOriginalFilename();
+    String extension = MediaTextUtils.getExtension(Objects.requireNonNull(filename));
+    return mediaTypeRepository.findTopByExtensionContaining(extension);
   }
 }

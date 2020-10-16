@@ -21,12 +21,12 @@ public class MediaAPI {
   @Autowired
   private IMediaService mediaService;
 
-  @RequestMapping(path = "/web/api/media/avatar", method = RequestMethod.POST)
-  public ResponseEntity<MediaDTO> uploadMedia(MediaDTO mediaDTO) {
-    MediaDTO media = mediaService.saveAvatar(mediaDTO.getRawFile(), "${username}");
-    return (media != null) ? new ResponseEntity<>(media, HttpStatus.OK) :
-        new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-  }
+//  @RequestMapping(path = "/web/api/media/avatar", method = RequestMethod.POST)
+//  public ResponseEntity<MediaDTO> uploadMedia(MediaDTO mediaDTO) {
+//    MediaDTO media = mediaService.saveAvatar(mediaDTO.getRawFile(), "${username}");
+//    return (media != null) ? new ResponseEntity<>(media, HttpStatus.OK) :
+//        new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//  }
 
   @RequestMapping(path = "/resource/{code}", method = RequestMethod.GET)
   public ResponseEntity<byte[]> getResource(@PathVariable String code) {

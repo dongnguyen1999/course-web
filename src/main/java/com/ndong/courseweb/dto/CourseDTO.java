@@ -1,5 +1,7 @@
 package com.ndong.courseweb.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.Column;
 import java.sql.Timestamp;
 
@@ -9,6 +11,8 @@ public class CourseDTO {
   private String title;
 
   private String thumbnail;
+
+  private MultipartFile thumbnailFile;
 
   private String shortDescription;
 
@@ -21,6 +25,16 @@ public class CourseDTO {
   private String categoryCode;
 
   private Integer nextAvailableLessonNo;
+
+  private String code;
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
 
   public Long getId() {
     return id;
@@ -92,5 +106,14 @@ public class CourseDTO {
 
   public void setNextAvailableLessonNo(Integer nextAvailableLessonNo) {
     this.nextAvailableLessonNo = nextAvailableLessonNo;
+  }
+
+
+  public MultipartFile getThumbnailFile() {
+    return thumbnailFile;
+  }
+
+  public void setThumbnailFile(MultipartFile thumbnailFile) {
+    this.thumbnailFile = thumbnailFile;
   }
 }

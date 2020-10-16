@@ -4,13 +4,24 @@ import java.util.Objects;
 
 public class MediaTextUtils {
   public static String avatarPath(String username){
-    String pattern =  "/avatar/${username}";
+    String pattern =  "/${username}/avatar";
     return pattern.replace("${username}", username);
   }
 
-  public static String avatarCaption(String username){
-    String pattern = "@Avatar(${username})";
-    return pattern.replace("${username}", username);
+  public static String thumbnailPath(String username, String courseCode){
+    String pattern =  "/${username}/${courseCode}/thumbnail";
+    return pattern.replace("${username}", username)
+        .replace("${courseCode}", courseCode);
+  }
+
+  public static String avatarCaption(Long userId){
+    String pattern = "@Avatar(${userId})";
+    return pattern.replace("${userId}", userId.toString());
+  }
+
+  public static String thumbnailCaption(Long id){
+    String pattern = "@Thumbnail(${courseId})";
+    return pattern.replace("${courseId}", id.toString());
   }
 
   public static String getExtension(String filename) {

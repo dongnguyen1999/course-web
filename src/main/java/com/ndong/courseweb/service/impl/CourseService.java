@@ -7,6 +7,7 @@ import com.ndong.courseweb.constant.UserStatusConstant;
 import com.ndong.courseweb.dto.CategoryDTO;
 import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.LessonDTO;
+import com.ndong.courseweb.dto.MediaDTO;
 import com.ndong.courseweb.entity.CategoryEntity;
 import com.ndong.courseweb.entity.CourseEntity;
 import com.ndong.courseweb.entity.LessonEntity;
@@ -15,12 +16,18 @@ import com.ndong.courseweb.entity.composite_id.LessonId;
 import com.ndong.courseweb.repository.CategoryRepository;
 import com.ndong.courseweb.repository.CourseRepository;
 import com.ndong.courseweb.repository.LessonRepository;
+import com.ndong.courseweb.repository.UserRepository;
 import com.ndong.courseweb.service.ICourseService;
+import com.ndong.courseweb.service.IMediaService;
+import com.ndong.courseweb.utils.CodeFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -38,15 +45,32 @@ public class CourseService implements ICourseService {
   @Autowired
   private LessonRepository lessonRepository;
 
+  @Autowired
+  private IMediaService mediaService;
+
+  @Autowired
+  private UserRepository userRepository;
+
   @Override
+  @Transactional
   public boolean tryOpenNewCourse(CourseDTO model) {
     try {
       CourseEntity course = modelMapper.map(model, CourseEntity.class);
       CategoryEntity category = categoryRepository.findOneByCode(model.getCategoryCode());
+      course.setUser(userRepository.getOne(1L));
       course.setCategory(category);
-      course.setThumbnail("empty-now-for-demo");
+      course.setThumbnail("thumbnail");
+      course.setCode("code");
       course.setOpenTime(new Timestamp(System.currentTimeMillis()));
       course.setStatus(CourseStatusConstant.EARLY_ACCESS);
+      course = courseRepository.save(course);
+      course.setCode(CodeFactory.from(course));
+      MultipartFile thumbnailFile = model.getThumbnailFile();
+      if (thumbnailFile != null &&
+          !Objects.requireNonNull(thumbnailFile.getOriginalFilename()).isBlank()) {
+        MediaDTO mediaDTO = mediaService.saveThumbnail(thumbnailFile, course);
+        course.setThumbnail(mediaDTO.getCode());
+      }
       courseRepository.save(course);
       return true;
     } catch (Exception e) {
