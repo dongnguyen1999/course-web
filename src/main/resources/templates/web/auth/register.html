@@ -5,13 +5,15 @@
   <title>Đăng ký</title>
   <th:block th:replace="web/fragments/general :: meta"/>
   <th:block th:replace="web/fragments/general :: link"/>
-  <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}">
 
 
 </head>
 <body>
 <div th:replace="web/fragments/general :: header"></div>
+<div id="wrapper" class="wrapper-content">
 <div class="container">
   <hr>
   <div class="card bg-light">
@@ -138,6 +140,7 @@
     </article><!--card-body.-->
   </div><!--card.-->
 </div><!--container.-->
+</div><!--wrapper-content.-->
 
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script"/>

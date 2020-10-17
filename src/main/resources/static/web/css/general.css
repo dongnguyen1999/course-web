@@ -1,3 +1,7 @@
+/*Accent color #131d60*/
+/*Light color #b2ecf2*/
+/*Shadow color #5d687f*/
+
 * {
     padding: 0;
     margin: 0;
@@ -21,6 +25,384 @@
     display: flex;
     align-items: center;
 }
+
+
+
+.toggle-btn-view {
+    background: white;
+    border: solid 1px gray;
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+    height: 65px;
+    padding-right: 15px;
+    font-size: 18px;
+    line-height: 60px;
+    padding-left: 15px;
+    margin-top: -20px;
+    margin-left: -20px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.toggle-btn-view.toggled {
+    display: flex;
+}
+
+.btn-toggle-menu {
+
+}
+
+/*header*/
+header .main-nav {
+    background: #131d60;
+}
+
+header a {
+    color: white;
+}
+
+.navbar-toggler {
+    background: #131d60;
+    border: solid 2px white !important;
+}
+
+.navbar-toggler i {
+    color: white;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+.navbar-toggler.collapsed {
+    background: #b2ecf2;
+    border: solid 2px black !important;
+}
+
+.navbar-toggler.collapsed i {
+    color: #131d60;
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+.login-btn {
+    font-weight: bold;
+    font-size: .8rem !important;
+}
+
+.login-btn.btn-light-blue {
+    color: #131d60;
+}
+
+/*header.*/
+
+
+/*footer*/
+
+footer {
+    box-shadow: 0 -1px 3px #5d687f;
+}
+
+footer, footer.page-footer .row a {
+    background: #b2ecf2;
+    color: black !important;
+}
+
+.footer-copyright {
+    background: #131d60 !important;
+}
+
+/*footer.*/
+
+/*left side menu*/
+body{
+    background: #f4f3ef;
+}
+
+#wrapper {
+    padding-left: 0;
+    margin-top: 4.7rem;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.has-sidebar.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background:#fff;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#sidebar-wrapper {
+    box-shadow: inset -1px 0px 0px 0px #DDDDDD;
+}
+
+#wrapper.has-sidebar.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.has-sidebar.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper.has-sidebar {
+        padding-left: 250px;
+    }
+
+    #wrapper.has-sidebar.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.has-sidebar.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 0;
+        position: relative;
+    }
+
+    #wrapper.has-sidebar.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+#sidebar-wrapper li.active > a:after {
+    border-right: 17px solid #f4f3ef;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    content: "";
+    display: inline-block;
+    position: absolute;
+    right: -1px;
+}
+
+.sidebar-brand {
+    border-bottom: 1px solid rgba(102, 97, 91, 0.3);
+}
+
+.sidebar-brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 15px;
+}
+
+.navbar .navbar-nav > li > a p {
+    display: inline-block;
+    margin: 0;
+}
+p {
+    font-size: 16px;
+    line-height: 1.4em;
+}
+
+.navbar-default {
+    background-color: #f4f3ef;
+    border:0px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+btn-menu {
+    border-radius: 3px;
+    padding: 4px 12px;
+    margin: 14px 5px 5px 20px;
+    font-size: 14px;
+    float: left;
+}
+
+/*left side menu.*/
+
+/*search box*/
+
+.searchbar{
+    margin: auto 5rem;
+    height: 2.4rem;
+    background-color: #353b48;
+    border-radius: 30px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 23.5rem;
+    min-width: 13.5rem;
+    box-shadow: 0px 0px 4px #5d687f;
+}
+
+.search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    line-height: 2rem;
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 20rem;
+    min-width: 10rem;
+}
+
+.search_icon{
+    height: 2rem;
+    width: 2rem;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration:none;
+    background: white;
+    color: #131d60;
+}
+
+.search_icon:hover {
+    color: darkgreen;
+    text-decoration: none;
+}
+
+/*search box.*/
+
+
+/*scroll top button*/
+.back-to-top {
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 5px !important;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    display: none;
+    background: #131d60 !important;
+    z-index: 10;
+}
+
+/*scroll top button.*/
+
+
+/*simple logo*/
+
+.simple-logo {
+    margin-right: 30px;
+    font-family: "Roboto", sans-serif;
+    font-size: .7rem;
+}
+
+.simple-logo .subtext {
+    position: absolute;
+    top: 2.7rem;
+    font-size: .7rem;
+}
+
+.k-letter, .o-letter, .s-letter {
+    text-transform: uppercase;
+}
+
+.letter {
+    font-weight: bold;
+    font-size: 2rem;
+    text-shadow: 0 0 3px #5d687f;
+    color: white;
+}
+
+.k-letter {
+    color: #cf3c3c;
+}
+
+.o-letter {
+    color: #ffa628;
+}
+
+.s-letter {
+    color: #008000;
+}
+
+.normal-letter {
+
+}
+
+/*simple logo.*/
+
+
+
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: gray;

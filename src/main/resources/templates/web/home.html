@@ -4,21 +4,55 @@
 <head>
   <title>Homepage</title>
   <th:block th:replace="web/fragments/general :: meta" />
+  <th:block th:replace="web/fragments/general :: link"/>
 </head>
 <body>
 <div th:replace="web/fragments/general :: header"></div>
 
-<h1 th:unless="${session.user}">Welcome!</h1>
-<h1 th:if="${session.user}">Welcome: <span th:text="${session.user.fullName}"></span></h1>
-<h3>Demo forms:</h3>
-<ul>
-  <li><a href="/login">Login</a></li>
-  <li><a href="/register">Register</a></li>
-  <li><a href="/course/new">Open new course</a></li>
-  <li><a href="/course/1/new-lesson">Create new lesson for courseId=1</a></li>
-  <li><a href="/admin/manage/category">Admin manage category</a></li>
-  <li><a href="/admin/manage/media-type">Admin manage media type</a></li>
-</ul>
-<div th:replace="web/fragments/general :: footer"></div>
+<div id="wrapper" class="wrapper-content has-sidebar">
+  <div th:replace="web/fragments/general :: sidebar"></div>
+  <div id="page-content-wrapper">
+    <div class="row d-fex justify-content-center">
+      <div class="searchbar d-flex d-lg-none m-2">
+        <input class="search_input" type="text" name="" placeholder="Search...">
+        <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <h1>Sidebar Menu</h1>
+          <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens,
+            and will appear non-collapsed on larger screens.</p>
+          <p>Make sure to keep your content here Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut cumque, cupiditate deserunt exercitationem hic id minima nemo numquam officiis quas unde, vel velit! Asperiores corporis distinctio dolor dolores dolorum ea facilis minus nisi, nobis odit quia suscipit, tempore ut! Aspernatur consectetur cupiditate, dolores ducimus facilis minima minus nisi non qui similique. A accusamus accusantium aliquid amet aperiam assumenda autem commodi consectetur corporis debitis dolore dolorem doloribus facere labore laboriosam laudantium libero minus molestiae molestias nam nemo nostrum, officia omnis porro soluta tempora voluptates. Alias blanditiis exercitationem expedita fugit iste, omnis quibusdam quis voluptates! Amet aut dolor laboriosam nisi sint Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque, quo Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad adipisci aliquid consectetur corporis cum deserunt dolor error esse eum excepturi explicabo facere hic, libero molestias nihil numquam perspiciatis recusandae, repellat reprehenderit sequi tempora unde, vel vero voluptates. A accusamus, architecto cumque cupiditate distinctio enim, est incidunt ipsam pariatur porro quisquam rem repellendus tenetur voluptatibus voluptatum. Aspernatur ducimus eveniet harum, magnam odit officiis placeat quod unde voluptatem? Amet aperiam, assumenda, distinctio ducimus est eum eveniet facere incidunt inventore ipsa laborum maxime, nesciunt optio perferendis provident quibusdam reiciendis repellendus sit voluptatem voluptatibus. Ea eum exercitationem, fugit impedit in ipsum, iste itaque molestias nisi pariatur porro quia saepe vel. Beatae debitis nulla rem? Accusantium autem consectetur consequatur consequuntur cupiditate dolores eaque esse, laborum laudantium molestias nisi numquam officiis perferendis, quaerat quis ratione sed sunt tenetur unde veritatis. A ad adipisci asperiores, assumenda at blanditiis, corporis culpa delectus dicta ducimus excepturi expedita, fuga illo laboriosam magni molestias nam non nostrum nulla officia quaerat quidem quod rem sed sunt tenetur vel. Accusantium, animi consequuntur dolores ducimus, eveniet iusto, labore natus nemo optio rerum sed sunt veniam! Accusamus, adipisci atque consequatur cupiditate deserunt doloribus explicabo fugiat harum iusto laudantium, magnam minus modi nobis nulla perspiciatis provident quo sapiente sequi soluta sunt suscipit vel voluptates. Assumenda corporis debitis minus nihil possimus sit vel voluptates. Accusamus alias amet aperiam commodi consequuntur corporis cupiditate debitis deleniti deserunt, dignissimos dolorem doloribus exercitationem incidunt ipsum laboriosam magnam magni maxime minima nisi obcaecati perferendis praesentium quos ratione repellendus reprehenderit repudiandae rerum sit suscipit ullam voluptatum. A aliquid eveniet porro. Ab, alias aut, beatae commodi delectus dolore et exercitationem harum iure libero magni non nulla quidem quod sequi sit soluta suscipit totam vel voluptates? Aperiam assumenda consequatur consequuntur ducimus esse exercitationem explicabo minima molestiae nihil, non nostrum, possimus quae quasi quod recusandae rem repellat sequi voluptatibus! Consectetur ipsum odio quam recusandae. Delectus ipsam laborum odit totam! Ab alias blanditiis consequuntur cum cupiditate debitis deserunt, dolor dolore eaque error fugit id itaque odio omnis placeat porro quam ratione, recusandae reiciendis similique tempora temporibus totam unde vero voluptatum. Aliquid aspernatur consequatur cupiditate dolorem eius explicabo facere illum, ipsa ipsam necessitatibus odit officiis porro quasi quibusdam quis repellat sed. Accusantium architecto aspernatur doloremque explicabo, illum incidunt itaque magni quae quaerat qui quisquam repellat sapiente unde, vel, vitae. Ab at beatae consectetur deleniti dignissimos dolores dolorum earum et ex excepturi expedita facilis fugit incidunt minima numquam omnis perferendis quaerat, qui quod sint temporibus unde, vel voluptates. Autem commodi consectetur corporis dolorum ducimus excepturi illo itaque neque nostrum, obcaecati possimus rem unde, veniam voluptate voluptatem? Modi, molestiae, molestias? Consequatur deleniti iste odit quae quos. Adipisci autem earum, fugit nisi pariatur quibusdam sapiente tenetur vitae! A accusantium ad amet animi delectus dolorem dolorum earum eius fuga fugiat hic illum impedit, incidunt, ipsa, iste laboriosam modi omnis placeat provident quas quibusdam quidem quo rem repellendus saepe sapiente suscipit unde ut voluptate voluptatem. Ducimus eaque, earum enim est excepturi facere fuga incidunt nulla, odit quas quo quod, totam? Architecto ea exercitationem labore odit quisquam tempora unde? Consequuntur debitis doloribus eius hic nihil recusandae reiciendis reprehenderit sunt ullam velit! Ab aliquam at, beatae corporis deleniti eaque esse est eum ipsa minus nam nemo neque nihil perferendis reiciendis unde voluptatibus. Ab aliquid, animi aspernatur blanditiis consequuntur culpa cumque deserunt doloremque dolores ducimus enim fuga hic illo impedit iusto magni, maiores molestias mollitia necessitatibus neque nesciunt nihil pariatur quod quos ratione reprehenderit sapiente sed, tempora totam voluptas! Quae suscipit, voluptates. Ab accusamus aspernatur, consectetur ea, eius eveniet explicabo facilis illum mollitia nulla odio quibusdam, quos saepe unde veniam? Recusandae repellat saepe tempora tenetur veniam! Ad beatae ducimus eum ex id, inventore, labore magni molestiae necessitatibus nulla odio perferendis vitae. Accusantium at consequatur fugiat, hic maiores maxime qui similique voluptatibus voluptatum. Adipisci asperiores consectetur dolores earum eius eos et ex expedita facere fuga id, illum ipsum labore minima molestias nostrum provident quaerat quam qui quod quos recusandae rem sint temporibus ullam vitae voluptate voluptatibus. Aliquam corporis eum exercitationem magnam perspiciatis qui ut. Amet eaque eligendi magni optio sapiente sed vel veniam! Aperiam consequuntur dolorem eligendi est. Aliquam amet autem dignissimos esse iusto molestias odio, quia quibusdam voluptatibus! Aliquam at aut dicta, dolor dolorem dolores doloribus dolorum enim eos eum itaque magni minima molestiae neque odit officiis porro quaerat quidem quod quos recusandae, sit temporibus veritatis. Ab accusamus ipsam magni quae voluptas! Ab corporis debitis doloremque ducimus eligendi est fugit iure necessitatibus nemo nesciunt nihil, omnis quasi quia quod ullam? Accusamus adipisci culpa, cum debitis deserunt dolorum eaque inventore, iste maxime minima officia pariatur sequi sint soluta unde! Adipisci beatae doloremque dolores eaque eos est fugiat laborum libero minus modi natus nemo nisi recusandae, totam veritatis? Alias architecto aspernatur autem commodi cum dicta distinctio eveniet exercitationem facere, fugit id incidunt ipsam iste iure laudantium nam neque nisi pariatur porro, quam quas rem sint soluta vel velit. Autem blanditiis deleniti ducimus ea eum fuga fugiat id iste laboriosam, nisi, nostrum qui rem totam. Asperiores consectetur cumque, debitis dolorum in ipsa maxime nobis quo voluptate voluptates? Dignissimos facere iste nobis odit praesentium quo quod reiciendis ullam. Adipisci asperiores aspernatur cupiditate dicta, eligendi excepturi expedita, facere fugit ipsum itaque laudantium maxime nihil placeat quo unde voluptates voluptatum! Accusantium ad beatae corporis eius fugiat iste modi optio provident quod, sapiente sunt vel, voluptate voluptates? Dolorum, ex expedita facilis fuga incidunt ipsum labore laborum molestias odit placeat rem reprehenderit sit tempora unde vel. Ab accusamus adipisci assumenda corporis dicta distinctio eaque esse, facilis iste iure maiores molestiae necessitatibus nulla officiis perspiciatis placeat quibusdam quis repudiandae ut vero? Alias dignissimos dolorem fuga placeat quia voluptate? Accusantium aperiam at consequuntur corporis cum distinctio dolor dolorem dolores ea eaque eius eligendi est et ex exercitationem explicabo fugiat harum impedit ipsa ipsam magni molestias nam nisi odio officiis optio placeat porro quaerat quas quia quidem quod repellat reprehenderit sequi, voluptas voluptate voluptatem. Architecto assumenda laudantium rem. At consequuntur delectus distinctio dolore, dolores ea eaque id magni numquam odit quae quam sapiente. Architecto, dignissimos, rem.</p>
+        </div>
+      </div>
+    </div>
+    <div th:replace="web/fragments/general :: footer"></div>
+  </div><!--page wrapper content.-->
+</div><!--wrapper content.-->
+
+<!--<h1 th:unless="${session.user}">Welcome!</h1>-->
+<!--<h1 th:if="${session.user}">Welcome: <span th:text="${session.user.fullName}"></span></h1>-->
+<!--<h3>Demo forms:</h3>-->
+<!--<ul>-->
+<!--  <li><a href="/login">Login</a></li>-->
+<!--  <li><a href="/register">Register</a></li>-->
+<!--  <li><a href="/course/new">Open new course</a></li>-->
+<!--  <li><a href="/course/1/new-lesson">Create new lesson for courseId=1</a></li>-->
+<!--  <li><a href="/admin/manage/category">Admin manage category</a></li>-->
+<!--  <li><a href="/admin/manage/media-type">Admin manage media type</a></li>-->
+<!--</ul>-->
+
+<th:block th:replace="web/fragments/general :: script"/>
+<script>
+  $(function(){
+    $(".btn-toggle-menu").click(function() {
+      $("#wrapper").toggleClass("toggled");
+      $('.toggle-btn-view').toggleClass("toggled");
+    });
+  })
+</script>
 </body>
 </html>

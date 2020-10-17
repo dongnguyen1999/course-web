@@ -5,31 +5,208 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>General</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-  <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}" >
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" th:href="@{/vendor/mdbootstrap/css/bootstrap.min.css}">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" th:href="@{/vendor/mdbootstrap/css/mdb.min.css}">
+  <!--Custom styles-->
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}">
 </head>
 <body>
+
+<!--Simple logo-->
+<div class="simple-logo" th:fragment="simpleLogo">
+  <span class="letter k-letter">k</span>
+  <!--/*@thymesVar id="hasSubtext" type="java.lang.Boolean"*/-->
+  <span th:if="${hasSubtext}" class="subtext">eep</span>
+  <span class="letter o-letter">o</span>
+  <span class="letter normal-letter">u</span>
+  <span class="letter normal-letter">r</span>
+  <span class="letter s-letter">s</span>
+  <span class="letter normal-letter">e</span>
+  <span th:if="${hasSubtext}" class="subtext">eds</span>
+</div>
+<!--Simple logo.-->
+
 <!--Header-->
 <header th:fragment="header">
-  <h3>Header</h3>
+  <nav class="navbar navbar-expand-lg fixed-top main-nav">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="#">
+        <th:block th:replace="::simpleLogo(hasSubtext=true)"/>
+      </a>
+
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+              aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link d-xl-none" href="/login">Đăng nhập</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-xl-none" href="/register">Đăng ký</a>
+          </li>
+
+        </ul>
+        <div class="searchbar d-none d-lg-flex ml-0 mr-0">
+          <input class="search_input" type="text" name="" placeholder="Search...">
+          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+        </div>
+        <a href="/login" class="btn d-none d-xl-block btn-outline-light-blue btn-sm login-btn">Đăng nhập</a>
+        <a href="/register" class="btn d-none d-xl-block btn-light-blue btn-sm login-btn">Đăng ký</a>
+      </div>
+    </div>
+  </nav>
 </header>
 <!--Header.-->
 
+<!--Side bar-->
+<nav th:fragment="sidebar">
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <span>THỂ LOẠI</span>
+        <button class="btn-menu btn btn-success btn-toggle-menu" type="button">
+          <i class="fa fa-bars"></i>
+        </button>
+      </li>
+      <li>
+        <a href="#">Dashboard</a>
+      </li>
+      <li>
+        <a href="#">Shortcuts</a>
+      </li>
+      <li>
+        <a href="#">Overview</a>
+      </li>
+      <li>
+        <a href="#">Events</a>
+      </li>
+      <li class="active">
+        <a href="#">About</a>
+      </li>
+      <li>
+        <a href="#">Services</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--Side bar.-->
+
 <!--Footer-->
-<footer th:fragment="footer">
-  <h3>Footer</h3>
+<footer th:fragment="footer" class="page-footer font-small pt-4 mt-4">
+  <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"
+     title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
+    <i class="fas fa-angle-up"></i>
+  </a>
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-5 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <th:block th:replace="::simpleLogo(hasSubtext=false)"/>
+        <p>Không gian tự học không giới hạn dành cho tất cả mọi người<br>Tham gia và mở khóa học của bạn ngay thôi nào
+        </p>
+
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">
+          <strong>Đường dẫn</strong>
+        </h6>
+        <hr class="accent-2 mb-1 mt-0 d-inline-block mx-auto" style="width: 100px;">
+        <ul class="list-unstyled">
+          <li><a href=""><i class="fab fa-youtube mr-3"></i> Kênh KOurSe</a></li>
+          <li><a href=""><i class="fab fa-facebook-square mr-3"></i> Facebook fanpage</a></li>
+          <li><a href=""><i class="fab fa-github-square mr-3"></i> For developer</a></li>
+          <li><a href=""><i class="fas fa-graduation-cap mr-3"></i>Đại học Cần Thơ</a></li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 mb-md-0 mb-3">
+
+        <!-- Contacts -->
+        <h6 class="text-uppercase font-weight-bold">
+          <strong>Liên hệ</strong>
+        </h6>
+        <hr class="accent-2 mb-1 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <ul class="list-unstyled">
+          <li><i class="fas fa-home mr-3"></i> Ninh Kiều, Cần Thơ, VN</li>
+          <li><i class="fa fa-envelope mr-3"></i> dongb1709590@student.ctu.edu.vn</li>
+          <li><i class="fa fa-phone mr-3"></i> +84334007127</li>
+          <li><i class="fa fa-print mr-3"></i> +84837972128</li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mdbootstrap.com/bootstrap-tutorial/">Nguyễn Việt Đông - B1709590</a>
+  </div>
+  <!-- Copyright -->
+
 </footer>
 <!--Footer.-->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script th:src="@{/admin/js/common.js}"></script>
+<!-- jQuery -->
+<script type="text/javascript" th:src="@{/vendor/mdbootstrap/js/jquery.min.js}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" th:src="@{/vendor/mdbootstrap/js/popper.min.js}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" th:src="@{/vendor/mdbootstrap/js/bootstrap.min.js}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" th:src="@{/vendor/mdbootstrap/js/mdb.min.js}"></script>
+<!--Custom scripts-->
+<script th:src="@{/web/js/common.js}"></script>
 
-<script>
-  useBtnCheckbox();
-</script>
+<!--<script>-->
+<!--  useBtnCheckbox();-->
+<!--</script>-->
 </body>
 </html>

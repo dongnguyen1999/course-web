@@ -9,6 +9,7 @@
 </head>
 <body>
 <div th:replace="web/fragments/general :: header"></div>
+<div id="wrapper" class="wrapper-content">
 <div class="container">
   <div class="card bg-light">
     <h1 class="card-header">Mở một khóa học mới</h1>
@@ -86,8 +87,10 @@
       )"></div>
 
     </div><!--container-fluid.-->
-  </div>
-</div>
+  </div><!--card.-->
+</div><!--container.-->
+</div><!--wrapper content.-->
+
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script" />
 <script src="https://cdn.ckeditor.com/4.15.0/basic/ckeditor.js"></script>

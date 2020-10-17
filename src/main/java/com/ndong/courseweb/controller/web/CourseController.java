@@ -41,19 +41,19 @@ public class CourseController {
     return view;
   }
 
-  @RequestMapping(path = "/course/{courseId}/new-lesson", method = RequestMethod.GET)
-  public ModelAndView getCreateLessonForm(@PathVariable Long courseId) {
+  @RequestMapping(path = "/course/{courseCode}/new-lesson", method = RequestMethod.GET)
+  public ModelAndView getCreateLessonForm(@PathVariable String courseCode) {
     ModelAndView view = new ModelAndView("/web/course/edit-lesson");
-    CourseDTO course = courseService.findOneCourse(courseId);
+    CourseDTO course = courseService.findOneCourse(courseCode);
     view.addObject(SystemConstant.COURSE_DTO, course);
     return view;
   }
 
-  @RequestMapping(path = "/course/{courseId}/new-lesson", method = RequestMethod.POST)
-  public ModelAndView createNewLesson(@PathVariable Long courseId, LessonDTO lessonDTO) {
+  @RequestMapping(path = "/course/{courseCode}/new-lesson", method = RequestMethod.POST)
+  public ModelAndView createNewLesson(@PathVariable String courseCode, LessonDTO lessonDTO) {
     ModelAndView view = new ModelAndView("/web/course/edit-lesson");
     boolean createLessonStatus = courseService.tryCreateNewLesson(lessonDTO);
-    CourseDTO course = courseService.findOneCourse(courseId);
+    CourseDTO course = courseService.findOneCourse(courseCode);
     view.addObject(SystemConstant.COURSE_DTO, course);
     view.addObject(SystemConstant.CREATE_LESSON_STATUS, createLessonStatus);
     return view;

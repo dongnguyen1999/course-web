@@ -9,6 +9,7 @@
 </head>
 <body>
 <div th:replace="web/fragments/general :: header"></div>
+<div id="wrapper" class="wrapper-content">
 <div class="container-fluid p-4 bg-light">
   <form id="createLessonForm" action="" method="post" novalidate>
     <input type="hidden" name="courseId" th:value="${course.id}">
@@ -66,7 +67,9 @@
         title='Thêm bài học thất bại',
         content='Có gì đó sai sai<br>Có thể do hệ thống quá tải, vui lòng thử lại sau'
       )"></div>
-</div><!--container-->
+</div><!--container.-->
+</div><!--wrapper content.-->
+
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script"/>
 <script src="https://cdn.ckeditor.com/4.15.0/basic/ckeditor.js"></script>

@@ -105,4 +105,13 @@ public class CourseService implements ICourseService {
     if (dto != null) dto.setNextAvailableLessonNo(maxLessonId+1);
     return dto;
   }
+
+  @Override
+  public CourseDTO findOneCourse(String courseCode) {
+    CourseEntity course = courseRepository.findOneByCode(courseCode);
+    Integer maxLessonId = lessonRepository.findMaxNoByCourseId(course.getId());
+    CourseDTO dto = modelMapper.map(course, CourseDTO.class);
+    if (dto != null) dto.setNextAvailableLessonNo(maxLessonId+1);
+    return dto;
+  }
 }

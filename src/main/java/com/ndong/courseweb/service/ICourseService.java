@@ -7,5 +7,6 @@ public interface ICourseService {
   boolean tryOpenNewCourse(CourseDTO model);
   boolean tryCreateNewLesson(LessonDTO model);
   CourseDTO findOneCourse(Long courseId);
+  CourseDTO findOneCourse(String courseCode);
 
 }
