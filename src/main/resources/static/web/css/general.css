@@ -1,7 +1,8 @@
 /*Accent color #131d60*/
 /*Light color #b2ecf2*/
 /*Shadow color #5d687f*/
-
+/*Error color #cf3c3c*/
+/*Warnning color #FF7B2E*/
 * {
     padding: 0;
     margin: 0;
@@ -57,6 +58,125 @@
 
 }
 
+/*landing intro*/
+#intro {
+    height: 25rem;
+    /*noinspection CssUnknownTarget*/
+    background: url("/web/img/landing-background.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+
+.landing-title {
+    color: #131d60;
+    font-size: 2.5rem;
+}
+
+.landing-container {
+    margin-top: 6rem;
+}
+
+/*Course list*/
+
+.course-list .card-body {
+    padding: 1.5rem;
+}
+
+.course-list .card-title {
+    color: #131d60;
+}
+
+.course-list .card-subtitle {
+    color: #cf3c3c;
+}
+
+.course-list .card-title:hover {
+    text-decoration: underline;
+}
+
+.course-list .card {
+    border-radius: 10px;
+}
+
+.course-list .nb-used {
+    color: #FF7B2E;
+    font-style: italic;
+}
+
+.course-list .more-detail-btn {
+    background: #131d60 !important;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2rem;
+}
+
+
+.course-list .view.overlay {
+    border-radius: 10px 10px 0 0;
+}
+
+
+
+.course-list .card-img-top {
+    height: 15rem;
+    object-fit: cover !important;
+}
+
+.course-list .max-lines-3 {
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    height: 4rem;
+    line-height: 1.3rem;
+}
+
+/*Course list.*/
+
+
+/*Feature list*/
+
+.feature-list .card {
+    border-radius: 16px;
+}
+
+.feature-list .card {
+    display: flex;
+    flex-direction: row;
+}
+
+.feature-list .card-icon {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    text-align: center;
+    vertical-align: middle;
+    color: #131d60;
+}
+
+.feature-list .card-title {
+    color: #131d60;
+}
+
+.feature-list .card:hover {
+    background: #b2ecf2;
+}
+
+.feature-list .card:hover .card-text {
+    color: black;
+}
+
+.feature-list .card-body {
+    flex: 3;
+}
+
+/*Feature list.*/
+
 /*header*/
 header .main-nav {
     background: #131d60;
@@ -64,6 +184,10 @@ header .main-nav {
 
 header a {
     color: white;
+}
+
+header .navbar-brand {
+    margin-right: 30px;
 }
 
 .navbar-toggler {
@@ -101,6 +225,12 @@ header a {
 
 .login-btn.btn-light-blue {
     color: #131d60;
+    background: #b2ecf2 !important;
+}
+
+.login-btn.btn-outline-light-blue {
+    color: #b2ecf2 !important;
+    border-color: #b2ecf2 !important;
 }
 
 /*header.*/
@@ -130,7 +260,7 @@ body{
 
 #wrapper {
     padding-left: 0;
-    margin-top: 4.7rem;
+    margin-top: 4.6rem;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -167,7 +297,6 @@ body{
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
 }
 
 #wrapper.has-sidebar.toggled #page-content-wrapper {
@@ -367,7 +496,6 @@ btn-menu {
 /*simple logo*/
 
 .simple-logo {
-    margin-right: 30px;
     font-family: "Roboto", sans-serif;
     font-size: .7rem;
 }
@@ -389,6 +517,10 @@ btn-menu {
     color: white;
 }
 
+.letter.big {
+    font-size: 5rem;
+}
+
 .k-letter {
     color: #cf3c3c;
 }
@@ -406,6 +538,9 @@ btn-menu {
 }
 
 /*simple logo.*/
+
+
+
 
 
 

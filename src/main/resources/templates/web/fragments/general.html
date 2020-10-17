@@ -18,19 +18,14 @@
 </head>
 <body>
 
-<!--Simple logo-->
-<div class="simple-logo" th:fragment="simpleLogo">
-  <span class="letter k-letter">k</span>
-  <!--/*@thymesVar id="hasSubtext" type="java.lang.Boolean"*/-->
-  <span th:if="${hasSubtext}" class="subtext">eep</span>
-  <span class="letter o-letter">o</span>
-  <span class="letter normal-letter">u</span>
-  <span class="letter normal-letter">r</span>
-  <span class="letter s-letter">s</span>
-  <span class="letter normal-letter">e</span>
-  <span th:if="${hasSubtext}" class="subtext">eds</span>
+<!--Small screen searchbox-->
+<div class="row d-fex justify-content-center" th:fragment="smSearchbox">
+  <div class="searchbar d-flex d-lg-none m-2">
+    <input class="search_input" type="text" name="" placeholder="Search...">
+    <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+  </div>
 </div>
-<!--Simple logo.-->
+<!--Small screen searchbox.-->
 
 <!--Header-->
 <header th:fragment="header">
@@ -192,6 +187,21 @@
 
 </footer>
 <!--Footer.-->
+
+<!--Simple logo-->
+<div class="simple-logo" th:classappend="${sizeBig}? 'big': ''" th:fragment="simpleLogo">
+  <!--/*@thymesVar id="sizeBig" type="java.lang.Boolean"*/-->
+  <span class="letter k-letter" th:classappend="${sizeBig}? 'big': ''">k</span>
+  <!--/*@thymesVar id="hasSubtext" type="java.lang.Boolean"*/-->
+  <span th:if="${hasSubtext}" class="subtext" th:classappend="${sizeBig}? 'big': ''">eep</span>
+  <span class="letter o-letter" th:classappend="${sizeBig}? 'big': ''">o</span>
+  <span class="letter normal-letter " th:classappend="${sizeBig}? 'big': ''">u</span>
+  <span class="letter normal-letter" th:classappend="${sizeBig}? 'big': ''">r</span>
+  <span class="letter s-letter" th:classappend="${sizeBig}? 'big': ''">s</span>
+  <span class="letter normal-letter" th:classappend="${sizeBig}? 'big': ''">e</span>
+  <span th:if="${hasSubtext}" class="subtext" th:classappend="${sizeBig}? 'big': ''">eds</span>
+</div>
+<!--Simple logo.-->
 
 <!-- jQuery -->
 <script type="text/javascript" th:src="@{/vendor/mdbootstrap/js/jquery.min.js}"></script>
