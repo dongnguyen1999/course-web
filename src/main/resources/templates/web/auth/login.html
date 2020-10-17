@@ -14,14 +14,14 @@
 <div id="wrapper" class="wrapper-content">
 <div class="container">
   <hr>
-  <div class="card bg-light">
+  <div class="card">
     <article class="card-body mx-auto">
-      <h1 class="card-title mt-3 text-center ">Đăng nhập tài khoản</h1>
+      <h1 class="card-title mt-3 text-center ">ĐĂNG NHẬP TÀI KHOẢN</h1>
       <p class="text-center">Đăng nhập và bắt đầu chia sẻ khóa học của riêng mình</p>
       <form id="loginForm" action="/login" method="post" class="col-md-4">
         <!--Avatar image-->
         <div class="mt-5 mb-5 avatar-container">
-          <img id="user-image" class="avatar" th:src="@{/web/img/default-avatar.png}" alt="default avatar">
+          <img id="user-image" class="avatar z-depth-1" th:src="@{/web/img/default-avatar.png}" alt="default avatar">
         </div>
         <!--Username input-->
         <div class="mb-3">
@@ -46,11 +46,11 @@
         </div>
 
         <!--Submit button-->
-        <div class="form-group">
+        <div class="mb-2">
           <button type="submit" class="btn btn-primary btn-block">ĐĂNG NHẬP</button>
         </div> <!--form-group.-->
 
-        <p class="text-center">Chưa có tài khoản? <a href="/register">Đăng ký</a> </p>
+        <p class="text-center">Chưa có tài khoản? <a class="login-switch" href="/register">Đăng ký</a> </p>
       </form>
 
       <div th:replace="web/fragments/modal :: informationModal(

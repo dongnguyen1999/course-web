@@ -88,6 +88,12 @@ header a {
     padding: 5px;
 }
 
+.navbar-collapse li:hover a {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 3px #5d687f;
+}
+
 .login-btn {
     font-weight: bold;
     font-size: .8rem !important;
@@ -422,4 +428,9 @@ btn-menu {
 }
 .form-control:-ms-input-placeholder {
     color: gray;
+}
+
+.form-control:focus {
+    /*border: #131d60 !important;*/
+    border: solid 2px #131d60;
 }

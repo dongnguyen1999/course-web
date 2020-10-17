@@ -5,8 +5,6 @@
   <title>Đăng ký</title>
   <th:block th:replace="web/fragments/general :: meta"/>
   <th:block th:replace="web/fragments/general :: link"/>
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}">
 
 
@@ -14,137 +12,136 @@
 <body>
 <div th:replace="web/fragments/general :: header"></div>
 <div id="wrapper" class="wrapper-content">
-<div class="container">
-  <hr>
-  <div class="card bg-light">
-    <article class="card-body mx-auto">
-      <h1 class="card-title mt-3 text-center ">Đăng ký một tài khoản</h1>
-      <p class="text-center">Bắt đầu bằng việc tạo tài khoản miễn phí</p>
-      <form id="registerForm" action="/register" method="post" class="needs-validation col-md-4" novalidate enctype="multipart/form-data">
-        <!--Avatar image-->
-        <label class="form-group mt-4 mb-4 avatar-container position-relative" for="avatarInput" role="button">
-          <img id="user-image" class="img-fluid border border-dark image-preview avatar"
-               src="" th:src="@{/web/img/default-avatar.png}" defSrc="/web/img/default-avatar.png" alt="default avatar">
-          <i class="d-none position-absolute fas fa-camera" id="camera-icon"></i>
-          <input class="form-control hide is-invalid" id="avatarInput" type="file" name="avatarFile">
-          <div class="invalid-feedback text-center avatar-feedback"></div>
-        </label>
+  <div class="container">
+    <hr>
+    <div class="card">
+      <article class="card-body mx-auto">
+        <h1 class="card-title mt-3 text-center ">ĐĂNG KÝ MỘT TÀI KHOẢN</h1>
+        <p class="text-center">Bắt đầu bằng việc tạo tài khoản miễn phí</p>
+        <form id="registerForm" action="/register" method="post" class="needs-validation col-md-4" novalidate
+              enctype="multipart/form-data">
+          <!--Avatar image-->
+          <label class="mt-4 mb-4 avatar-container position-relative" for="avatarInput" role="button">
+            <img id="user-image" class="img-fluid border border-dark image-preview z-depth-1 avatar"
+                 src="" th:src="@{/web/img/default-avatar.png}" defSrc="/web/img/default-avatar.png"
+                 alt="default avatar">
+            <i class="d-none position-absolute fas fa-camera" id="camera-icon"></i>
+            <input class="form-control hide is-invalid" id="avatarInput" type="file" name="avatarFile">
+            <div class="invalid-feedback text-center avatar-feedback"></div>
+          </label>
 
-        <!--Username input-->
-        <div class="form-row mb-2">
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-            </div>
-            <input name="username" class="form-control" placeholder="*Tên đăng nhập" type="text" required>
-            <div class="valid-feedback"></div>
-            <div class="invalid-feedback">Tên tài khoản không được bỏ trống</div>
-          </div> <!--form-group.-->
-        </div>
+          <!--Username input-->
+          <div class="form-row mb-2">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+              </div>
+              <input name="username" class="form-control" placeholder="*Tên đăng nhập" type="text" required>
+              <div class="valid-feedback"></div>
+              <div class="invalid-feedback">Tên tài khoản không được bỏ trống</div>
+            </div> <!--form-group.-->
+          </div>
 
-        <!--Full name input-->
-        <div class="form-row mb-2">
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-user-plus"></i> </span>
-            </div>
-            <input name="fullName" class="form-control" placeholder="*Tên đầy đủ" type="text" required>
-            <div class="invalid-feedback">Tên đầy đủ không được bỏ trống</div>
-          </div> <!--form-group.-->
-        </div>
+          <!--Full name input-->
+          <div class="form-row mb-2">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user-plus"></i> </span>
+              </div>
+              <input name="fullName" class="form-control" placeholder="*Tên đầy đủ" type="text" required>
+              <div class="invalid-feedback">Tên đầy đủ không được bỏ trống</div>
+            </div> <!--form-group.-->
+          </div>
 
-        <!--Password input-->
-        <div class="form-row mb-2">
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-            </div>
-            <input name="password" class="form-control" placeholder="*Mật khẩu" type="password" required>
-            <div class="invalid-feedback">Mật khẩu không được bỏ trống</div>
-          </div> <!--form-group.-->
-        </div>
+          <!--Password input-->
+          <div class="form-row mb-2">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+              </div>
+              <input name="password" class="form-control" placeholder="*Mật khẩu" type="password" required>
+              <div class="invalid-feedback">Mật khẩu không được bỏ trống</div>
+            </div> <!--form-group.-->
+          </div>
 
-        <!--Confirm password input-->
-        <div class="form-row mb-2">
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-            </div>
-            <input id="confirm-password" class="form-control" placeholder="*Xác nhận mật khẩu" type="password" required>
-            <div class="invalid-feedback">Hãy xác nhận mật khẩu</div>
-          </div> <!--form-group.-->
-        </div>
+          <!--Confirm password input-->
+          <div class="form-row mb-2">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+              </div>
+              <input id="confirm-password" class="form-control" placeholder="*Xác nhận mật khẩu" type="password"
+                     required>
+              <div class="invalid-feedback">Hãy xác nhận mật khẩu</div>
+            </div> <!--form-group.-->
+          </div>
 
-        <!--Email input-->
-        <div class="form-row mb-2">
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-            </div>
-            <input name="email" class="form-control no-required" placeholder="Email" type="email">
-            <div class="invalid-feedback"></div>
-          </div> <!--form-group.-->
-        </div>
+          <!--Email input-->
+          <div class="form-row mb-2">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+              </div>
+              <input name="email" class="form-control no-required" placeholder="Email" type="email">
+              <div class="invalid-feedback"></div>
+            </div> <!--form-group.-->
+          </div>
 
-        <!--Phone number input-->
-        <div class="form-row mb-2">
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
-            </div>
-            <span class="input-group-text bg-light phone-prefix" style="max-width: 100rem;">
+          <!--Phone number input-->
+          <div class="form-row mb-2">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+              </div>
+              <span class="input-group-text bg-light phone-prefix" style="max-width: 100rem;">
             +84
             </span>
-            <input name="phone" class="form-control no-required" placeholder="Số điện thoại" type="text">
-            <div class="invalid-feedback"></div>
-          </div> <!--form-group.-->
-        </div>
+              <input name="phone" class="form-control no-required" placeholder="Số điện thoại" type="text">
+              <div class="invalid-feedback"></div>
+            </div> <!--form-group.-->
+          </div>
 
-        <!--Birthday input-->
-        <div class="form-row mb-2">
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
-            </div>
-            <div class="form-control date no-required" data-provide="datepicker" data-date-format="dd/mm/yyyy">
-              <input name="birth" class="text-dark" type="text" placeholder="Ngày sinh: dd/mm/yyyy" value="">
-              <div class="input-group-addon">
-                <span class="glyphicon glyphicon-th"></span>
+          <!--Birthday input-->
+          <div class="form-row mb-2">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
               </div>
-            </div>
+
+              <input name="birth" class="form-control no-required" type="date" placeholder="dd-mm-yyyy" value="">
+
+            </div> <!--form-group.-->
+          </div>
+
+          <!--Work experience input-->
+          <div class="form-row mb-2 mt">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-star"></i> </span>
+              </div>
+              <textarea name="workExperienceInfo" class="form-control no-required" placeholder="Vài dòng về bản thân"
+                        type="text"></textarea>
+            </div> <!--form-group.-->
+          </div>
+
+          <!--Submit button-->
+          <div class="mb-2">
+            <button type="submit" class="btn btn-primary btn-block">ĐĂNG KÝ TÀI KHOẢN</button>
           </div> <!--form-group.-->
-        </div>
 
-        <!--Work experience input-->
-        <div class="form-row mb-2 mt">
-          <div class="form-group input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-star"></i> </span>
-            </div>
-            <textarea name="workExperienceInfo" class="form-control no-required" placeholder="Vài dòng về bản thân"
-                      type="text"></textarea>
-          </div> <!--form-group.-->
-        </div>
+          <p class="text-center">Đã có tài khoản? <a class="login-switch" href="/login">Đăng nhập</a></p>
+        </form>
 
-        <!--Submit button-->
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block">ĐĂNG KÝ TÀI KHOẢN</button>
-        </div> <!--form-group.-->
-
-        <p class="text-center">Đã có tài khoản? <a href="/login">Đăng nhập</a></p>
-      </form>
-
-      <div th:replace="web/fragments/modal :: registerModal(registerStatus=${registerStatus})"></div>
+        <div th:replace="web/fragments/modal :: registerModal(registerStatus=${registerStatus})"></div>
 
 
-    </article><!--card-body.-->
-  </div><!--card.-->
-</div><!--container.-->
+      </article><!--card-body.-->
+    </div><!--card.-->
+  </div><!--container.-->
 </div><!--wrapper-content.-->
 
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script th:src="@{/web/js/validation.js}"></script>
 <script th:src="@{/web/js/register-form-validation.js}"></script>
 <script th:src="@{/web/js/image-picker.js}"></script>

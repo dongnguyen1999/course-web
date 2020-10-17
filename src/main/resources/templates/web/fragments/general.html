@@ -37,7 +37,7 @@
   <nav class="navbar navbar-expand-lg fixed-top main-nav">
     <div class="container-fluid">
 
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/index">
         <th:block th:replace="::simpleLogo(hasSubtext=true)"/>
       </a>
 
@@ -48,18 +48,18 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="/index">Trang chủ
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#">Khóa học</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link" href="#">Tính năng</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="#">Liên hệ</a>
           </li>
 
           <li class="nav-item">
@@ -68,7 +68,6 @@
           <li class="nav-item">
             <a class="nav-link d-xl-none" href="/register">Đăng ký</a>
           </li>
-
         </ul>
         <div class="searchbar d-none d-lg-flex ml-0 mr-0">
           <input class="search_input" type="text" name="" placeholder="Search...">
@@ -205,8 +204,13 @@
 <!--Custom scripts-->
 <script th:src="@{/web/js/common.js}"></script>
 
-<!--<script>-->
-<!--  useBtnCheckbox();-->
-<!--</script>-->
+<script>
+  // useBtnCheckbox();
+  $(function () {
+    $(".navbar a.nav-link").removeClass("waves-effect").removeClass("waves-light");
+  })
+
+</script>
+
 </body>
 </html>

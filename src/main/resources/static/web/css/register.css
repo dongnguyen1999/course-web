@@ -15,7 +15,7 @@
   width: 10rem;
   height: 10rem;
   border-radius: 5rem !important;
-  border: solid 2px black !important;
+  border: solid 2px #131d60 !important;
   object-fit: cover;
 }
 
@@ -64,6 +64,27 @@
   border-radius: 0 !important;
 }
 
+.form-control, .form-group .input-group-prepend, .phone-prefix {
+  border-radius: 5px;
+  box-shadow: 0 0 3px #5d687f;
+}
+
 .form-control.is-invalid {
   border-width: 2px;
+}
+
+
+.card {
+  background: #b2ecf2;
+}
+
+button[type="submit"] {
+  background: #131d60 !important;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+}
+
+.login-switch {
+  color: #131d60 !important;
 }
