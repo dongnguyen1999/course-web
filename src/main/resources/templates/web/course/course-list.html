@@ -15,13 +15,19 @@
   <div id="page-content-wrapper">
     <div th:replace="web/fragments/general :: smSearchbox"></div>
     <nav class="course-nav row">
-      <div class="category-toggle-view col-md-7">
+      <div class="category-toggle-view col-md-5 col-lg-7">
         <button class="btn-menu btn btn-toggle-menu" type="button">
           <i class="fa fa-bars"></i>
         </button>
-        <div class="category-label ml-3">Thể loại: <span class="category">Tất cả</span></div>
+        <div class="category-label ml-3">Thể loại:&nbsp;<span class="category d-none d-md-inline">Tất cả</span></div>
+        <select class="form-control w-50 ml-1 custom-select d-block d-md-none">
+          <option selected>Chọn thể loại</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
       </div>
-      <div class="btn-group col-md-5" role="group" aria-label="Course filter">
+      <div class="btn-group col-md-7 col-lg-5" role="group" aria-label="Course filter">
         <button type="button" class="btn">Tất cả</button>
         <button type="button" class="btn">Phổ biến</button>
         <button type="button" class="btn">Giá rẽ</button>
@@ -29,13 +35,263 @@
       </div>
     </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-12" style="height: 80vh">
+    <div class="row searching-label">Tìm kiếm với từ khóa:&nbsp;<span class="key-word">khóa học java</span></div>
 
-        </div>
+    <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4">
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
+          <!-- Card -->
+          <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top"
+                   th:src="@{/web/img/default-thumbnail.png}"
+                   alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body p-3">
+              <!-- Title -->
+              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
+              <!-- Title -->
+              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
+              <!-- Text -->
+              <div class="card-detail">
+                <p class="card-text mb-0 max-lines-2">ke up the bulk of
+                  the
+                  card's
+                  content.</p>
+                <div class="nb-used mb-1">30 Học viên</div>
+              </div>
+              <!-- Button -->
+              <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
+              </div>
+            </div><!--Card body.-->
+          </div><!--Card.-->
+        </div><!--Col.-->
+
+
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
+          <!-- Card -->
+          <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top"
+                   th:src="@{/web/img/default-thumbnail.png}"
+                   alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body p-3">
+              <!-- Title -->
+              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
+              <!-- Title -->
+              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
+              <!-- Text -->
+              <div class="card-detail">
+                <p class="card-text mb-0 max-lines-2">ke up the bulk of
+                  the
+                  card's
+                  content.</p>
+                <div class="nb-used mb-1">30 Học viên</div>
+              </div>
+              <!-- Button -->
+              <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
+              </div>
+            </div><!--Card body.-->
+          </div><!--Card.-->
+        </div><!--Col.-->
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
+          <!-- Card -->
+          <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top"
+                   th:src="@{/web/img/default-thumbnail.png}"
+                   alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body p-3">
+              <!-- Title -->
+              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
+              <!-- Title -->
+              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
+              <!-- Text -->
+              <div class="card-detail">
+                <p class="card-text mb-0 max-lines-2">ke up the bulk of
+                  the
+                  card's
+                  content.</p>
+                <div class="nb-used mb-1">30 Học viên</div>
+              </div>
+              <!-- Button -->
+              <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
+              </div>
+            </div><!--Card body.-->
+          </div><!--Card.-->
+        </div><!--Col.-->
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
+          <!-- Card -->
+          <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top"
+                   th:src="@{/web/img/default-thumbnail.png}"
+                   alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body p-3">
+              <!-- Title -->
+              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
+              <!-- Title -->
+              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
+              <!-- Text -->
+              <div class="card-detail">
+                <p class="card-text mb-0 max-lines-2">ke up the bulk of
+                  the
+                  card's
+                  content.</p>
+                <div class="nb-used mb-1">30 Học viên</div>
+              </div>
+              <!-- Button -->
+              <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
+              </div>
+            </div><!--Card body.-->
+          </div><!--Card.-->
+        </div><!--Col.-->
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
+          <!-- Card -->
+          <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top"
+                   th:src="@{/web/img/default-thumbnail.png}"
+                   alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body p-3">
+              <!-- Title -->
+              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
+              <!-- Title -->
+              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
+              <!-- Text -->
+              <div class="card-detail">
+                <p class="card-text mb-0 max-lines-2">ke up the bulk of
+                  the
+                  card's
+                  content.</p>
+                <div class="nb-used mb-1">30 Học viên</div>
+              </div>
+              <!-- Button -->
+              <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
+              </div>
+            </div><!--Card body.-->
+          </div><!--Card.-->
+        </div><!--Col.-->
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
+          <!-- Card -->
+          <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top"
+                   th:src="@{/web/img/default-thumbnail.png}"
+                   alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body p-3">
+              <!-- Title -->
+              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
+              <!-- Title -->
+              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
+              <!-- Text -->
+              <div class="card-detail">
+                <p class="card-text mb-0 max-lines-2">ke up the bulk of
+                  the
+                  card's
+                  content.</p>
+                <div class="nb-used mb-1">30 Học viên</div>
+              </div>
+              <!-- Button -->
+              <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
+              </div>
+            </div><!--Card body.-->
+          </div><!--Card.-->
+        </div><!--Col.-->
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
+          <!-- Card -->
+          <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top"
+                   th:src="@{/web/img/default-thumbnail.png}"
+                   alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body p-3">
+              <!-- Title -->
+              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
+              <!-- Title -->
+              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
+              <!-- Text -->
+              <div class="card-detail">
+                <p class="card-text mb-0 max-lines-2">ke up the bulk of
+                  the
+                  card's
+                  content.</p>
+                <div class="nb-used mb-1">30 Học viên</div>
+              </div>
+              <!-- Button -->
+              <div class="d-flex justify-content-center">
+                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
+              </div>
+            </div><!--Card body.-->
+          </div><!--Card.-->
+        </div><!--Col.-->
+      </div><!--Row cols.-->
+      <div class="row d-flex justify-content-center mt-5 paging-view">
+        <nav aria-label="Course pagination">
+          <ul class="pagination pg-blue">
+            <li class="page-item ">
+              <a class="page-link prev">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link">1</a></li>
+            <li class="page-item">
+              <a class="page-link">2</a>
+            </li>
+            <li class="page-item active"><a class="page-link">3</a></li>
+            <li class="page-item disabled">
+              <a class="page-link next">Next</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
+
     <div th:replace="web/fragments/general :: footer"></div>
   </div><!--page wrapper content.-->
 </div><!--wrapper content.-->

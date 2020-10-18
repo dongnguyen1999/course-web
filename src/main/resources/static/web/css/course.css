@@ -1,3 +1,25 @@
+.searching-label {
+  margin: 0 0 0 2rem;
+  color: #FF7B2E;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.paging-view li a{
+  background: #b2ecf2 !important;
+  box-shadow: 0 0 2px #5d687f;
+}
+
+.paging-view li.active a{
+  background: #131d60 !important;
+  color: white;
+  font-weight: bold;
+}
+
+.paging-view a.prev, .paging-view a.next {
+  font-weight: bold;
+}
+
 /*Course nav*/
 
 .category-toggle-view {
@@ -20,7 +42,7 @@
   font-size: 1.2rem;
 }
 
-.category-toggle-view .category-label .category {
+.category-toggle-view .category-label .category, .searching-label .key-word {
   font-weight: normal;
   font-style: italic;
 }
@@ -62,3 +84,68 @@
 }
 
 /*Category sidebar.*/
+
+/*Card list*/
+.card {
+  border-radius: 10px;
+}
+
+.card-img-top {
+  height: 11rem;
+  object-fit: cover !important;
+}
+
+.view.overlay {
+  border-radius: 10px 10px 0 0;
+}
+
+.card-detail {
+  height: 3.7rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+  font-size: 1rem;
+}
+
+.card-title {
+  color: #131d60;
+  font-size: 1.2rem;
+}
+
+.card-subtitle {
+  color: #cf3c3c;
+  font-size: 1.2rem;
+}
+
+.max-lines-2 {
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 2rem;
+  line-height: 1rem;
+}
+
+.nb-used {
+  color: #FF7B2E;
+  font-style: italic;
+  font-size: .8rem;
+}
+
+.title-max-lines-2 {
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  height: 2.4rem;
+  line-height: 1.2rem;
+}
+
+.more-detail-btn {
+  background: #131d60 !important;
+  border: solid 2px #b2ecf2 !important;
+  font-weight: bold;
+  color: white !important;
+  font-size: 1.2rem;
+}
+
+/*Card list.*/
