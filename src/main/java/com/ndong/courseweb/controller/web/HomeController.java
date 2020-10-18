@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -19,8 +20,13 @@ public class HomeController {
   private IUserService userService;
 
   @RequestMapping(path = "/index", method = RequestMethod.GET)
-  public ModelAndView indexPage() {
-    return new ModelAndView("web/home");
+  public ModelAndView indexPage(
+      @RequestParam(required = false) String feature,
+      @RequestParam(required = false) String contact) {
+    ModelAndView view = new ModelAndView("web/home");
+    if (feature != null) view.addObject(SystemConstant.NAV_FEATURE, true);
+    if (contact != null) view.addObject(SystemConstant.NAV_CONTACT, true);
+    return view;
   }
 
   @RequestMapping(path = "/login", method = RequestMethod.GET)

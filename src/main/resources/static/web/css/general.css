@@ -107,10 +107,17 @@
     font-style: italic;
 }
 
-.course-list .more-detail-btn {
+.course-list .more-detail-btn, .more-course-btn:hover {
     background: #131d60 !important;
     font-weight: bold;
     color: white;
+    font-size: 1.2rem;
+}
+
+.more-course-btn {
+    border-color: #131d60 !important;
+    font-weight: bold;
+    color: #131d60 !important;
     font-size: 1.2rem;
 }
 

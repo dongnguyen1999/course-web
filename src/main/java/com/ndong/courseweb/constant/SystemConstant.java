@@ -4,6 +4,8 @@ public class SystemConstant {
   public static final String REGISTER_STATUS = "registerStatus";
   public static final String OPEN_COURSE_STATUS = "openCourseStatus";
   public static final String CREATE_LESSON_STATUS = "createLessonStatus";
+  public static final String NAV_FEATURE = "navFeature";
+  public static final String NAV_CONTACT = "navContact";
   public static final String LOGIN_FAILED = "loginFailed";
   public static final String USER_DTO = "user";
   public static final String COURSE_DTO = "course";

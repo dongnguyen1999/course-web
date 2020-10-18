@@ -34,3 +34,14 @@ function setScrollTopHandler(){
 $(function () {
   setScrollTopHandler();
 })
+
+function setScrollToViewHandler(jqBtn, jqElement) {
+  jqBtn.click(function(event) {
+    event.preventDefault();
+    $([document.documentElement, document.body]).animate({
+      scrollTop: jqElement.offset().top
+    }, 800);
+    $('button.navbar-toggler').addClass('collapsed').attr('aria-expanded','false');
+    $('#navbarResponsive').removeClass('show');
+  });
+}

@@ -37,6 +37,8 @@
       </div>
       <!--/.Mask-->
 
+      <div id="courseList" class="nav-point"></div>
+
       <div class="container d-flex flex-column align-items-center justify-content-center landing-container">
         <h2 class="row">
           <div class=" display-4 font-weight-bold landing-title">
@@ -213,11 +215,16 @@
             </div><!--Card.-->
           </div><!--Col.-->
         </div><!--Course list.-->
+        <div class="d-flex justify-content-center">
+          <a href="#" class="btn btn-outline-light mt-4 more-course-btn">Các khóa học khác</a>
+        </div>
       </div>
+
+      <div id="featureList" class="nav-point"></div>
 
       <div class="container d-flex flex-column align-items-center justify-content-center mb-5 landing-container">
         <h2 class="row">
-          <div class=" display-4 font-weight-bold landing-title">
+          <div class="display-4 font-weight-bold landing-title">
             Tính năng nổi bật
           </div>
         </h2>
@@ -331,13 +338,37 @@
 <!--</ul>-->
 
 <th:block th:replace="web/fragments/general :: script"/>
+
+<script th:if="${navFeature}">
+  var navFunction = function () {
+    $('header a.feature').click();
+  }
+</script>
+
+<script th:if="${navContact}">
+  var navFunction = function () {
+    $('header a.contact').click();
+  }
+</script>
+
 <script>
   $(function () {
     $(".btn-toggle-menu").click(function () {
       $("#wrapper").toggleClass("toggled");
       $('.toggle-btn-view').toggleClass("toggled");
     });
+
+    // scrollTopBtn.click(function () {
+    //   $('body,html').animate({
+    //     scrollTop: 0
+    //   }, 1000);
+    //   return false;
+    // });
+    setScrollToViewHandler($('header a.course'), $('#courseList'));
+    setScrollToViewHandler($('header a.feature'), $('#featureList'));
+    setScrollToViewHandler($('header a.contact'), $('#contactInfo'));
   })
 </script>
+
 </body>
 </html>
