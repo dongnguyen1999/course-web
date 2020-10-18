@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Homepage</title>
+  <title>Trang chủ</title>
   <th:block th:replace="web/fragments/general :: meta"/>
   <th:block th:replace="web/fragments/general :: link"/>
 </head>
@@ -29,7 +29,7 @@
                 <!-- Description -->
                 <h4 class="white-text my-3">Không gian tự học không giới hạn dành cho tất cả mọi người. Tham gia và
                   chọn khóa học của bạn ngay thôi nào</h4>
-                <button type="button" class="btn btn-outline-white">Tìm khóa học</button>
+                <a href="/course" class="btn btn-outline-white">Tìm khóa học</a>
               </div>
             </div>
           </div>
@@ -216,12 +216,11 @@
           </div><!--Col.-->
         </div><!--Course list.-->
         <div class="d-flex justify-content-center">
-          <a href="#" class="btn btn-outline-light mt-4 more-course-btn">Các khóa học khác</a>
+          <a href="/course" class="btn mt-4 more-course-btn">Các khóa học khác</a>
         </div>
       </div>
 
       <div id="featureList" class="nav-point"></div>
-
       <div class="container d-flex flex-column align-items-center justify-content-center mb-5 landing-container">
         <h2 class="row">
           <div class="display-4 font-weight-bold landing-title">

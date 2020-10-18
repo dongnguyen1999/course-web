@@ -20,13 +20,8 @@ public class HomeController {
   private IUserService userService;
 
   @RequestMapping(path = "/index", method = RequestMethod.GET)
-  public ModelAndView indexPage(
-      @RequestParam(required = false) String feature,
-      @RequestParam(required = false) String contact) {
-    ModelAndView view = new ModelAndView("web/home");
-    if (feature != null) view.addObject(SystemConstant.NAV_FEATURE, true);
-    if (contact != null) view.addObject(SystemConstant.NAV_CONTACT, true);
-    return view;
+  public ModelAndView indexPage() {
+    return new ModelAndView("web/home");
   }
 
   @RequestMapping(path = "/login", method = RequestMethod.GET)

@@ -19,7 +19,7 @@
 <body>
 
 <!--Small screen searchbox-->
-<div class="row d-fex justify-content-center" th:fragment="smSearchbox">
+<div class="row d-fex justify-content-center m-sm-3 m-md-auto" th:fragment="smSearchbox">
   <div class="searchbar d-flex d-lg-none m-2">
     <input class="search_input" type="text" name="" placeholder="Search...">
     <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
@@ -48,13 +48,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link course" href="#">Khóa học</a>
+            <a class="nav-link course" href="/course">Khóa học</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link feature" href="#">Tính năng</a>
+            <a class="nav-link feature" href="/index#featureList">Tính năng</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link contact" href="#">Liên hệ</a>
+            <a class="nav-link contact" href="/index#contactInfo">Liên hệ</a>
           </li>
 
           <li class="nav-item">
@@ -82,31 +82,32 @@
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
         <span>THỂ LOẠI</span>
-        <button class="btn-menu btn btn-success btn-toggle-menu" type="button">
+        <button class="btn-menu btn btn-toggle-menu" type="button">
           <i class="fa fa-bars"></i>
         </button>
       </li>
-      <li>
+      <li class="sidebar-item">
         <a href="#">Dashboard</a>
       </li>
-      <li>
+      <li class="sidebar-item">
         <a href="#">Shortcuts</a>
       </li>
-      <li>
+      <li class="sidebar-item">
         <a href="#">Overview</a>
       </li>
-      <li>
+      <li class="sidebar-item">
         <a href="#">Events</a>
       </li>
-      <li class="active">
-        <a href="#">About</a>
+      <li class="sidebar-item active">
+        <a href="#">Công nghệ thông tin</a>
       </li>
-      <li>
+      <li class="sidebar-item">
         <a href="#">Services</a>
       </li>
-      <li>
+      <li class="sidebar-item">
         <a href="#">Contact</a>
       </li>
+
     </ul>
   </div>
 </nav>

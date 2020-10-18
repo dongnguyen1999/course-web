@@ -6,7 +6,6 @@ import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.LessonDTO;
 import com.ndong.courseweb.service.ICategoryService;
 import com.ndong.courseweb.service.ICourseService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +23,11 @@ public class CourseController {
 
   @Autowired
   private ICourseService courseService;
+
+  @RequestMapping(path = "/course", method = RequestMethod.GET)
+  public ModelAndView getCourseList(){
+    return new ModelAndView("/web/course/course-list");
+  }
 
   @RequestMapping(path = "/course/new", method = RequestMethod.GET)
   public ModelAndView getNewCourseForm() {

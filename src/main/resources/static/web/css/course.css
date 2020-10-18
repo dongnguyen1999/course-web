@@ -1,0 +1,64 @@
+/*Course nav*/
+
+.category-toggle-view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.course-nav {
+  margin: 0.6rem 0 0;
+}
+
+.category-toggle-view button {
+  margin-right: 0;
+}
+
+.category-toggle-view .category-label {
+  color: #131d60;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.category-toggle-view .category-label .category {
+  font-weight: normal;
+  font-style: italic;
+}
+
+.course-nav .btn-group button {
+  height: 2rem;
+  width: 5rem;
+  padding: 0;
+  color: white;
+  background: #131d60 !important;
+}
+
+/*Course nav.*/
+
+/*Category sidebar*/
+#sidebar-wrapper {
+  background: #b2ecf2;
+  color: #131d60;
+}
+
+.sidebar-brand {
+  border-bottom: solid 1px #131d60;
+}
+
+.sidebar-item a {
+  color: black !important;
+}
+
+.sidebar-item a:hover {
+  color: #131d60 !important;
+  font-weight: bold;
+  box-shadow: 0 0 3px #5d687f;
+}
+
+.sidebar-item.active a {
+  color: #131d60 !important;
+  font-weight: bold;
+  text-shadow: 0 0 2px #5d687f;
+}
+
+/*Category sidebar.*/

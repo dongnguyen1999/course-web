@@ -8,6 +8,10 @@
     margin: 0;
 }
 
+#sidebar-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
 .show {
     display: block !important;
 }
@@ -109,13 +113,14 @@
 
 .course-list .more-detail-btn, .more-course-btn:hover {
     background: #131d60 !important;
+    border: solid 2px #b2ecf2 !important;
     font-weight: bold;
-    color: white;
+    color: white !important;
     font-size: 1.2rem;
 }
 
 .more-course-btn {
-    border-color: #131d60 !important;
+    border: solid 2px #131d60 !important;
     font-weight: bold;
     color: #131d60 !important;
     font-size: 1.2rem;
@@ -267,6 +272,26 @@ footer, footer.page-footer .row a {
 /*left side menu*/
 body{
     background: #f4f3ef;
+}
+
+.sidebar-brand span {
+    font-weight: bold;
+}
+
+.btn-toggle-menu {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    background: #131d60 !important;
+    color: white;
+}
+
+.btn-toggle-menu:hover {
+    color: white;
 }
 
 #wrapper {
@@ -449,8 +474,8 @@ btn-menu {
     align-items: center;
     width: 100%;
     max-width: 23.5rem;
-    min-width: 13.5rem;
-    box-shadow: 0px 0px 4px #5d687f;
+    min-width: 10rem;
+    box-shadow: 0 0 4px #5d687f;
 }
 
 .search_input{
