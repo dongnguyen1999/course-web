@@ -126,12 +126,16 @@
     object-fit: cover !important;
 }
 
+.course-list .card-detail {
+    height: 5.8rem;
+}
+
 .course-list .max-lines-3 {
     text-overflow: ellipsis;
     word-wrap: break-word;
     overflow: hidden;
-    height: 4rem;
-    line-height: 1.3rem;
+    max-height: 3.8rem;
+    line-height: 1.2rem;
 }
 
 /*Course list.*/
