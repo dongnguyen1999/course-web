@@ -3,11 +3,10 @@ package com.ndong.courseweb.dto;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class CourseDTO {
-  private Long id;
-
+public class CourseDTO extends AbstractDTO implements Serializable {
   private String title;
 
   private String thumbnail;
@@ -34,14 +33,6 @@ public class CourseDTO {
 
   public void setCode(String code) {
     this.code = code;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public String getTitle() {

@@ -17,7 +17,7 @@
   <div class="card">
     <article class="card-body mx-auto">
       <h1 class="card-title mt-3 text-center">
-        <div class=" display-4 font-weight-bold form-title">
+        <div class="display-4 form-title">
           ĐĂNG NHẬP TÀI KHOẢN
         </div>
       </h1>
@@ -53,8 +53,8 @@
         <div class="mb-2">
           <button type="submit" class="btn btn-primary btn-block">ĐĂNG NHẬP</button>
         </div> <!--form-group.-->
-
         <p class="text-center">Chưa có tài khoản? <a class="login-switch" href="/register">Đăng ký</a> </p>
+        <input th:if="${navigateUrl != null}" th:value="${navigateUrl}" type="hidden" name="navigateUrl">
       </form>
 
       <div th:replace="web/fragments/modal :: informationModal(

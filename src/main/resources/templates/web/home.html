@@ -342,7 +342,7 @@
 
           <!--Col-->
           <div class="col mt-4 col mt-4 pl-5 pl-sm-3 pr-5 pr-sm-3">
-            <a href="">
+            <a href="/course/new">
               <div class="card">
                 <div class="card-icon ml-3">
                   <i class="fas fa-door-open"></i>
@@ -405,17 +405,6 @@
 
 <th:block th:replace="web/fragments/general :: script"/>
 
-<script th:if="${navFeature}">
-  var navFunction = function () {
-    $('header a.feature').click();
-  }
-</script>
-
-<script th:if="${navContact}">
-  var navFunction = function () {
-    $('header a.contact').click();
-  }
-</script>
 
 <script>
   $(function () {
@@ -424,12 +413,6 @@
       $('.toggle-btn-view').toggleClass("toggled");
     });
 
-    // scrollTopBtn.click(function () {
-    //   $('body,html').animate({
-    //     scrollTop: 0
-    //   }, 1000);
-    //   return false;
-    // });
     setScrollToViewHandler($('header a.course'), $('#courseList'));
     setScrollToViewHandler($('header a.feature'), $('#featureList'));
     setScrollToViewHandler($('header a.contact'), $('#contactInfo'));

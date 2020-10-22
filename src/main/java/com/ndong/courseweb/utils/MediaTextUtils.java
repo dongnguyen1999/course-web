@@ -9,7 +9,7 @@ public class MediaTextUtils {
   }
 
   public static String thumbnailPath(String username, String courseCode){
-    String pattern =  "/${username}/${courseCode}/thumbnail";
+    String pattern =  "/${username}/course/${courseCode}/thumbnail";
     return pattern.replace("${username}", username)
         .replace("${courseCode}", courseCode);
   }

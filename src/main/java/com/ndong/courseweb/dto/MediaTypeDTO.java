@@ -1,23 +1,15 @@
 package com.ndong.courseweb.dto;
 
 import javax.persistence.Column;
+import java.io.Serializable;
 
-public class MediaTypeDTO {
-  private Long id;
+public class MediaTypeDTO extends AbstractDTO implements Serializable {
 
   private String name;
 
   private String code;
 
   private String extension;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public String getName() {
     return name;

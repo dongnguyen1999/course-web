@@ -8,6 +8,17 @@
     margin: 0;
 }
 
+.btn.primary {
+    background: #131d60 !important;
+    color: white;
+}
+
+.form-title {
+    color: #131d60;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
 #sidebar-wrapper::-webkit-scrollbar {
     display: none;
 }
@@ -30,6 +41,17 @@
     display: flex;
     align-items: center;
 }
+
+.modal-dialog .modal-header.bg-danger {
+    background: #cf3c3c !important;
+}
+
+.modal-dialog button.btn {
+    background: #131d60 !important;
+    color: white;
+}
+
+
 
 
 

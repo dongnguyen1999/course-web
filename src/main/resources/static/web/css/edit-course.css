@@ -3,6 +3,10 @@
   font-weight: bold;
 }
 
+.img-thumbnail {
+  background: #131d60;
+}
+
 .price-input {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -25,4 +29,50 @@
 
 label[for="thumbnailInput"] {
   height: 12rem;
+}
+
+.card {
+  background: #b2ecf2 !important;
+  box-shadow: 0 0 3px #5d687f;
+  border-radius: 10px;
+}
+
+.form-control, .price-append {
+  border-radius: 5px;
+  box-shadow: 0 0 3px #5d687f;
+}
+
+/*ckeditor*/
+#cke_shortDescription .cke_inner, #cke_shortDescription {
+  border-radius: 5px !important;
+}
+
+#cke_shortDescription .cke_top {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  box-shadow: 0 0 3px #5d687f;
+}
+
+#cke_1_contents {
+  font-size: 1rem;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  box-shadow: 0 0 3px #5d687f;
+}
+
+/*ckeditor.*/
+
+.price-input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.price-append {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-control:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }

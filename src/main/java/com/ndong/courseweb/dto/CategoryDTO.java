@@ -2,18 +2,10 @@ package com.ndong.courseweb.dto;
 
 import java.io.Serializable;
 
-public class CategoryDTO implements Serializable {
-  private Long id;
+public class CategoryDTO extends AbstractDTO implements Serializable {
   private String name;
   private String code;
 
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public String getName() {
     return name;

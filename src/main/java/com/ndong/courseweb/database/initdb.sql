@@ -6,6 +6,18 @@ insert into category(name, code) values ('Bán hàng', 'ban-hang');
 insert into category(name, code) values ('Công nghệ thông tin', 'cong-nghe-thong-tin');
 insert into category(name, code) values ('Âm nhạc', 'am-nhac');
 insert into category(name, code) values ('Phát triển bản thân', 'phat-trien-ban-than');
+insert into category(name, code) values ('Thiết kế và nghệ thuật', 'art-design');
+insert into category(name, code) values ('Kinh doanh', 'business');
+insert into category(name, code) values ('Khoa học máy tính', 'computer-science');
+insert into category(name, code) values ('Khoa học dữ liệu', 'data-science');
+insert into category(name, code) values ('Sư phạm và giáo dục', 'education-teaching');
+insert into category(name, code) values ('Y học', 'health-medicine');
+insert into category(name, code) values ('Văn học', 'humanities');
+insert into category(name, code) values ('Toán học', 'mathematics');
+insert into category(name, code) values ('Lập trình', 'programming');
+insert into category(name, code) values ('Khoa học', 'science');
+insert into category(name, code) values ('Khoa học xã hội', 'social-sciences');
+
 
 insert into media_type(name, code, extension) values ('Hình ảnh JPEG (.jpeg/.jpg)', 'image/jpeg', 'jpeg|jpg');
 insert into media_type(name, code, extension) values ('Hình ảnh WEBP (.webp)', 'image/webp', 'webp');

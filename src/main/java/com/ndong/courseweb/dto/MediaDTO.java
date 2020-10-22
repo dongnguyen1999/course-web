@@ -8,9 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
-public class MediaDTO {
-  private Long id;
+public class MediaDTO extends AbstractDTO implements Serializable {
 
   private String caption;
 
@@ -40,14 +40,6 @@ public class MediaDTO {
 
   public void setRawFile(MultipartFile rawFile) {
     this.rawFile = rawFile;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public String getCaption() {

@@ -5,8 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 
-public class UserDTO implements Serializable {
-  private Long id;
+public class UserDTO extends AbstractDTO implements Serializable {
   private String username;
   private String password;
   private String fullName;
@@ -18,14 +17,6 @@ public class UserDTO implements Serializable {
   private String avatar;
   private Double coin;
   private MultipartFile avatarFile;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public String getUsername() {
     return username;

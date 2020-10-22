@@ -32,7 +32,7 @@
 }
 
 .card {
-  box-shadow: 0 0 3px #000000;
+  box-shadow: 0 0 3px #5d687f;
 }
 
 .card-body {
@@ -77,11 +77,6 @@
 .card {
   background: #b2ecf2;
   border-radius: 10px;
-}
-
-.form-title {
-  color: #131d60;
-  font-size: 2.5rem;
 }
 
 button[type="submit"] {

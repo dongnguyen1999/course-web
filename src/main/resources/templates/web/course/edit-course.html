@@ -10,16 +10,16 @@
 <body>
 <div th:replace="web/fragments/general :: header"></div>
 <div id="wrapper" class="wrapper-content">
-<div class="container">
+<div class="container pt-4">
   <div class="card bg-light">
-    <h1 class="card-header">Mở một khóa học mới</h1>
+    <h1 class="card-header form-title">Mở một khóa học mới</h1>
     <div class="container-fluid p-3 p-md-5">
       <form id="editCourseForm" action="/course/new" method="post" novalidate enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-4 details mb-3 h-25 d-flex justify-content-center">
             <label class="w-75" for="thumbnailInput">
               <i id="camera-icon" class="d-none fas fa-camera"></i>
-              <img id="imgThumbnail" class="w-100 h-100 img-thumbnail bg-dark image-preview thumbnail" alt="default thumbnail"
+              <img id="imgThumbnail" class="w-100 h-100 img-thumbnail image-preview thumbnail z-depth-1" alt="default thumbnail"
                    th:src="@{/web/img/default-thumbnail.png}" defSrc="/web/img/default-thumbnail.png" src="" role="button"/>
               <input id="thumbnailInput" class="hide" type="file" name="thumbnailFile">
               <div class="invalid-feedback"></div>
@@ -28,7 +28,7 @@
           <div class="col-md-8 right">
             <div class="form-body">
               <div class="form-group">
-                <label class="control-label" for="title">Tên khóa học</label>
+                <label class="control-label" for="title">Tên khóa học:</label>
                 <input id="title" name="title" placeholder="Mọi người có thể tìm thấy khóa học của bạn qua tên"
                        class="form-control input-md" required type="text">
                 <div class="invalid-feedback">
@@ -75,7 +75,7 @@
           </div><!--row-inner-left.-->
         </div><!--row.-->
         <div class="row justify-content-center mt-3">
-          <button type="submit" class="btn btn-primary btn-lg">MỞ KHÓA HỌC MỚI</button>
+          <button type="submit" class="btn primary btn-lg">MỞ KHÓA HỌC MỚI</button>
         </div>
       </form>
 
