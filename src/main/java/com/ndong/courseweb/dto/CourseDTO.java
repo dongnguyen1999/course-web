@@ -27,6 +27,16 @@ public class CourseDTO extends AbstractDTO implements Serializable {
 
   private String code;
 
+  private Long nbMembers;
+
+  public Long getNbMembers() {
+    return nbMembers;
+  }
+
+  public void setNbMembers(Long nbMembers) {
+    this.nbMembers = nbMembers;
+  }
+
   public String getCode() {
     return code;
   }

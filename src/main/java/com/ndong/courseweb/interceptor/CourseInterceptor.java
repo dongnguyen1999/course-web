@@ -1,22 +1,26 @@
 package com.ndong.courseweb.interceptor;
 
 import com.ndong.courseweb.constant.SystemConstant;
-import com.ndong.courseweb.dto.UserDTO;
-import com.ndong.courseweb.utils.SessionUtils;
+import com.ndong.courseweb.dto.CategoryDTO;
+import com.ndong.courseweb.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Component
-public class WebInterceptor extends HandlerInterceptorAdapter {
+public class CourseInterceptor extends HandlerInterceptorAdapter {
+  @Autowired
+  private ICategoryService categoryService;
+
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-    SessionUtils sessionUtils = new SessionUtils(request);
-    UserDTO user = sessionUtils.getUser();
-    if (user != null) request.setAttribute(SystemConstant.USER_DTO, user);
+    List<CategoryDTO> categories = categoryService.findAll();
+    request.setAttribute(SystemConstant.CATEGORY_DTO_LIST, categories);
     return true;
   }
 }

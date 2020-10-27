@@ -1,8 +1,10 @@
 package com.ndong.courseweb.controller.web;
 
 import com.ndong.courseweb.constant.SystemConstant;
+import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.entity.UserEntity;
+import com.ndong.courseweb.service.ICourseService;
 import com.ndong.courseweb.service.IUserService;
 import com.ndong.courseweb.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -20,9 +23,15 @@ public class HomeController {
   @Autowired
   private IUserService userService;
 
+  @Autowired
+  private ICourseService courseService;
+
   @RequestMapping(path = "/index", method = RequestMethod.GET)
   public ModelAndView indexPage() {
-    return new ModelAndView("web/home");
+    ModelAndView view = new ModelAndView("web/home");
+    List<CourseDTO> courses = courseService.listTopPopularCourses(SystemConstant.LANDING_LIMIT_ITEM);
+    view.addObject(SystemConstant.COURSE_DTO_LIST, courses);
+    return view;
   }
 
   @RequestMapping(path = "/login", method = RequestMethod.GET)

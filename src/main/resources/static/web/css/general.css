@@ -46,14 +46,14 @@
     background: #cf3c3c !important;
 }
 
-.modal-dialog button.btn {
+.modal-dialog button.btn, .modal-dialog a.btn {
     background: #131d60 !important;
     color: white;
 }
 
-
-
-
+.card .view.overlay {
+    box-shadow: 0 1px 3px #5d687f;
+}
 
 .toggle-btn-view {
     background: white;

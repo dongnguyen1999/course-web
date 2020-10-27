@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>General</title>
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <!-- Google Fonts Roboto -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
   <!-- Bootstrap core CSS -->
@@ -20,10 +20,14 @@
 
 <!--Small screen searchbox-->
 <div class="row d-fex justify-content-center m-sm-3 m-md-auto" th:fragment="smSearchbox">
-  <div class="searchbar d-flex d-lg-none m-2">
-    <input class="search_input" type="text" name="" placeholder="Tìm kiếm khóa học">
-    <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-  </div>
+  <form class="searchbar d-flex d-lg-none m-2" th:action="${requestPort}?:'/course'" method="GET">
+    <input class="search_input" type="text" name="search" placeholder="Tìm kiếm khóa học"
+           th:if="${pagingInfo != null}" th:value="${pagingInfo.search}?:''">
+    <input class="search_input" type="text" name="search" placeholder="Tìm kiếm khóa học"
+           th:if="${pagingInfo == null}">
+    <input th:if="${pagingInfo != null && pagingInfo.filter != null}" type="hidden" name="filter" th:value="${pagingInfo.filter}">
+    <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+  </form>
 </div>
 <!--Small screen searchbox.-->
 
@@ -40,6 +44,7 @@
               aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -93,10 +98,14 @@
           </th:block>
 
         </ul>
-        <div class="searchbar d-none d-lg-flex ml-0 mr-0">
-          <input class="search_input" type="text" name="" placeholder="Tìm kiếm khóa học">
-          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-        </div>
+        <form class="searchbar d-none d-lg-flex ml-0 mr-0" th:action="${requestPort}?:'/course'" method="GET">
+          <input class="search_input" type="text" name="search" placeholder="Tìm kiếm khóa học"
+                 th:if="${pagingInfo != null}" th:value="${pagingInfo.search}?:''">
+          <input class="search_input" type="text" name="search" placeholder="Tìm kiếm khóa học"
+                 th:if="${pagingInfo == null}">
+          <input th:if="${pagingInfo != null && pagingInfo.filter != null}" type="hidden" name="filter" th:value="${pagingInfo.filter}">
+          <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+        </form>
         <!--suppress ThymeleafVariablesResolveInspection -->
         <th:block th:if="${user == null}">
           <a href="/login" class="btn d-none d-xl-block btn-outline-light-blue btn-sm login-btn">Đăng nhập</a>
@@ -143,26 +152,16 @@
           <i class="fa fa-bars"></i>
         </button>
       </li>
-      <li class="sidebar-item">
-        <a href="#">Dashboard</a>
+      <!--suppress ThymeleafVariablesResolveInspection -->
+      <li class="sidebar-item" th:classappend="${category == null}? 'active': null">
+        <a th:href="${pagingInfo.search != null && !pagingInfo.search.isEmpty()}? '/course' + '?search=' + ${pagingInfo.search}: '/course'">Tất
+          cả</a>
       </li>
-      <li class="sidebar-item">
-        <a href="#">Shortcuts</a>
-      </li>
-      <li class="sidebar-item">
-        <a href="#">Overview</a>
-      </li>
-      <li class="sidebar-item">
-        <a href="#">Events</a>
-      </li>
-      <li class="sidebar-item active">
-        <a href="#">Công nghệ thông tin</a>
-      </li>
-      <li class="sidebar-item">
-        <a href="#">Services</a>
-      </li>
-      <li class="sidebar-item">
-        <a href="#">Contact</a>
+      <!--/*@thymesVar id="categories" type="java.util.List"*/-->
+      <li class="sidebar-item" th:each="item: ${categories}" th:classappend="${category != null && category.code == item.code}? 'active': null">
+        <!--suppress ThymeleafVariablesResolveInspection -->
+        <a th:href="${pagingInfo.search != null && !pagingInfo.search.isEmpty()}? '/category/' + ${item.code} + '?search=' + ${pagingInfo.search}: '/category/' + ${item.code}"
+           th:text="${item.name}">item</a>
       </li>
 
     </ul>

@@ -7,7 +7,9 @@
   <th:block th:replace="web/fragments/general :: link"/>
   <link rel="stylesheet" type="text/css" th:href="@{/web/css/course.css}">
 </head>
-<body>
+<body th:with="requestPort=${#httpServletRequest.requestURL},
+     search=${pagingInfo.search != null && !pagingInfo.search.isEmpty()}? 'search='+${pagingInfo.search}+'&':'',
+     filter=${pagingInfo.filter != null}? 'filter='+${pagingInfo.filter}+'&':''">
 <div th:replace="web/fragments/general :: header"></div>
 
 <div id="wrapper" class="wrapper-content has-sidebar toggled">
@@ -19,273 +21,132 @@
         <button class="btn-menu btn btn-toggle-menu" type="button">
           <i class="fa fa-bars"></i>
         </button>
-        <div class="category-label ml-3">Thể loại:&nbsp;<span class="category d-none d-md-inline">Tất cả</span></div>
-        <select class="form-control w-50 ml-1 custom-select d-block d-md-none">
-          <option selected>Chọn thể loại</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <div class="category-label ml-3">Thể loại:&nbsp;<span class="category d-none d-md-inline"
+                                                              th:text="${category != null}? ${category.name}: 'Tất cả'">Tất cả</span>
+        </div>
+
+        <select class="form-control w-50 ml-1 custom-select d-block d-md-none" onchange="location = this.value;">
+          <option selected th:text="${category != null}? ${category.name}: 'Chọn thể loại'">Chọn thể loại</option>
+          <option th:value="${pagingInfo.search != null && !pagingInfo.search.isEmpty()}? '/course' + '?search=' + ${pagingInfo.search}: '/course'">Tất cả</option>
+          <th:block th:each="item: ${categories}">
+            <option th:text="${item.name}" th:value="${pagingInfo.search != null && !pagingInfo.search.isEmpty()}? '/category/' + ${item.code} + '?search=' + ${pagingInfo.search}: '/category/' + ${item.code}">One</option>
+          </th:block>
         </select>
       </div>
       <div class="btn-group col-md-7 col-lg-5" role="group" aria-label="Course filter">
-        <button type="button" class="btn">Tất cả</button>
-        <button type="button" class="btn">Phổ biến</button>
-        <button type="button" class="btn">Giá rẽ</button>
-        <button type="button" class="btn">Vừa xem</button>
+        <a th:href="${requestPort} + '?'+ ${search} +'filter=tat-ca'" type="button"
+           th:classappend="${pagingInfo.filter == 'tat-ca' || pagingInfo.filter == null}? 'active': ''" class="btn">Tất
+          cả</a>
+        <a th:href="${requestPort} + '?'+ ${search} +'filter=pho-bien'" type="button"
+           th:classappend="${pagingInfo.filter == 'pho-bien'}? 'active': ''" class="btn">Phổ biến</a>
+        <a th:href="${requestPort} + '?'+ ${search} +'filter=gia-re'" type="button"
+           th:classappend="${pagingInfo.filter == 'gia-re'}? 'active': ''" class="btn">Giá rẽ</a>
+        <a th:href="${requestPort} + '?'+ ${search} +'filter=vua-xem'" type="button"
+           th:classappend="${pagingInfo.filter == 'vua-xem'}? 'active': ''" class="btn">Vừa xem</a>
       </div>
     </nav>
 
-    <div class="row searching-label">Tìm kiếm với từ khóa:&nbsp;<span class="key-word">khóa học java</span></div>
+    <div class="row searching-label" th:if="${pagingInfo.search != null}">Tìm kiếm với từ khóa:&nbsp;<span
+        class="key-word" th:text="${pagingInfo.search}">khóa học java</span><a
+        th:href="${pagingInfo.filter != null}? ${requestPort} + '?filter=' + ${pagingInfo.filter}: ${requestPort}"><i
+        class="fas fa-times-circle"></i></a></div>
 
     <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4">
-        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 w-100">
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3" th:each="course: ${courses}">
           <!-- Card -->
           <div class="card">
             <!-- Card image -->
             <div class="view overlay">
               <img class="card-img-top"
-                   th:src="@{/web/img/default-thumbnail.png}"
+                   th:src="'/resource/' + ${course.thumbnail}"
                    alt="Card image cap">
-              <a href="#!">
+              <a th:href="'/course/' + ${course.code}">
                 <div class="mask rgba-white-slight"></div>
               </a>
             </div>
             <!-- Card content -->
             <div class="card-body p-3">
               <!-- Title -->
-              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
+              <a th:href="'/course/' + ${course.code}" href=""><h4 class="card-title title-max-lines-2"
+                                                                   th:text="${course.title}">Khóa học</h4></a>
               <!-- Title -->
-              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
+              <h4 class="card-subtitle mb-1" th:text="${course.price + ' VNĐ'}">5.000.000 VND</h4>
               <!-- Text -->
               <div class="card-detail">
-                <p class="card-text mb-0 max-lines-2">ke up the bulk of
-                  the
-                  card's
-                  content.</p>
-                <div class="nb-used mb-1">30 Học viên</div>
+                <p class="card-text mb-0 max-lines-2" th:text="${course.shortDescription}">Course description</p>
+                <div class="nb-used mb-1" th:text="${course.nbMembers} + ' Học viên'">30 Học viên</div>
               </div>
               <!-- Button -->
               <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
+                <a href="" th:href="'/course/' + ${course.code}" class="btn btn-primary w-100 m-0 more-detail-btn"><span
+                    class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
               </div>
             </div><!--Card body.-->
           </div><!--Card.-->
         </div><!--Col.-->
 
-
-        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-          <!-- Card -->
-          <div class="card">
-            <!-- Card image -->
-            <div class="view overlay">
-              <img class="card-img-top"
-                   th:src="@{/web/img/default-thumbnail.png}"
-                   alt="Card image cap">
-              <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <!-- Card content -->
-            <div class="card-body p-3">
-              <!-- Title -->
-              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
-              <!-- Title -->
-              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
-              <!-- Text -->
-              <div class="card-detail">
-                <p class="card-text mb-0 max-lines-2">ke up the bulk of
-                  the
-                  card's
-                  content.</p>
-                <div class="nb-used mb-1">30 Học viên</div>
-              </div>
-              <!-- Button -->
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
-              </div>
-            </div><!--Card body.-->
-          </div><!--Card.-->
-        </div><!--Col.-->
-        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-          <!-- Card -->
-          <div class="card">
-            <!-- Card image -->
-            <div class="view overlay">
-              <img class="card-img-top"
-                   th:src="@{/web/img/default-thumbnail.png}"
-                   alt="Card image cap">
-              <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <!-- Card content -->
-            <div class="card-body p-3">
-              <!-- Title -->
-              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
-              <!-- Title -->
-              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
-              <!-- Text -->
-              <div class="card-detail">
-                <p class="card-text mb-0 max-lines-2">ke up the bulk of
-                  the
-                  card's
-                  content.</p>
-                <div class="nb-used mb-1">30 Học viên</div>
-              </div>
-              <!-- Button -->
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
-              </div>
-            </div><!--Card body.-->
-          </div><!--Card.-->
-        </div><!--Col.-->
-        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-          <!-- Card -->
-          <div class="card">
-            <!-- Card image -->
-            <div class="view overlay">
-              <img class="card-img-top"
-                   th:src="@{/web/img/default-thumbnail.png}"
-                   alt="Card image cap">
-              <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <!-- Card content -->
-            <div class="card-body p-3">
-              <!-- Title -->
-              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
-              <!-- Title -->
-              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
-              <!-- Text -->
-              <div class="card-detail">
-                <p class="card-text mb-0 max-lines-2">ke up the bulk of
-                  the
-                  card's
-                  content.</p>
-                <div class="nb-used mb-1">30 Học viên</div>
-              </div>
-              <!-- Button -->
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
-              </div>
-            </div><!--Card body.-->
-          </div><!--Card.-->
-        </div><!--Col.-->
-        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-          <!-- Card -->
-          <div class="card">
-            <!-- Card image -->
-            <div class="view overlay">
-              <img class="card-img-top"
-                   th:src="@{/web/img/default-thumbnail.png}"
-                   alt="Card image cap">
-              <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <!-- Card content -->
-            <div class="card-body p-3">
-              <!-- Title -->
-              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
-              <!-- Title -->
-              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
-              <!-- Text -->
-              <div class="card-detail">
-                <p class="card-text mb-0 max-lines-2">ke up the bulk of
-                  the
-                  card's
-                  content.</p>
-                <div class="nb-used mb-1">30 Học viên</div>
-              </div>
-              <!-- Button -->
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
-              </div>
-            </div><!--Card body.-->
-          </div><!--Card.-->
-        </div><!--Col.-->
-        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-          <!-- Card -->
-          <div class="card">
-            <!-- Card image -->
-            <div class="view overlay">
-              <img class="card-img-top"
-                   th:src="@{/web/img/default-thumbnail.png}"
-                   alt="Card image cap">
-              <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <!-- Card content -->
-            <div class="card-body p-3">
-              <!-- Title -->
-              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
-              <!-- Title -->
-              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
-              <!-- Text -->
-              <div class="card-detail">
-                <p class="card-text mb-0 max-lines-2">ke up the bulk of
-                  the
-                  card's
-                  content.</p>
-                <div class="nb-used mb-1">30 Học viên</div>
-              </div>
-              <!-- Button -->
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
-              </div>
-            </div><!--Card body.-->
-          </div><!--Card.-->
-        </div><!--Col.-->
-        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-          <!-- Card -->
-          <div class="card">
-            <!-- Card image -->
-            <div class="view overlay">
-              <img class="card-img-top"
-                   th:src="@{/web/img/default-thumbnail.png}"
-                   alt="Card image cap">
-              <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <!-- Card content -->
-            <div class="card-body p-3">
-              <!-- Title -->
-              <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mv Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, voluptates.c Lorem ipsum dolor sit.</h4></a>
-              <!-- Title -->
-              <h4 class="card-subtitle mb-1">5.000.000 VND</h4>
-              <!-- Text -->
-              <div class="card-detail">
-                <p class="card-text mb-0 max-lines-2">ke up the bulk of
-                  the
-                  card's
-                  content.</p>
-                <div class="nb-used mb-1">30 Học viên</div>
-              </div>
-              <!-- Button -->
-              <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
-              </div>
-            </div><!--Card body.-->
-          </div><!--Card.-->
-        </div><!--Col.-->
       </div><!--Row cols.-->
-      <div class="row d-flex justify-content-center mt-5 paging-view">
+      <div class="row d-flex justify-content-center mt-5 paging-view w-100" th:if="${pagingInfo.totalPages > 1}">
         <nav aria-label="Course pagination">
-          <ul class="pagination pg-blue">
-            <li class="page-item ">
-              <a class="page-link prev">Previous</a>
+          <ul class="pagination pg-blue" th:with="visiblePage=5">
+            <li class="page-item" th:classappend="${pagingInfo.page == 0}? 'disabled': null">
+              <a class="page-link first" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=1'">First</a>
             </li>
-            <li class="page-item"><a class="page-link">1</a></li>
-            <li class="page-item">
-              <a class="page-link">2</a>
+            <li class="page-item" th:classappend="${pagingInfo.page == 0}? 'disabled': null"
+                th:with="prevPage=${pagingInfo.page}">
+              <a class="page-link prev" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${prevPage}">Previous</a>
             </li>
-            <li class="page-item active"><a class="page-link">3</a></li>
-            <li class="page-item disabled">
-              <a class="page-link next">Next</a>
+            <th:block th:if="${pagingInfo.totalPages > visiblePage}"
+                      th:with="headPoint=${visiblePage - 1},
+                      tailPoint=${pagingInfo.totalPages - visiblePage},
+                      start=${pagingInfo.page + 1 - visiblePage / 2},
+                      end=${pagingInfo.page + 1 + visiblePage / 2}">
+              <th:block th:if="${pagingInfo.page >= headPoint}">
+                <li class="page-item">
+                  <a class="page-link disabled">...</a>
+                </li>
+              </th:block>
+              <th:block th:if="${pagingInfo.page < headPoint}" th:each="i: ${#numbers.sequence(1, headPoint+1)}">
+                <li class="page-item" th:classappend="${pagingInfo.page == i - 1}? 'active': null">
+                  <a class="page-link" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${i}"
+                     th:text="${i}">${i}</a>
+                </li>
+              </th:block>
+              <th:block th:if="${pagingInfo.page > tailPoint}"
+                        th:each="i: ${#numbers.sequence(tailPoint+1, pagingInfo.totalPages)}">
+                <li class="page-item" th:classappend="${pagingInfo.page == i - 1}? 'active': null">
+                  <a class="page-link" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${i}"
+                     th:text="${i}">${i}</a>
+                </li>
+              </th:block>
+              <th:block th:if="${headPoint <= pagingInfo.page && pagingInfo.page <= tailPoint}"
+                        th:each="i: ${#numbers.sequence(start, end)}">
+                <li class="page-item" th:classappend="${pagingInfo.page == i - 1}? 'active': null">
+                  <a class="page-link" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${i}"
+                     th:text="${i}">${i}</a>
+                </li>
+              </th:block>
+              <th:block th:if="${pagingInfo.page <= tailPoint}">
+                <li class="page-item">
+                  <a class="page-link disabled">...</a>
+                </li>
+              </th:block>
+            </th:block>
+            <th:block th:if="${pagingInfo.totalPages <= visiblePage}"
+                      th:each="i: ${#numbers.sequence(1, pagingInfo.totalPages)}">
+              <li class="page-item" th:classappend="${pagingInfo.page == i - 1}? 'active': null">
+                <a class="page-link" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${i}"
+                   th:text="${i}">${i}</a>
+              </li>
+            </th:block>
+            <li class="page-item" th:classappend="${pagingInfo.page == pagingInfo.totalPages - 1}? 'disabled': null"
+                th:with="nextPage=${pagingInfo.page+2}">
+              <a class="page-link next" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${nextPage}">Next</a>
+            </li>
+            <li class="page-item" th:classappend="${pagingInfo.page == pagingInfo.totalPages - 1}? 'disabled': null">
+              <a class="page-link last"
+                 th:href="${requestPort} + '?' + ${search} + ${filter} + 'page=' + ${pagingInfo.totalPages}">Last</a>
             </li>
           </ul>
         </nav>

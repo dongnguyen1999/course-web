@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService implements ICategoryService {
@@ -35,7 +36,8 @@ public class CategoryService implements ICategoryService {
     for (CategoryEntity category : categories) {
       dtos.add(modelMapper.map(category, CategoryDTO.class));
     }
-    return dtos;
+    return categories.stream().map(category -> modelMapper.map(category, CategoryDTO.class)).
+        collect(Collectors.toList());
   }
 
   @Override

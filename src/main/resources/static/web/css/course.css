@@ -5,9 +5,16 @@
   font-size: 1.2rem;
 }
 
-.paging-view li a{
+.course-nav .btn-group a.active {
   background: #b2ecf2 !important;
-  box-shadow: 0 0 2px #5d687f;
+  color: black;
+  font-weight: bold;
+  border: #131d60 solid 1px;
+}
+
+.paging-view li a, .paging-view li a:active{
+  background: #b2ecf2 !important;
+  box-shadow: 0 0 2px #5d687f !important;
 }
 
 .paging-view li.active a{
@@ -16,7 +23,10 @@
   font-weight: bold;
 }
 
-.paging-view a.prev, .paging-view a.next {
+.paging-view a.prev,
+.paging-view a.next,
+.paging-view a.first,
+.paging-view a.last{
   font-weight: bold;
 }
 
@@ -47,12 +57,26 @@
   font-style: italic;
 }
 
-.course-nav .btn-group button {
+.searching-label i {
+  color: #cf3c3c;
+  font-size: 1rem;
+  margin-left: .8rem;
+  display: none;
+  cursor: pointer;
+}
+.searching-label:hover i {
+  display: inline;
+}
+
+.course-nav .btn-group a {
   height: 2rem;
   width: 5rem;
   padding: 0;
   color: white;
   background: #131d60 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*Course nav.*/

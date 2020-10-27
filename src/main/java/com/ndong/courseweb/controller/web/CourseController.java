@@ -1,18 +1,24 @@
 package com.ndong.courseweb.controller.web;
 
 import com.ndong.courseweb.constant.SystemConstant;
+import com.ndong.courseweb.dto.AbstractDTO;
 import com.ndong.courseweb.dto.CategoryDTO;
 import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.LessonDTO;
+import com.ndong.courseweb.entity.CourseEntity;
+import com.ndong.courseweb.filter.IFilter;
 import com.ndong.courseweb.service.ICategoryService;
 import com.ndong.courseweb.service.ICourseService;
+import com.ndong.courseweb.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -24,9 +30,39 @@ public class CourseController {
   @Autowired
   private ICourseService courseService;
 
+  @Autowired
+  private IFilter<CourseEntity> filter;
+
   @RequestMapping(path = "/course", method = RequestMethod.GET)
-  public ModelAndView getCourseList(){
-    return new ModelAndView("/web/course/course-list");
+  public ModelAndView getCourseList(AbstractDTO getParams){
+    ModelAndView view = new ModelAndView("/web/course/course-list");
+    int page = (getParams.getPage() != null)? getParams.getPage() - 1: 0;
+    int limit = (getParams.getLimit() != null)? getParams.getLimit(): SystemConstant.COURSE_LIMIT_ITEM;
+    List<CourseDTO> courses = courseService.listCourse(
+        getParams.getSearch(), getParams.getFilter(),
+        PageRequest.of(page, limit), null);
+    getParams.setPage(page);
+    getParams.setTotalPages(filter.getTotalPages());
+    view.addObject(SystemConstant.PAGING_INFO, getParams);
+    view.addObject(SystemConstant.COURSE_DTO_LIST, courses);
+    return view;
+  }
+
+  @RequestMapping(path = "/category/{categoryCode}", method = RequestMethod.GET)
+  public ModelAndView getCourseListWithCategory(AbstractDTO getParams, @PathVariable String categoryCode){
+    ModelAndView view = new ModelAndView("/web/course/course-list");
+    int page = (getParams.getPage() != null)? getParams.getPage() - 1: 0;
+    int limit = (getParams.getLimit() != null)? getParams.getLimit(): SystemConstant.COURSE_LIMIT_ITEM;
+    List<CourseDTO> courses = courseService.listCourse(
+        getParams.getSearch(), getParams.getFilter(),
+        PageRequest.of(page, limit), categoryCode);
+    getParams.setPage(page);
+    getParams.setTotalPages(filter.getTotalPages());
+    CategoryDTO category = categoryService.findByCode(categoryCode);
+    view.addObject(SystemConstant.PAGING_INFO, getParams);
+    view.addObject(SystemConstant.CATEGORY_DTO, category);
+    view.addObject(SystemConstant.COURSE_DTO_LIST, courses);
+    return view;
   }
 
   @RequestMapping(path = "/course/new", method = RequestMethod.GET)
@@ -62,4 +98,16 @@ public class CourseController {
     view.addObject(SystemConstant.CREATE_LESSON_STATUS, createLessonStatus);
     return view;
   }
+
+  @RequestMapping(path = "/course/{courseCode}", method = RequestMethod.GET)
+  public ModelAndView getCourseDetail(@PathVariable String courseCode, HttpSession session) {
+    ModelAndView view = new ModelAndView("/web/course/edit-lesson");
+    CourseDTO course = courseService.findOneCourse(courseCode);
+    SessionUtils sessionUtils = new SessionUtils(session);
+    sessionUtils.pushCourse(course.getId());
+    view.addObject(SystemConstant.COURSE_DTO, course);
+    return view;
+  }
+
+
 }

@@ -44,243 +44,39 @@
           <div class=" display-4 font-weight-bold landing-title">
             Khóa học phổ biến
           </div>
-
         </h2>
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 course-list">
-          <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
+          <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3" th:each="course: ${courses}">
             <!-- Card -->
             <div class="card">
               <!-- Card image -->
               <div class="view overlay">
                 <img class="card-img-top"
-                     th:src="@{/web/img/default-thumbnail.png}"
-                     alt="Card image cap">
-                <a href="#!">
+                     th:src="'/resource/' + ${course.thumbnail}"
+                     alt="Course thumbnail">
+                <a th:href="'/course/' + ${course.code}">
                   <div class="mask rgba-white-slight"></div>
                 </a>
               </div>
               <!-- Card content -->
               <div class="card-body">
                 <!-- Title -->
-                <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mvc Lorem ipsum dolor sit. Lorem ipsum dolor sit amet.</h4></a>
+                <a href="" th:href="'/course/' + ${course.code}"><h4 class="card-title title-max-lines-2" th:text="${course.title}">Course title</h4></a>
                 <!-- Title -->
-                <h4 class="card-subtitle mb-2">5.000.000 VND</h4>
+                <h4 class="card-subtitle mb-2" th:text="${course.price} + ' VNĐ'">5.000.000 VND</h4>
                 <!-- Text -->
                 <div class="card-detail">
-                  <p class="card-text mb-1 max-lines-3">ke up the bulk of
-                    the
-                    card's
-                    content.</p>
-                  <div class="nb-used mb-2">30 Học viên</div>
+                  <p class="card-text mb-1 max-lines-3" th:text="${course.shortDescription}">Course short description</p>
+                  <div class="nb-used mb-2" th:text="${course.nbMembers} + ' Học viên'">30 Học viên</div>
                 </div>
                 <!-- Button -->
                 <div class="d-flex justify-content-center">
-                  <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-lg-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-lg-none">Xem thêm</span></a>
+                  <a href="" th:href="'/course/' + ${course.code}" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-lg-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-lg-none">Xem thêm</span></a>
                 </div>
               </div><!--Card body.-->
             </div><!--Card.-->
           </div><!--Col.-->
-
-
-          <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-            <!-- Card -->
-            <div class="card">
-              <!-- Card image -->
-              <div class="view overlay">
-                <img class="card-img-top"
-                     th:src="@{/web/img/default-thumbnail.png}"
-                     alt="Card image cap">
-                <a href="#!">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!-- Card content -->
-              <div class="card-body">
-                <!-- Title -->
-                <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mvc Lorem ipsum dolor sit. Lorem ipsum dolor sit amet.</h4></a>
-                <!-- Title -->
-                <h4 class="card-subtitle mb-2">5.000.000 VND</h4>
-                <!-- Text -->
-                <div class="card-detail">
-                  <p class="card-text mb-1 max-lines-3">ke up the bulk of
-                    the
-                    card's
-                    content.</p>
-                  <div class="nb-used mb-2">30 Học viên</div>
-                </div>
-                <!-- Button -->
-                <div class="d-flex justify-content-center">
-                  <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-lg-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-lg-none">Xem thêm</span></a>
-                </div>
-              </div><!--Card body.-->
-            </div><!--Card.-->
-          </div><!--Col.-->
-          <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-            <!-- Card -->
-            <div class="card">
-              <!-- Card image -->
-              <div class="view overlay">
-                <img class="card-img-top"
-                     th:src="@{/web/img/default-thumbnail.png}"
-                     alt="Card image cap">
-                <a href="#!">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!-- Card content -->
-              <div class="card-body">
-                <!-- Title -->
-                <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mvc Lorem ipsum dolor sit. Lorem ipsum dolor sit amet.</h4></a>
-                <!-- Title -->
-                <h4 class="card-subtitle mb-2">5.000.000 VND</h4>
-                <!-- Text -->
-                <div class="card-detail">
-                  <p class="card-text mb-1 max-lines-3">ke up the bulk of
-                    the
-                    card's
-                    content.</p>
-                  <div class="nb-used mb-2">30 Học viên</div>
-                </div>
-                <!-- Button -->
-                <div class="d-flex justify-content-center">
-                  <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-lg-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-lg-none">Xem thêm</span></a>
-                </div>
-              </div><!--Card body.-->
-            </div><!--Card.-->
-          </div><!--Col.-->
-          <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-            <!-- Card -->
-            <div class="card">
-              <!-- Card image -->
-              <div class="view overlay">
-                <img class="card-img-top"
-                     th:src="@{/web/img/default-thumbnail.png}"
-                     alt="Card image cap">
-                <a href="#!">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!-- Card content -->
-              <div class="card-body">
-                <!-- Title -->
-                <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mvc Lorem ipsum dolor sit. Lorem ipsum dolor sit amet.</h4></a>
-                <!-- Title -->
-                <h4 class="card-subtitle mb-2">5.000.000 VND</h4>
-                <!-- Text -->
-                <div class="card-detail">
-                  <p class="card-text mb-1 max-lines-3">ke up the bulk of
-                    the
-                    card's
-                    content.</p>
-                  <div class="nb-used mb-2">30 Học viên</div>
-                </div>
-                <!-- Button -->
-                <div class="d-flex justify-content-center">
-                  <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-lg-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-lg-none">Xem thêm</span></a>
-                </div>
-              </div><!--Card body.-->
-            </div><!--Card.-->
-          </div><!--Col.-->
-          <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-            <!-- Card -->
-            <div class="card">
-              <!-- Card image -->
-              <div class="view overlay">
-                <img class="card-img-top"
-                     th:src="@{/web/img/default-thumbnail.png}"
-                     alt="Card image cap">
-                <a href="#!">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!-- Card content -->
-              <div class="card-body">
-                <!-- Title -->
-                <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mvc Lorem ipsum dolor sit. Lorem ipsum dolor sit amet.</h4></a>
-                <!-- Title -->
-                <h4 class="card-subtitle mb-2">5.000.000 VND</h4>
-                <!-- Text -->
-                <div class="card-detail">
-                  <p class="card-text mb-1 max-lines-3">ke up the bulk of
-                    the
-                    card's
-                    content.</p>
-                  <div class="nb-used mb-2">30 Học viên</div>
-                </div>
-                <!-- Button -->
-                <div class="d-flex justify-content-center">
-                  <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-lg-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-lg-none">Xem thêm</span></a>
-                </div>
-              </div><!--Card body.-->
-            </div><!--Card.-->
-          </div><!--Col.-->
-          <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-            <!-- Card -->
-            <div class="card">
-              <!-- Card image -->
-              <div class="view overlay">
-                <img class="card-img-top"
-                     th:src="@{/web/img/default-thumbnail.png}"
-                     alt="Card image cap">
-                <a href="#!">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!-- Card content -->
-              <div class="card-body">
-                <!-- Title -->
-                <a href=""><h4 class="card-title title-max-lines-2">Lorem ipsum dolor sit amet.Khóa học java spring mvc Lorem ipsum dolor sit. Lorem ipsum dolor sit amet.</h4></a>
-                <!-- Title -->
-                <h4 class="card-subtitle mb-2">5.000.000 VND</h4>
-                <!-- Text -->
-                <div class="card-detail">
-                  <p class="card-text mb-1 max-lines-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores at enim est in iure numquam obcaecati, qui quis sequi.ke up the bulk of
-                    the
-                    card's
-                    content.</p>
-                  <div class="nb-used mb-2">30 Học viên</div>
-                </div>
-                <!-- Button -->
-                <div class="d-flex justify-content-center">
-                  <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-lg-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-lg-none">Xem thêm</span></a>
-                </div>
-              </div><!--Card body.-->
-            </div><!--Card.-->
-          </div><!--Col.-->
-          <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3">
-            <!-- Card -->
-            <div class="card">
-              <!-- Card image -->
-              <div class="view overlay">
-                <img class="card-img-top"
-                     th:src="@{/web/img/default-thumbnail.png}"
-                     alt="Card image cap">
-                <a href="#!">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!-- Card content -->
-              <div class="card-body">
-                <!-- Title -->
-                <a href=""><h4 class="card-title title-max-lines-2">Khóa học java spring mvc Lorem ipsum dolor sit. Lorem ipsum dolor sit amet.</h4></a>
-                <!-- Title -->
-                <h4 class="card-subtitle mb-2">5.000.000 VND</h4>
-                <!-- Text -->
-                <div class="card-detail">
-                  <p class="card-text mb-1 max-lines-3">ke up the bulk of
-                    the
-                    card's
-                    content.</p>
-                  <div class="nb-used mb-2">30 Học viên</div>
-                </div>
-                <!-- Button -->
-                <div class="d-flex justify-content-center">
-                  <a href="#" class="btn btn-primary w-100 m-0 more-detail-btn"><span class="d-sm-none d-lg-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-lg-none">Xem thêm</span></a>
-                </div>
-              </div><!--Card body.-->
-            </div><!--Card.-->
-          </div><!--Col.-->
-
         </div><!--Course list.-->
         <div class="d-flex justify-content-center">
           <a href="/course" class="btn mt-4 more-course-btn">Các khóa học khác</a>
