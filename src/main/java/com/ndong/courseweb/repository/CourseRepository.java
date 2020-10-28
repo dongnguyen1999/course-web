@@ -11,6 +11,7 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<CourseEntity, Long> {
   CourseEntity findOneByCode(String code);
   Page<CourseEntity> findAllByCategory(CategoryEntity category, Pageable pageable);
+  Page<CourseEntity> findAllByCategoryOrderByOpenTimeDesc(CategoryEntity category, Pageable pageable);
   Page<CourseEntity> findByTitleContaining(String title, Pageable pageable);
   Page<CourseEntity> findByCategoryAndTitleContaining(CategoryEntity category, String title, Pageable pageable);
 }

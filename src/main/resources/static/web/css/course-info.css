@@ -1,0 +1,41 @@
+.course-info .title {
+  color: #131d60;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.course-info .title {
+  color: #131d60;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.course-info .price {
+  color: #FF7B2E;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.course-info tr a:hover {
+  color: #131d60;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #131d60;
+}
+
+.related-course-title {
+  color: #131d60;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.course-list .card-title {
+  font-size: 1rem;
+}
+
+.course-list .card-subtitle {
+  font-size: 1.2rem;
+}
+
+img.thumbnail {
+  box-shadow: 0 0 3px #5d687f;
+}

@@ -13,4 +13,5 @@ public interface ICourseService {
   CourseDTO findOneCourse(String courseCode);
   List<CourseDTO> listTopPopularCourses(Integer limit);
   List<CourseDTO> listCourse(String searchText, String filterCode, Pageable pageable, String categoryCode);
+  List<CourseDTO> listRelatedCourses(String categoryCode);
 }

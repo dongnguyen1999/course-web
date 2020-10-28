@@ -6,10 +6,12 @@ public class SystemConstant {
   public static final String CREATE_LESSON_STATUS = "createLessonStatus";
   public static final String LOGIN_FAILED = "loginFailed";
   public static final String USER_DTO = "user";
+  public static final String COURSE_AUTHOR_DTO = "author";
   public static final String COURSE_DTO = "course";
   public static final String CATEGORY_DTO = "category";
   public static final String CATEGORY_DTO_LIST = "categories";
   public static final String COURSE_DTO_LIST = "courses";
+  public static final String RELATED_COURSE_DTO_LIST = "relatedCourses";
   public static final String PAGING_INFO = "pagingInfo";
   public static final String MEDIA_TYPE_DTO_LIST = "mediaTypes";
   public static final String NAVIGATE_URL = "navigateUrl";

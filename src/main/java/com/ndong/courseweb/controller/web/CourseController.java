@@ -1,14 +1,12 @@
 package com.ndong.courseweb.controller.web;
 
 import com.ndong.courseweb.constant.SystemConstant;
-import com.ndong.courseweb.dto.AbstractDTO;
-import com.ndong.courseweb.dto.CategoryDTO;
-import com.ndong.courseweb.dto.CourseDTO;
-import com.ndong.courseweb.dto.LessonDTO;
+import com.ndong.courseweb.dto.*;
 import com.ndong.courseweb.entity.CourseEntity;
 import com.ndong.courseweb.filter.IFilter;
 import com.ndong.courseweb.service.ICategoryService;
 import com.ndong.courseweb.service.ICourseService;
+import com.ndong.courseweb.service.IUserService;
 import com.ndong.courseweb.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -32,6 +30,9 @@ public class CourseController {
 
   @Autowired
   private IFilter<CourseEntity> filter;
+
+  @Autowired
+  private IUserService userService;
 
   @RequestMapping(path = "/course", method = RequestMethod.GET)
   public ModelAndView getCourseList(AbstractDTO getParams){
@@ -101,11 +102,17 @@ public class CourseController {
 
   @RequestMapping(path = "/course/{courseCode}", method = RequestMethod.GET)
   public ModelAndView getCourseDetail(@PathVariable String courseCode, HttpSession session) {
-    ModelAndView view = new ModelAndView("/web/course/edit-lesson");
+    ModelAndView view = new ModelAndView("/web/course/course-info");
     CourseDTO course = courseService.findOneCourse(courseCode);
+    CategoryDTO category = categoryService.findByCode(course.getCategoryCode());
+    UserDTO author = userService.findOneUser(course.getUserId());
+    List<CourseDTO> relatedCourses = courseService.listRelatedCourses(category.getCode());
     SessionUtils sessionUtils = new SessionUtils(session);
     sessionUtils.pushCourse(course.getId());
     view.addObject(SystemConstant.COURSE_DTO, course);
+    view.addObject(SystemConstant.CATEGORY_DTO, category);
+    view.addObject(SystemConstant.COURSE_AUTHOR_DTO, author);
+    view.addObject(SystemConstant.RELATED_COURSE_DTO_LIST, relatedCourses);
     return view;
   }
 

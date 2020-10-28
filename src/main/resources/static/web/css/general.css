@@ -188,6 +188,14 @@
     line-height: 1.5rem;
 }
 
+.course-list .title-max-lines-3 {
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    height: 3.5rem;
+    line-height: 1.2rem;
+}
+
 /*Course list.*/
 
 

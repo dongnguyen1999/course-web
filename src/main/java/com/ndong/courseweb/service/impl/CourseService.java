@@ -115,17 +115,17 @@ public class CourseService implements ICourseService {
     Optional<CourseEntity> course = courseRepository.findById(courseId);
     Integer maxLessonId = lessonRepository.findMaxNoByCourseId(courseId);
     CourseDTO dto = course.map(courseEntity -> modelMapper.map(courseEntity, CourseDTO.class)).orElse(null);
-    if (dto != null) dto.setNextAvailableLessonNo(maxLessonId + 1);
+    if (dto != null) {
+      dto.setNextAvailableLessonNo(maxLessonId + 1);
+      dto.setNbMembers(purchaseDetailRepository.countByCourseId(courseId));
+    }
     return dto;
   }
 
   @Override
   public CourseDTO findOneCourse(String courseCode) {
     CourseEntity course = courseRepository.findOneByCode(courseCode);
-    Integer maxLessonId = lessonRepository.findMaxNoByCourseId(course.getId());
-    CourseDTO dto = modelMapper.map(course, CourseDTO.class);
-    if (dto != null) dto.setNextAvailableLessonNo(maxLessonId + 1);
-    return dto;
+    return findOneCourse(course.getId());
   }
 
   @Override
@@ -151,6 +151,15 @@ public class CourseService implements ICourseService {
       dto.setNbMembers(purchaseDetailRepository.countByCourseId(dto.getId()));
       return dto;
     }).collect(Collectors.toList());
+  }
+
+  @Override
+  public List<CourseDTO> listRelatedCourses(String categoryCode) {
+    CategoryEntity category = categoryRepository.findOneByCode(categoryCode);
+    Page<CourseEntity> courses = courseRepository.findAllByCategoryOrderByOpenTimeDesc(category,
+        PageRequest.of(0, 8));
+    return courses.get().map(course -> modelMapper.map(course, CourseDTO.class)).
+        collect(Collectors.toList());
   }
 
 }
