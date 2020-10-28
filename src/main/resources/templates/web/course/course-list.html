@@ -21,14 +21,15 @@
         <button class="btn-menu btn btn-toggle-menu" type="button">
           <i class="fa fa-bars"></i>
         </button>
-        <div class="category-label ml-3">Thể loại:&nbsp;<span class="category d-none d-md-inline"
+        <label for="sm-categories-list" class="category-label ml-3">Thể loại:&nbsp;<span class="category d-none d-md-inline"
                                                               th:text="${category != null}? ${category.name}: 'Tất cả'">Tất cả</span>
-        </div>
-
-        <select class="form-control w-50 ml-1 custom-select d-block d-md-none" onchange="location = this.value;">
-          <option selected th:text="${category != null}? ${category.name}: 'Chọn thể loại'">Chọn thể loại</option>
-          <option th:value="${pagingInfo.search != null && !pagingInfo.search.isEmpty()}? '/course' + '?search=' + ${pagingInfo.search}: '/course'">Tất cả</option>
+        </label>
+        <select id="sm-categories-list" class="form-control w-50 ml-1 custom-select d-block d-md-none" onchange="location = this.value;">
+          <option selected th:text="${category != null}? ${category.name}: 'Tất cả'">Chọn thể loại</option>
+          <option th:if="${category != null}" th:value="${pagingInfo.search != null && !pagingInfo.search.isEmpty()}? '/course' + '?search=' + ${pagingInfo.search}: '/course'">Tất cả</option>
+          <!--/*@thymesVar id="categories" type="java.util.List"*/-->
           <th:block th:each="item: ${categories}">
+            <!--/*@thymesVar id="item" type="com.ndong.courseweb.dto.CategoryDTO"*/-->
             <option th:text="${item.name}" th:value="${pagingInfo.search != null && !pagingInfo.search.isEmpty()}? '/category/' + ${item.code} + '?search=' + ${pagingInfo.search}: '/category/' + ${item.code}">One</option>
           </th:block>
         </select>
@@ -52,7 +53,11 @@
         class="fas fa-times-circle"></i></a></div>
 
     <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 w-100">
+      <div th:unless="${courses.size() > 0}" class="w-100 d-flex flex-column justify-content-center align-items-center" style="height: 50vh">
+        <div class="mt-5 not-found-course-text">Không tìm thấy khóa học nào</div>
+        <a href="/course" class="btn primary outline mt-5">Xem tất cả khóa học</a>
+      </div>
+      <div th:if="${courses.size() > 0}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 w-100">
         <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3" th:each="course: ${courses}">
           <!-- Card -->
           <div class="card">
@@ -60,7 +65,7 @@
             <div class="view overlay">
               <img class="card-img-top"
                    th:src="'/resource/' + ${course.thumbnail}"
-                   alt="Card image cap">
+                   alt="Card image cap" src="">
               <a th:href="'/course/' + ${course.code}">
                 <div class="mask rgba-white-slight"></div>
               </a>

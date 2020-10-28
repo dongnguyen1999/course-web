@@ -11,6 +11,14 @@
 .btn.primary {
     background: #131d60 !important;
     color: white;
+    font-size: 1rem;
+}
+
+.btn.primary.outline:hover {
+    background: #b2ecf2 !important;
+    color: #131d60;
+    outline: solid 2px #131d60;
+    font-weight: bold;
 }
 
 .form-title {

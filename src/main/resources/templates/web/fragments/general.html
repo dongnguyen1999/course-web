@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -20,6 +21,7 @@
 
 <!--Small screen searchbox-->
 <div class="row d-fex justify-content-center m-sm-3 m-md-auto" th:fragment="smSearchbox">
+  <!--/*@thymesVar id="requestPort" type="java.lang.String"*/-->
   <form class="searchbar d-flex d-lg-none m-2" th:action="${requestPort}?:'/course'" method="GET">
     <input class="search_input" type="text" name="search" placeholder="Tìm kiếm khóa học"
            th:if="${pagingInfo != null}" th:value="${pagingInfo.search}?:''">

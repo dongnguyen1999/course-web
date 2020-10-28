@@ -46,10 +46,17 @@
   margin-right: 0;
 }
 
+.not-found-course-text {
+  font-size: 2rem;
+  color: #FF7B2E;
+  text-shadow: 0 0 .5px #5d687f;
+}
+
 .category-toggle-view .category-label {
   color: #131d60;
   font-weight: bold;
   font-size: 1.2rem;
+  margin: 0;
 }
 
 .category-toggle-view .category-label .category, .searching-label .key-word {
