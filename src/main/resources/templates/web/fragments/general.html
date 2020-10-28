@@ -278,11 +278,10 @@
   // useBtnCheckbox();
   $(function () {
     $(".navbar a.nav-link").removeClass("waves-effect").removeClass("waves-light");
-    $('.card .card-subtitle, span.price strong').each(function () {
-      $(this).html(parseFloat($(this).html()).toLocaleString('vi') + ' VNĐ')
-    })
   })
-
+  $('.card .card-subtitle, span.price strong').each(function () {
+    $(this).html(parseFloat($(this).html()).toLocaleString('vi') + ' VNĐ')
+  })
 </script>
 
 </body>
