@@ -22,11 +22,13 @@
   -webkit-text-stroke-color: #131d60;
 }
 
-.related-course-title {
+.related-course-title, .lesson-list-title {
   color: #131d60;
   font-weight: bold;
   font-size: 1.8rem;
 }
+
+
 
 .course-list .card-title {
   font-size: 1rem;
@@ -39,3 +41,74 @@
 img.thumbnail {
   box-shadow: 0 0 3px #5d687f;
 }
+
+.lesson-list .lesson-no {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.lesson-list .title-group {
+  font-size: 1.2rem;
+  color: #131d60;
+}
+
+.lesson-list .li-badge, .lesson-list .li-badge-hide {
+  background: #131d60;
+  color: white;
+}
+.lesson-list .li-badge-danger {
+  background: #cf3c3c;
+  color: white;
+}
+
+.lesson-list .li-badge {
+  display: inline;
+}
+
+.lesson-list .li-badge span, .lesson-list .li-badge-hide, .lesson-list .li-badge-danger{
+  display: none;
+}
+
+.lesson-list li:hover .li-badge span, .lesson-list li:hover .li-badge-danger, .lesson-list li:hover .li-badge-hide {
+  display: inline;
+}
+
+.author-control .btn {
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  box-shadow: 0 0 2px #5d687f;
+}
+
+.author-control .btn.add {
+  background: #131d60;
+}
+
+.author-control .btn.success {
+  background: darkgreen;
+}
+
+.course-control {
+  width: 20rem;
+  height: 3rem;
+}
+
+.course-control .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.course-control .btn.edit {
+  background: #131d60;
+  color: white;
+  flex: 50;
+}
+.course-control .btn.delete {
+  background: #cf3c3c;
+  color: white;
+  flex: 1;
+}
+

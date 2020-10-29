@@ -45,3 +45,19 @@ function setScrollToViewHandler(jqBtn, jqElement) {
     $('#navbarResponsive').removeClass('show');
   });
 }
+
+function useBtnCheckbox() {
+  let checkBoxs = $('.checkbox');
+  checkBoxs.unbind('click');
+  checkBoxs.click(function (event) {
+    event.preventDefault();
+    if ($(this).hasClass('checked')) {
+      $(this).removeClass('checked');
+      $('#enableFreeTrial').val(false);
+    }
+    else {
+      $(this).addClass('checked');
+      $('#enableFreeTrial').val(true);
+    }
+  })
+}

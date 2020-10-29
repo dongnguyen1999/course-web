@@ -8,6 +8,15 @@
     margin: 0;
 }
 
+.badge-warning {
+    background: #FF7B2E !important;
+}
+
+.badge-danger {
+    background: #cf3c3c !important;
+}
+
+
 .btn.primary {
     background: #131d60 !important;
     color: white;

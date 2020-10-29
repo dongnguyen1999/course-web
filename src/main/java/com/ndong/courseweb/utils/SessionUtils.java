@@ -13,17 +13,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Component
 public class SessionUtils {
 
-  private final HttpSession session;
-
-  public SessionUtils(HttpSession session) {
-    this.session = session;
-  }
-
-  public SessionUtils(HttpServletRequest request){
-    this.session = request.getSession();
-  }
+  @Autowired
+  private HttpSession session;
 
   public void setUser(UserDTO user) {
     session.setAttribute(SystemConstant.USER_DTO, user);

@@ -56,14 +56,16 @@ public class CategoryService implements ICategoryService {
   }
 
   @Override
-  public Boolean deleteCategories(Long[] ids) {
+  public List<CategoryDTO> deleteCategories(Long[] ids) {
     try {
-      categoryRepository.deleteAll(categoryRepository.findAllById(Arrays.asList(ids)));
-      return true;
+      List<CategoryEntity> categories = categoryRepository.findAllById(Arrays.asList(ids));
+      categoryRepository.deleteAll(categories);
+      return categories.stream().
+          map(category -> modelMapper.map(category, CategoryDTO.class)).
+          collect(Collectors.toList());
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      return false;
+      return null;
     }
   }
-
 }

@@ -1,10 +1,7 @@
 package com.ndong.courseweb.interceptor.config;
 
 import com.mysql.cj.log.Log;
-import com.ndong.courseweb.interceptor.CourseInterceptor;
-import com.ndong.courseweb.interceptor.LoginInterceptor;
-import com.ndong.courseweb.interceptor.RequireLoginInterceptor;
-import com.ndong.courseweb.interceptor.WebInterceptor;
+import com.ndong.courseweb.interceptor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -28,7 +25,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(webInterceptor).
-        addPathPatterns("/*").
         excludePathPatterns("/admin/*");
 
     registry.addInterceptor(loginInterceptor).

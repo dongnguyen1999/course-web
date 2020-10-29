@@ -118,13 +118,13 @@
         <th:block th:if="${user != null}">
           <div class="user-area d-none d-lg-flex align-items-center ml-3">
             <div class="avatar-container">
-              <img th:src="@{/web/img/default-avatar.png}" alt="User avatar" class="avatar">
+              <img th:src="${user.avatar != null}? '/resource/'+${user.avatar}: '/web/img/default-avatar.png'" alt="User avatar" class="avatar">
             </div>
             <div class="dropdown">
               <a class="nav-link dropdown-toggle waves-effect p-0 user-dropdown-btn" href="#" id="userDropdown"
                  data-toggle="dropdown"
                  aria-haspopup="true" aria-expanded="false">
-                <span class="d-none d-xl-inline-block">Nguyễn Phan Việt Đông</span>
+                <span class="d-none d-xl-inline-block" th:text="${user.fullName}">Nguyễn Phan Việt Đông</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#"><i class="fas fa-info-circle"></i>Thông tin tài khoản</a>
@@ -174,7 +174,7 @@
 <!--Footer-->
 <footer th:fragment="footer" class="page-footer font-small pt-4 mt-4">
   <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button"
-     title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
+     title="Về đầu trang" data-toggle="tooltip" data-placement="left">
     <i class="fas fa-angle-up"></i>
   </a>
   <!-- Footer Links -->
@@ -278,6 +278,7 @@
   // useBtnCheckbox();
   $(function () {
     $(".navbar a.nav-link").removeClass("waves-effect").removeClass("waves-light");
+    $('[data-toggle="tooltip"]').tooltip()
   })
   $('.card .card-subtitle, span.price strong').each(function () {
     $(this).html(parseFloat($(this).html()).toLocaleString('vi') + ' VNĐ')

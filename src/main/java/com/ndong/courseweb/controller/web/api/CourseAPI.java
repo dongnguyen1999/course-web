@@ -1,0 +1,32 @@
+package com.ndong.courseweb.controller.web.api;
+
+import com.ndong.courseweb.dto.CourseDTO;
+import com.ndong.courseweb.dto.LessonDTO;
+import com.ndong.courseweb.service.ICourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class CourseAPI {
+
+  @Autowired
+  private ICourseService courseService;
+
+  @RequestMapping(path = "/web/api/course/complete", method = RequestMethod.PUT)
+  public ResponseEntity<CourseDTO> completeCourse(@RequestParam Long courseId) {
+    CourseDTO course = courseService.completeCourse(courseId);
+    return (course != null)? new ResponseEntity<>(course, HttpStatus.OK):
+        new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  @RequestMapping(path = "/web/api/course/pop-lesson", method = RequestMethod.DELETE)
+  public ResponseEntity<LessonDTO> popLesson(@RequestParam Long courseId) {
+    LessonDTO lesson = courseService.popLesson(courseId);
+    return new ResponseEntity<>(lesson, HttpStatus.OK);
+  }
+
+
+
+}

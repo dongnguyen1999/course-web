@@ -26,6 +26,9 @@ public class HomeController {
   @Autowired
   private ICourseService courseService;
 
+  @Autowired
+  private SessionUtils sessionUtils;
+
   @RequestMapping(path = "/index", method = RequestMethod.GET)
   public ModelAndView indexPage() {
     ModelAndView view = new ModelAndView("web/home");
@@ -49,7 +52,7 @@ public class HomeController {
   @RequestMapping(path = "/register", method = RequestMethod.POST)
   public ModelAndView register(UserDTO userDTO) {
     ModelAndView view = new ModelAndView("/web/auth/register");
-    boolean registerStatus = userService.tryRegisterAccount(userDTO);
+    boolean registerStatus = userService.tryRegisterAccount(userDTO) != null;
     view.addObject(SystemConstant.REGISTER_STATUS, registerStatus);
     return view;
   }
@@ -61,7 +64,6 @@ public class HomeController {
     UserDTO user = userService.findOneUser(userDTO.getUsername(), userDTO.getPassword());
     String navigateUrl = userDTO.getNavigateUrl().orElse("/index");
     if (user != null) {
-      SessionUtils sessionUtils = new SessionUtils(session);
       sessionUtils.setUser(user);
       String redirectView = "redirect:" + navigateUrl;
       return new ModelAndView(redirectView);
@@ -71,7 +73,6 @@ public class HomeController {
 
   @RequestMapping(path = "/logout", method = RequestMethod.GET)
   public ModelAndView logout(HttpSession session) {
-    SessionUtils sessionUtils = new SessionUtils(session);
     sessionUtils.removeUser();
     return new ModelAndView("redirect:/index");
   }

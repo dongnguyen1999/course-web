@@ -34,7 +34,7 @@ public class CourseFilter implements IFilter<CourseEntity> {
   private PurchaseDetailRepository purchaseDetailRepository;
 
   @Autowired
-  private HttpSession session;
+  private SessionUtils sessionUtils;
 
   private Pageable pageable;
   private Long totalElement;
@@ -107,7 +107,6 @@ public class CourseFilter implements IFilter<CourseEntity> {
         courses = courses.subList(offset, Math.min(offset + limit, courses.size()));
         break;
       case FilterCodeConstant.LATELY:
-        SessionUtils sessionUtils = new SessionUtils(session);
         List<Long> latelyCourseIds = sessionUtils.getLatelyCourseIds();
         if (categoryCode != null) {
           latelyCourseIds = latelyCourseIds.stream().filter(courseId -> {

@@ -80,7 +80,7 @@
       </form>
 
       <div th:replace="web/fragments/modal :: informationModal(
-        showCondition=${openCourseStatus == false},
+        showCondition=${openCourseFailed == true},
         headerColor='bg-danger',
         title='Mở khóa học thất bại',
         content='Có gì đó sai sai<br>Có thể do hệ thống quá tải, vui lòng thử lại sau'
@@ -97,7 +97,7 @@
 <script th:src="@{/web/js/image-picker.js}"></script>
 <script th:src="@{/web/js/validation.js}"></script>
 <script th:src="@{/web/js/course-form-validation.js}"></script>
-<script th:replace="web/fragments/modal :: informationModalController(showCondition=${openCourseStatus == false})"></script>
+<script th:replace="web/fragments/modal :: informationModalController(showCondition=${openCourseFailed == true})"></script>
 
 <script>
   CKEDITOR.replace('shortDescription');

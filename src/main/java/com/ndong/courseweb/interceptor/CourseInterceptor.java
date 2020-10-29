@@ -6,6 +6,7 @@ import com.ndong.courseweb.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Component
-public class CourseInterceptor extends HandlerInterceptorAdapter {
+public class CourseInterceptor implements HandlerInterceptor {
   @Autowired
   private ICategoryService categoryService;
 

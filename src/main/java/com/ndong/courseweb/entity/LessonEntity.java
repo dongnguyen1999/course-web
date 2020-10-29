@@ -36,7 +36,7 @@ public class LessonEntity {
   @Column(name = "enable_free_trail", nullable = false, columnDefinition = "bool")
   private Boolean enableFreeTrial;
 
-  @OneToMany(mappedBy = "lesson")
+  @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
   private final Set<MediaEntity> mediaSet = new HashSet<>();
 
   public LessonId getId() {

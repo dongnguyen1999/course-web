@@ -8,5 +8,5 @@ public interface ICategoryService {
   CategoryDTO findByCode(String code);
   List<CategoryDTO> findAll();
   CategoryDTO updateCategory(CategoryDTO model);
-  Boolean deleteCategories(Long[] ids);
+  List<CategoryDTO> deleteCategories(Long[] ids);
 }

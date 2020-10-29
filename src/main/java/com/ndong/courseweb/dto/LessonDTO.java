@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 
 public class LessonDTO extends AbstractDTO implements Serializable {
 
-    private Integer no;
+    private Integer idNo;
 
     private Long courseId;
 
@@ -26,14 +26,14 @@ public class LessonDTO extends AbstractDTO implements Serializable {
 
     private Integer duration;
 
-    private Boolean enableFreeTrail;
+    private Boolean enableFreeTrial;
 
-    public Integer getNo() {
-        return no;
+    public Integer getIdNo() {
+        return idNo;
     }
 
-    public void setNo(Integer no) {
-        this.no = no;
+    public void setIdNo(Integer idNo) {
+        this.idNo = idNo;
     }
 
     public Long getCourseId() {
@@ -84,11 +84,11 @@ public class LessonDTO extends AbstractDTO implements Serializable {
         this.duration = duration;
     }
 
-    public Boolean getEnableFreeTrail() {
-        return enableFreeTrail;
+    public Boolean getEnableFreeTrial() {
+        return enableFreeTrial;
     }
 
-    public void setEnableFreeTrail(Boolean enableFreeTrail) {
-        this.enableFreeTrail = enableFreeTrail;
+    public void setEnableFreeTrial(Boolean enableFreeTrial) {
+        this.enableFreeTrial = enableFreeTrial;
     }
 }

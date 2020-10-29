@@ -1,3 +1,4 @@
+
 .card-img-thumbnail {
     height: 18rem;
     object-fit: cover;
@@ -6,4 +7,30 @@
 .control-label {
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+.card-subtitle {
+    color: #cf3c3c;
+}
+
+.card-title {
+    color: #131d60;
+}
+
+.checkbox {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.checkbox i {
+    display: none;
+}
+
+.checkbox.checked i {
+    display: inline;
 }

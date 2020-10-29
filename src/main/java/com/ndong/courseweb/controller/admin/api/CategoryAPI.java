@@ -1,11 +1,14 @@
 package com.ndong.courseweb.controller.admin.api;
 
 import com.ndong.courseweb.dto.CategoryDTO;
+import com.ndong.courseweb.dto.MediaTypeDTO;
 import com.ndong.courseweb.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class CategoryAPI {
@@ -21,8 +24,10 @@ public class CategoryAPI {
   }
 
   @RequestMapping(path = "/admin/api/category", method = RequestMethod.DELETE)
-  public Boolean deleteCategory(@RequestBody Long[] ids){
-    return categoryService.deleteCategories(ids);
+  public ResponseEntity<List<CategoryDTO>> deleteCategory(@RequestBody Long[] ids){
+    List<CategoryDTO> mediaTypes = categoryService.deleteCategories(ids);
+    return (mediaTypes != null)? new ResponseEntity<>(mediaTypes, HttpStatus.OK):
+        new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @RequestMapping(path = "/admin/api/category", method = RequestMethod.POST)

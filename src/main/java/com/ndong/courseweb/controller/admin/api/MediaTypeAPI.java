@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class MediaTypeAPI {
 
@@ -23,8 +25,10 @@ public class MediaTypeAPI {
   }
 
   @RequestMapping(path = "/admin/api/media-type", method = RequestMethod.DELETE)
-  public Boolean deleteCategory(@RequestBody Long[] ids){
-    return mediaTypeService.deleteMediaTypes(ids);
+  public ResponseEntity<List<MediaTypeDTO>> deleteCategory(@RequestBody Long[] ids){
+    List<MediaTypeDTO> mediaTypes = mediaTypeService.deleteMediaTypes(ids);
+    return (mediaTypes != null)? new ResponseEntity<>(mediaTypes, HttpStatus.OK):
+        new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @RequestMapping(path = "/admin/api/media-type", method = RequestMethod.POST)

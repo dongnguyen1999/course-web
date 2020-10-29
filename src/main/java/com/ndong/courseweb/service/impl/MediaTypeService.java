@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class MediaTypeService implements IMediaTypeService {
@@ -52,13 +53,16 @@ public class MediaTypeService implements IMediaTypeService {
   }
 
   @Override
-  public Boolean deleteMediaTypes(Long[] ids) {
+  public List<MediaTypeDTO> deleteMediaTypes(Long[] ids) {
     try {
-      mediaTypeRepository.deleteAll(mediaTypeRepository.findAllById(Arrays.asList(ids)));
-      return true;
+      List<MediaTypeEntity> mediaTypes = mediaTypeRepository.findAllById(Arrays.asList(ids));
+      mediaTypeRepository.deleteAll(mediaTypes);
+      return mediaTypes.stream().
+          map(mediaType -> modelMapper.map(mediaType, MediaTypeDTO.class)).
+          collect(Collectors.toList());
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      return false;
+      return null;
     }
   }
 

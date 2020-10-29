@@ -149,7 +149,4 @@ public class UserEntity {
     this.workExperienceInfo = workExperienceInfo;
   }
 
-  public Set<PurchaseDetailEntity> getPurchaseDetailSet() {
-    return purchaseDetailEntitySet;
-  }
 }

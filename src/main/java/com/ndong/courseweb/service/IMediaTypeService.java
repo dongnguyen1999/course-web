@@ -10,7 +10,7 @@ import java.util.List;
 public interface IMediaTypeService {
   List<MediaTypeDTO> findAll();
   MediaTypeDTO updateMediaType(MediaTypeDTO model);
-  Boolean deleteMediaTypes(Long[] ids);
+  List<MediaTypeDTO> deleteMediaTypes(Long[] ids);
   MediaTypeDTO findByCode(String code);
   MediaTypeEntity getMediaTypeFromFile(MultipartFile file);
 }

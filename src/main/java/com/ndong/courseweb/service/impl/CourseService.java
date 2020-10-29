@@ -8,9 +8,7 @@ import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.LessonDTO;
 import com.ndong.courseweb.dto.MediaDTO;
 import com.ndong.courseweb.dto.query_result.NbUserPerCourseIdDTO;
-import com.ndong.courseweb.entity.CategoryEntity;
-import com.ndong.courseweb.entity.CourseEntity;
-import com.ndong.courseweb.entity.LessonEntity;
+import com.ndong.courseweb.entity.*;
 import com.ndong.courseweb.entity.composite_id.LessonId;
 import com.ndong.courseweb.filter.impl.CourseFilter;
 import com.ndong.courseweb.repository.*;
@@ -65,7 +63,7 @@ public class CourseService implements ICourseService {
 
   @Override
   @Transactional
-  public boolean tryOpenNewCourse(CourseDTO model) {
+  public CourseDTO tryOpenNewCourse(CourseDTO model) {
     try {
       CourseEntity course = modelMapper.map(model, CourseEntity.class);
       CategoryEntity category = categoryRepository.findOneByCode(model.getCategoryCode());
@@ -83,30 +81,29 @@ public class CourseService implements ICourseService {
         MediaDTO mediaDTO = mediaService.saveThumbnail(thumbnailFile, course);
         course.setThumbnail(mediaDTO.getCode());
       }
-      courseRepository.save(course);
-      return true;
+      course = courseRepository.save(course);
+      return modelMapper.map(course, CourseDTO.class);
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      return false;
+      return null;
     }
   }
 
   @Override
-  public boolean tryCreateNewLesson(LessonDTO model) {
+  public LessonDTO tryCreateNewLesson(LessonDTO model) {
     try {
       Integer maxAvailableLessonNo = lessonRepository.findMaxNoByCourseId(model.getCourseId()) + 1;
       LessonEntity lesson = modelMapper.map(model, LessonEntity.class);
       lesson.setId(new LessonId(model.getCourseId(), maxAvailableLessonNo));
       lesson.setUploadTime(new Timestamp(System.currentTimeMillis()));
-      lesson.setEnableFreeTrial(false);
       if (lesson.getShortDescription() == null)
         lesson.setShortDescription(DefaultValueConstant.LESSON_SHORT_DESCRIPTION);
       if (lesson.getContent() == null) lesson.setContent(DefaultValueConstant.LESSON_CONTENT);
-      lessonRepository.save(lesson);
-      return true;
+      lesson = lessonRepository.save(lesson);
+      return modelMapper.map(lesson, LessonDTO.class);
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      return false;
+      return null;
     }
   }
 
@@ -143,7 +140,7 @@ public class CourseService implements ICourseService {
   }
 
   @Override
-  public List<CourseDTO> listCourse(String searchText, String filterCode, Pageable pageable, String categoryCode) {
+  public List<CourseDTO> listCourses(String searchText, String filterCode, Pageable pageable, String categoryCode) {
     List<CourseEntity> courses = new ArrayList<>();
     courses = courseFilter.filter(searchText, filterCode, pageable, categoryCode);
     return courses.stream().map(course -> {
@@ -159,6 +156,29 @@ public class CourseService implements ICourseService {
     Page<CourseEntity> courses = courseRepository.findAllByCategoryOrderByOpenTimeDesc(category,
         PageRequest.of(0, 8));
     return courses.get().map(course -> modelMapper.map(course, CourseDTO.class)).
+        collect(Collectors.toList());
+  }
+
+  @Override
+  public CourseDTO completeCourse(Long courseId) {
+    CourseEntity course = courseRepository.findById(courseId).orElse(new CourseEntity());
+    course.setStatus(CourseStatusConstant.COMPLETE);
+    return modelMapper.map(courseRepository.save(course), CourseDTO.class);
+  }
+
+  @Override
+  public LessonDTO popLesson(Long courseId) {
+    CourseEntity course = courseRepository.findById(courseId).orElse(new CourseEntity());
+    LessonEntity latestLesson = lessonRepository.findTopByCourseOrderByIdDesc(course);
+    lessonRepository.delete(latestLesson);
+    return modelMapper.map(latestLesson, LessonDTO.class);
+  }
+
+  @Override
+  public List<LessonDTO> listLessons(Long courseId) {
+    CourseEntity course = courseRepository.findById(courseId).orElse(new CourseEntity());
+    List<LessonEntity> lessons = lessonRepository.findAllByCourseOrderById(course);
+    return lessons.stream().map(lesson -> modelMapper.map(lesson, LessonDTO.class)).
         collect(Collectors.toList());
   }
 
