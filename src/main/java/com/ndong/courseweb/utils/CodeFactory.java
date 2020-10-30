@@ -1,5 +1,6 @@
 package com.ndong.courseweb.utils;
 
+import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.MediaDTO;
 import com.ndong.courseweb.entity.CourseEntity;
 import com.ndong.courseweb.entity.MediaEntity;
@@ -13,9 +14,18 @@ public class CodeFactory {
   }
 
   public static String from(CourseEntity course) {
-    String uTitle = Normalizer.normalize(course.getTitle(), Normalizer.Form.NFD);
+    return fromCourse(course.getId(), course.getTitle());
+  }
+
+  public static String from(CourseDTO course) {
+    return fromCourse(course.getId(), course.getTitle());
+  }
+
+  public static String fromCourse(Long courseId, String courseTitle) {
+    String uTitle = Normalizer.normalize(courseTitle, Normalizer.Form.NFD);
     uTitle = uTitle.replaceAll("[^\\p{ASCII}]", "");
-    uTitle += " " + course.getId();
+    uTitle = uTitle.replaceAll("['’:,/]", "");
+    uTitle += " " + courseId;
     return String.join("-", uTitle.toLowerCase().split(" "));
   }
 

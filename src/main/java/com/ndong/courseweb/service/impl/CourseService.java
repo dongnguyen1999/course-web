@@ -7,6 +7,7 @@ import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.LessonDTO;
 import com.ndong.courseweb.dto.MediaDTO;
+import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.dto.query_result.NbUserPerCourseIdDTO;
 import com.ndong.courseweb.entity.*;
 import com.ndong.courseweb.entity.composite_id.LessonId;
@@ -56,10 +57,10 @@ public class CourseService implements ICourseService {
   private PurchaseDetailRepository purchaseDetailRepository;
 
   @Autowired
-  private HttpSession session;
+  private CourseFilter courseFilter;
 
   @Autowired
-  private CourseFilter courseFilter;
+  private SessionUtils sessionUtils;
 
   @Override
   @Transactional
@@ -67,7 +68,8 @@ public class CourseService implements ICourseService {
     try {
       CourseEntity course = modelMapper.map(model, CourseEntity.class);
       CategoryEntity category = categoryRepository.findOneByCode(model.getCategoryCode());
-      course.setUser(userRepository.getOne(1L));
+      UserDTO user = sessionUtils.getUser();
+      course.setUser(userRepository.findOneByUsername(user.getUsername()));
       course.setCategory(category);
       course.setThumbnail("thumbnail");
       course.setCode("code");
@@ -75,12 +77,8 @@ public class CourseService implements ICourseService {
       course.setStatus(CourseStatusConstant.EARLY_ACCESS);
       course = courseRepository.save(course);
       course.setCode(CodeFactory.from(course));
-      MultipartFile thumbnailFile = model.getThumbnailFile();
-      if (thumbnailFile != null &&
-          !Objects.requireNonNull(thumbnailFile.getOriginalFilename()).isBlank()) {
-        MediaDTO mediaDTO = mediaService.saveThumbnail(thumbnailFile, course);
-        course.setThumbnail(mediaDTO.getCode());
-      }
+      MediaDTO mediaDTO = mediaService.saveThumbnail(model.getThumbnailFile(), course);
+      if (mediaDTO != null) course.setThumbnail(mediaDTO.getCode());
       course = courseRepository.save(course);
       return modelMapper.map(course, CourseDTO.class);
     } catch (Exception e) {
@@ -182,4 +180,34 @@ public class CourseService implements ICourseService {
         collect(Collectors.toList());
   }
 
+  @Override
+  public CourseDTO updateCourse(CourseDTO model) {
+    CourseEntity course = courseRepository.findById(model.getId()).orElse(new CourseEntity());
+    CategoryEntity category = categoryRepository.findOneByCode(model.getCategoryCode());
+    course.setCategory(category);
+    model.setThumbnail(course.getThumbnail());
+    model.setCode(CodeFactory.from(model));
+    model.setOpenTime(course.getOpenTime());
+    model.setStatus(course.getStatus());
+    model.setUserId(course.getUser().getId());
+    modelMapper.map(model, course);
+    MediaDTO mediaDTO = mediaService.saveThumbnail(model.getThumbnailFile(), course);
+    if (mediaDTO != null) course.setThumbnail(mediaDTO.getCode());
+    course = courseRepository.save(course);
+    return modelMapper.map(course, CourseDTO.class);
+  }
+
+  @Override
+  public CourseDTO deleteCourse(Long courseId) {
+    try {
+      CourseEntity course = courseRepository.findById(courseId).orElse(new CourseEntity());
+      CourseDTO dto = modelMapper.map(course, CourseDTO.class);
+      courseRepository.delete(course);
+      return dto;
+    }
+    catch (Exception e) {
+      System.out.println(e.getMessage());
+      return null;
+    }
+  }
 }

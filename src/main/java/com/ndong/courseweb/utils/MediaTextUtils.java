@@ -8,10 +8,10 @@ public class MediaTextUtils {
     return pattern.replace("${username}", username);
   }
 
-  public static String thumbnailPath(String username, String courseCode){
-    String pattern =  "/${username}/course/${courseCode}/thumbnail";
+  public static String thumbnailPath(String username, Long courseId){
+    String pattern =  "/${username}/course/${courseId}/thumbnail";
     return pattern.replace("${username}", username)
-        .replace("${courseCode}", courseCode);
+        .replace("${courseId}", courseId.toString());
   }
 
   public static String avatarCaption(Long userId){

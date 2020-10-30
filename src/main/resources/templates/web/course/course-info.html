@@ -13,7 +13,7 @@
 <div id="wrapper" class="wrapper-content">
   <div class="container pt-4">
     <!--Section: Block Content-->
-    <section class="mb-5">
+    <section class="mb-5 course-info" th:id="${course.id}">
       <div class="row">
         <div class="col-md-6 mb-4 mb-md-0">
           <div id="mdb-lightbox-ui"></div>
@@ -32,8 +32,8 @@
                                                                                th:text="${category.name}">Khoa hoc</em>
           </p>
           <p><span class="mr-1 price"><strong th:text="${course.price}">1200000 VND</strong></span></p>
-          <p class="pt-1 short-description" th:text="${course.shortDescription}">Lorem ipsum dolor sit amet consectetur
-            adipisicing elit.</p>
+          <div class="pt-1 short-description" th:utext="${course.shortDescription}">Lorem ipsum dolor sit amet consectetur
+            adipisicing elit.</div>
           <div class="table-responsive">
             <table class="table table-sm table-borderless mb-0">
               <tbody>
@@ -66,13 +66,20 @@
           </button>
           <div th:if="${user != null && user.role == 'author' && course.status != 'deleted'}"
                class="btn-group course-control mt-4" role="group" aria-label="Course filter">
-            <a href="" type="button"
+            <a th:href="'/course/' + ${course.code} + '/edit'" type="button"
                class="btn edit">Sửa thông tin<i class="fas fa-pencil-alt ml-1"></i></a>
             <button type="button" data-toggle="tooltip" title="Xóa khóa học"
-                    class="btn delete"><i class="fas fa-trash-alt ml-1"></i></button>
+                    class="btn delete delete-course-btn"><i class="fas fa-trash-alt ml-1"></i></button>
           </div>
         </div>
       </div>
+
+      <div th:replace="web/fragments/modal :: confirmModal(
+        title='Bạn có chắc muốn xóa hẳn khóa học khỏi hệ thống',
+        confirmBtnText='Xóa luôn',
+        cancelBtnText='Quay lại'
+      )"></div>
+
     </section>
     <!--Section: Block Content-->
     <hr>
@@ -177,7 +184,6 @@
             </div>
           </li>
         </ul>
-
       </section>
       <!--Section: Block Content-->
       <hr>
@@ -219,11 +225,19 @@
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script"/>
 <script type="text/javascript" th:src="@{/vendor/dateformat/date.format.js}"></script>
+<script th:src="@{/web/js/course-crud.js}"></script>
 <script>
   $('span.upload-date').each(function () {
     let timestamp = $(this).html();
     let date = new Date(timestamp);
     $(this).html(dateFormat(date, "dd/mm/yyyy"));
+  })
+  $(function () {
+    $('.delete-course-btn').click(function () {
+      showConfirmModal('Khóa học của bạn sẽ bị xóa vĩnh viễn, chỉ những người dùng đã mua mới có thể truy cập lại khóa học này<br>Thao tác này không thể khôi phục, vui lòng xác nhận', function () {
+        deleteCourse($('section.course-info').attr('id'));
+      })
+    })
   })
 </script>
 </body>

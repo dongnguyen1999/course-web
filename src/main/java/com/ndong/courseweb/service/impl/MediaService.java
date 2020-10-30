@@ -44,6 +44,7 @@ public class MediaService implements IMediaService {
 
   @Override
   public MediaDTO saveAvatar(MultipartFile file, UserEntity user) {
+    if (file == null || Objects.requireNonNull(file.getOriginalFilename()).isBlank()) return null;
     try {
       String path = MediaTextUtils.avatarPath(user.getUsername());
       MediaEntity media = new MediaEntity();
@@ -71,8 +72,9 @@ public class MediaService implements IMediaService {
 
   @Override
   public MediaDTO saveThumbnail(MultipartFile file, CourseEntity course) {
+    if (file == null || Objects.requireNonNull(file.getOriginalFilename()).isBlank()) return null;
     try {
-      String path = MediaTextUtils.thumbnailPath(course.getUser().getUsername(), course.getCode());
+      String path = MediaTextUtils.thumbnailPath(course.getUser().getUsername(), course.getId());
       MediaEntity media = new MediaEntity();
       media.setSource(storageService.store(file, path));
       media.setCode(CodeFactory.from(media));

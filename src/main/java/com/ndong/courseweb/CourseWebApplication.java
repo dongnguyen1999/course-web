@@ -15,7 +15,6 @@ public class CourseWebApplication {
     // Add general converters
     mapper.addConverter(ConverterFactory.emptyStringToNull());
     mapper.addConverter(ConverterFactory.stringToDate());
-
     return mapper;
   }
 

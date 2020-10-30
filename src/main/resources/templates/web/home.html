@@ -66,7 +66,7 @@
                 <h4 class="card-subtitle mb-2" th:text="${course.price}">5.000.000 VND</h4>
                 <!-- Text -->
                 <div class="card-detail">
-                  <p class="card-text mb-1 max-lines-3" th:text="${course.shortDescription}">Course short description</p>
+                  <div class="card-text mb-1 max-lines-3" th:utext="${course.shortDescription}">Course short description</div>
                   <div class="nb-used mb-2" th:text="${course.nbMembers} + ' Học viên'">30 Học viên</div>
                 </div>
                 <!-- Button -->

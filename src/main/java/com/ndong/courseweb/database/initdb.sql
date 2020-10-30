@@ -1,11 +1,3 @@
-insert into category(name, code) values ('Ngoại ngữ', 'ngoai-ngu');
-insert into category(name, code) values ('Tin học văn phòng', 'tin-hoc-van-phong');
-insert into category(name, code) values ('Thiết kế', 'thiet-ke');
-insert into category(name, code) values ('Kinh doanh', 'kinh doanh');
-insert into category(name, code) values ('Bán hàng', 'ban-hang');
-insert into category(name, code) values ('Công nghệ thông tin', 'cong-nghe-thong-tin');
-insert into category(name, code) values ('Âm nhạc', 'am-nhac');
-insert into category(name, code) values ('Phát triển bản thân', 'phat-trien-ban-than');
 insert into category(name, code) values ('Thiết kế và nghệ thuật', 'art-design');
 insert into category(name, code) values ('Kinh doanh', 'business');
 insert into category(name, code) values ('Khoa học máy tính', 'computer-science');

@@ -2,7 +2,8 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Thêm khóa học</title>
+  <title th:unless="${course != null}">Thêm khóa học</title>
+  <title th:if="${course != null}">Sửa khóa học</title>
   <th:block th:replace="web/fragments/general :: meta" />
   <th:block th:replace="web/fragments/general :: link" />
   <link rel="stylesheet" th:href="@{/web/css/edit-course.css}">
@@ -12,16 +13,18 @@
 <div id="wrapper" class="wrapper-content">
 <div class="container pt-4">
   <div class="card bg-light">
-    <h1 class="card-header form-title">Mở một khóa học mới</h1>
+    <h1 th:unless="${course != null}" class="card-header form-title">Mở một khóa học mới</h1>
+    <h1 th:if="${course != null}" class="card-header form-title">Cập nhật thông tin khóa học</h1>
     <div class="container-fluid p-3 p-md-5">
-      <form id="editCourseForm" action="/course/new" method="post" novalidate enctype="multipart/form-data">
+      <form id="editCourseForm" action="" method="POST" novalidate enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-4 details mb-3 h-25 d-flex justify-content-center">
             <label class="w-75" for="thumbnailInput">
               <i id="camera-icon" class="d-none fas fa-camera"></i>
               <img id="imgThumbnail" class="w-100 h-100 img-thumbnail image-preview thumbnail z-depth-1" alt="default thumbnail"
-                   th:src="@{/web/img/default-thumbnail.png}" defSrc="/web/img/default-thumbnail.png" src="" role="button"/>
-              <input id="thumbnailInput" class="hide" type="file" name="thumbnailFile">
+                   th:src="${course != null}? '/resource/' + ${course.thumbnail}: '/web/img/default-thumbnail.png'"
+                   th:defSrc="${course != null}? '/resource/' + ${course.thumbnail}: '/web/img/default-thumbnail.png'" src="" role="button"/>
+              <input id="thumbnailInput" class="hide" type="file" name="thumbnailFile" th:required="${course == null}">
               <div class="invalid-feedback"></div>
             </label>
           </div>
@@ -30,7 +33,7 @@
               <div class="form-group">
                 <label class="control-label" for="title">Tên khóa học:</label>
                 <input id="title" name="title" placeholder="Mọi người có thể tìm thấy khóa học của bạn qua tên"
-                       class="form-control input-md" required type="text">
+                       class="form-control input-md" required type="text" th:value="${course != null}? ${course.title}: ''">
                 <div class="invalid-feedback">
                   Tựa đề khóa học không được bỏ trống
                 </div>
@@ -43,8 +46,9 @@
                 <div class="col-md-8">
                   <select id="categoryCode" name="categoryCode" class="form-control custom-select w-75" required>
                     <option value="">Chọn thể loại</option>
+                    <!--/*@thymesVar id="categories" type="java.util.List"*/-->
                     <th:block th:each="category: ${categories}">
-                      <option th:value="${category.code}" th:text="${category.name}">Thể loại</option>
+                      <option th:value="${category.code}" th:selected="${(course != null) && (category.code == course.categoryCode)}" th:text="${category.name}">Thể loại</option>
                     </th:block>
                   </select>
                   <div class="invalid-feedback">
@@ -59,7 +63,7 @@
                 </div>
                 <div class="col-md-8 row m-0">
                   <input id="price" name="price" placeholder="" class="form-control w-50 price-input" value="0" required
-                         type="number" min="0" step="500">
+                         type="number" min="0" step="500" th:value="${course != null}? ${course.price}:'0'">
                   <span class="rounded price-append">VNĐ</span>
                   <div class="invalid-feedback">
                     Giá tiền không được bỏ trống và phải đúng định dạng tiền việt
@@ -68,15 +72,19 @@
               </div>
               <div class="form-group">
                 <label class="control-label" for="shortDescription">Mô tả ngắn:</label>
-                <textarea class="form-control" id="shortDescription" name="shortDescription">
+                <textarea class="form-control" id="shortDescription" name="shortDescription" th:text="${course != null}? ${course.shortDescription}: ''">
                 </textarea>
               </div>
             </div><!--form-body.-->
           </div><!--row-inner-left.-->
         </div><!--row.-->
         <div class="row justify-content-center mt-3">
-          <button type="submit" class="btn primary btn-lg">MỞ KHÓA HỌC MỚI</button>
+          <button th:unless="${course != null}" type="submit" class="btn primary btn-lg">MỞ KHÓA HỌC MỚI</button>
+          <button th:if="${course != null}" type="submit" class="btn primary btn-lg">CẬP NHẬT KHÓA HỌC</button>
         </div>
+        <label>
+          <input th:if="${course != null}" type="hidden" name="id" th:value="${course.id}">
+        </label>
       </form>
 
       <div th:replace="web/fragments/modal :: informationModal(

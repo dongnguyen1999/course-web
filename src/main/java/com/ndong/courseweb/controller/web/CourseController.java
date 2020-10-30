@@ -76,10 +76,7 @@ public class CourseController {
 
   @RequestMapping(path = "/course/new", method = RequestMethod.GET)
   public ModelAndView getNewCourseForm() {
-    ModelAndView view = new ModelAndView("/web/course/edit-course");
-    List<CategoryDTO> categories = categoryService.findAll();
-    view.addObject(SystemConstant.CATEGORY_DTO_LIST, categories);
-    return view;
+    return new ModelAndView("/web/course/edit-course");
   }
 
   @RequestMapping(path = "/course/new", method = RequestMethod.POST)
@@ -90,6 +87,22 @@ public class CourseController {
       String redirectView = "redirect:/course/" + course.getCode();
       return new ModelAndView(redirectView);
     } else view.addObject(SystemConstant.OPEN_COURSE_FAILED, true);
+    return view;
+  }
+
+  @RequestMapping(path = "/course/{courseCode}/edit", method = RequestMethod.GET)
+  public ModelAndView openNewCourse(@PathVariable String courseCode) {
+    ModelAndView view = new ModelAndView("/web/course/edit-course");
+    CourseDTO course = courseService.findOneCourse(courseCode);
+    view.addObject(SystemConstant.COURSE_DTO, course);
+    return view;
+  }
+
+  @RequestMapping(path = "/course/{courseCode}/edit", method = RequestMethod.POST)
+  public ModelAndView openNewCourse(@PathVariable String courseCode, CourseDTO courseDTO) {
+    CourseDTO course = courseService.updateCourse(courseDTO);
+    ModelAndView view = new ModelAndView("redirect:/course/" + course.getCode());
+    view.addObject(SystemConstant.COURSE_DTO, course);
     return view;
   }
 

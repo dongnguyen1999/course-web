@@ -44,10 +44,8 @@ public class UserService implements IUserService {
       newUser.setStatusCode(UserConstant.NORMAL_USER);
       newUser.setCoin(0d);
       newUser = userRepository.save(newUser);
-      MultipartFile avatarFile = model.getAvatarFile();
-      if (avatarFile != null &&
-          !Objects.requireNonNull(avatarFile.getOriginalFilename()).isBlank()) {
-        MediaDTO mediaDTO = mediaService.saveAvatar(avatarFile, newUser);
+      MediaDTO mediaDTO = mediaService.saveAvatar(model.getAvatarFile(), newUser);
+      if (mediaDTO != null) {
         newUser.setAvatar(mediaDTO.getCode());
         newUser = userRepository.save(newUser);
       }

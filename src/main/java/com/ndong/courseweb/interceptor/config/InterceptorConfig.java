@@ -35,6 +35,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
         addPathPatterns("/course/new");
 
     registry.addInterceptor(courseInterceptor)
-        .addPathPatterns("/course").addPathPatterns("/category/*");
+        .addPathPatterns("/course")
+        .addPathPatterns("/course/new")
+        .addPathPatterns("/course/*/edit")
+        .addPathPatterns("/category/*");
   }
 }

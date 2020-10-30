@@ -61,3 +61,9 @@ function useBtnCheckbox() {
     }
   })
 }
+
+function showConfirmModal(message, confirmCallback) {
+  $('#confirmDialog button.confirm').click(confirmCallback);
+  $('#confirmDialog .modal-body').html(message);
+  $('#confirmDialog').modal('show');
+}

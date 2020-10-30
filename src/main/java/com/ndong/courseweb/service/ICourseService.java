@@ -17,4 +17,6 @@ public interface ICourseService {
   CourseDTO completeCourse(Long courseId);
   LessonDTO popLesson(Long courseId);
   List<LessonDTO> listLessons(Long courseId);
+  CourseDTO updateCourse(CourseDTO model);
+  CourseDTO deleteCourse(Long courseId);
 }

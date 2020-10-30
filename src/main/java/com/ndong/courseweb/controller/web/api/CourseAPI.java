@@ -14,15 +14,22 @@ public class CourseAPI {
   @Autowired
   private ICourseService courseService;
 
-  @RequestMapping(path = "/web/api/course/complete", method = RequestMethod.PUT)
-  public ResponseEntity<CourseDTO> completeCourse(@RequestParam Long courseId) {
+  @RequestMapping(path = "/web/api/course/complete/{courseId}", method = RequestMethod.PUT)
+  public ResponseEntity<CourseDTO> completeCourse(@PathVariable Long courseId) {
     CourseDTO course = courseService.completeCourse(courseId);
     return (course != null)? new ResponseEntity<>(course, HttpStatus.OK):
         new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
-  @RequestMapping(path = "/web/api/course/pop-lesson", method = RequestMethod.DELETE)
-  public ResponseEntity<LessonDTO> popLesson(@RequestParam Long courseId) {
+  @RequestMapping(path = "/web/api/course/{courseId}", method = RequestMethod.DELETE)
+  public ResponseEntity<CourseDTO> deleteCourse(@PathVariable Long courseId) {
+    CourseDTO course = courseService.deleteCourse(courseId);
+    return (course != null)? new ResponseEntity<>(course, HttpStatus.OK):
+        new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  @RequestMapping(path = "/web/api/course/pop-lesson/{courseId}", method = RequestMethod.DELETE)
+  public ResponseEntity<LessonDTO> popLesson(@PathVariable Long courseId) {
     LessonDTO lesson = courseService.popLesson(courseId);
     return new ResponseEntity<>(lesson, HttpStatus.OK);
   }
