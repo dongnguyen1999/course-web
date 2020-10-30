@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-md-8 row m-0">
                   <input id="price" name="price" placeholder="" class="form-control w-50 price-input" value="0" required
-                         type="number" min="0" step="500" th:value="${course != null}? ${course.price}:'0'">
+                         type="number" min="0" step="500" max="999999999" th:value="${course != null}? ${course.price}:'0'">
                   <span class="rounded price-append">VNĐ</span>
                   <div class="invalid-feedback">
                     Giá tiền không được bỏ trống và phải đúng định dạng tiền việt

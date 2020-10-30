@@ -10,5 +10,6 @@ public interface IMediaService {
   MediaDTO saveAvatar(MultipartFile file);
   MediaDTO saveThumbnail(MultipartFile file);
   MediaDTO saveThumbnail(MultipartFile file, CourseEntity course);
+  Boolean cleanCourseMedia(CourseEntity course);
   byte[] loadResource(String code);
 }

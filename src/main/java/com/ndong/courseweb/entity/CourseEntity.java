@@ -26,7 +26,7 @@ public class CourseEntity {
   @Column(name = "short_description", nullable = true, columnDefinition = "varchar(512)")
   private String shortDescription;
 
-  @Column(name = "price", nullable = false, columnDefinition = "float(9,1)")
+  @Column(name = "price", nullable = false, columnDefinition = "float(12,1)")
   private Float price;
 
   @Column(name = "open_time", nullable = false, columnDefinition = "timestamp")
@@ -42,9 +42,16 @@ public class CourseEntity {
   @OneToMany(mappedBy = "course")
   private final Set<PurchaseDetailEntity> purchaseDetailSet = new HashSet<>();
 
+  @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+  private final Set<LessonEntity> lessonSet = new HashSet<>();
+
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
   private UserEntity user;
+
+  public Set<LessonEntity> getLessonSet() {
+    return lessonSet;
+  }
 
   public UserEntity getUser() {
     return user;

@@ -98,6 +98,9 @@ public class CourseService implements ICourseService {
         lesson.setShortDescription(DefaultValueConstant.LESSON_SHORT_DESCRIPTION);
       if (lesson.getContent() == null) lesson.setContent(DefaultValueConstant.LESSON_CONTENT);
       lesson = lessonRepository.save(lesson);
+      CourseEntity course = courseRepository.findById(model.getCourseId()).orElse(new CourseEntity());
+      course.setStatus(CourseStatusConstant.PROGRESSING);
+      courseRepository.save(course);
       return modelMapper.map(lesson, LessonDTO.class);
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -201,8 +204,13 @@ public class CourseService implements ICourseService {
   public CourseDTO deleteCourse(Long courseId) {
     try {
       CourseEntity course = courseRepository.findById(courseId).orElse(new CourseEntity());
-      CourseDTO dto = modelMapper.map(course, CourseDTO.class);
-      courseRepository.delete(course);
+      course.setStatus(CourseStatusConstant.DELETED);
+      CourseDTO dto = modelMapper.map(courseRepository.save(course), CourseDTO.class);
+      Set<PurchaseDetailEntity> members = course.getPurchaseDetailSet();
+      if (members.size() == 0) {
+        mediaService.cleanCourseMedia(course);
+        courseRepository.delete(course);
+      }
       return dto;
     }
     catch (Exception e) {

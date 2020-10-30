@@ -89,6 +89,18 @@ public class MediaService implements IMediaService {
   }
 
   @Override
+  public Boolean cleanCourseMedia(CourseEntity course) {
+    try {
+      UserEntity author = course.getUser();
+      String path = MediaTextUtils.courseDirectory(author.getUsername(), course.getId());
+      return storageService.delete(path);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+  @Override
   public byte[] loadResource(String code) {
     MediaEntity media = mediaRepository.findOneByCode(code);
     if (media.getMediaType().getCode().contains("image")) {

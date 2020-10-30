@@ -42,6 +42,7 @@
                 <td class="p-0">
                   <span class="badge badge-warning" th:if="${course.status == 'early-access'}">Truy cập sớm</span>
                   <span class="badge badge-danger" th:if="${course.status == 'deleted'}">Ngừng kinh doanh</span>
+                  <span class="badge badge-info" th:if="${course.status == 'progressing'}">Đang tiến hành</span>
                 </td>
               </tr>
               <tr class="author" th:if="${user != null && user.role != 'author'}">

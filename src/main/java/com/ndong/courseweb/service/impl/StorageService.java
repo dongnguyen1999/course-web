@@ -1,6 +1,7 @@
 package com.ndong.courseweb.service.impl;
 
 import com.ndong.courseweb.service.IStorageService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 @Service
+
 public class StorageService implements IStorageService {
 
   private static final String STORAGE_LOCATION = "/data/upload";
@@ -34,6 +36,16 @@ public class StorageService implements IStorageService {
       return dest.getPath();
     }
     return null;
+  }
+
+  @Override
+  public Boolean delete(String path) throws IOException {
+    File dir = new File(STORAGE_LOCATION + File.separator + path);
+    if (dir.exists()) {
+      FileUtils.deleteDirectory(dir);
+      return true;
+    }
+    return false;
   }
 
   @Override

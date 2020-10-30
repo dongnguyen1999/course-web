@@ -14,6 +14,12 @@ public class MediaTextUtils {
         .replace("${courseId}", courseId.toString());
   }
 
+  public static String courseDirectory(String username, Long courseId) {
+    String pattern =  "/${username}/course/${courseId}";
+    return pattern.replace("${username}", username)
+        .replace("${courseId}", courseId.toString());
+  }
+
   public static String avatarCaption(Long userId){
     String pattern = "@Avatar(${userId})";
     return pattern.replace("${userId}", userId.toString());

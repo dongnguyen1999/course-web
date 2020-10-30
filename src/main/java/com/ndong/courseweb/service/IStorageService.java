@@ -8,5 +8,6 @@ import java.nio.file.Path;
 
 public interface IStorageService {
   String store(MultipartFile file, String path) throws IOException;
+  Boolean delete(String path) throws IOException;
   Resource load(String filename);
 }
