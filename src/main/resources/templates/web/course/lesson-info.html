@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="'Bài ' + ${lesson.idNo} + ': ' + ${lesson.title}">Bài học</title>
+  <th:block th:replace="web/fragments/general :: meta"/>
+  <th:block th:replace="web/fragments/general :: link"/>
+  <link rel="stylesheet" th:href="@{/web/css/course-info.css}">
+</head>
+<body>
+<div th:replace="web/fragments/general :: header"></div>
+<!--/*@thymesVar id="user" type="com.ndong.courseweb.dto.UserDTO"*/-->
+<div id="wrapper" class="wrapper-content">
+  <h1 th:text="'Bài ' + ${lesson.idNo} + ': ' + ${lesson.title}">Bài 1: Bài học</h1>
+  <h3 th:utext="${lesson.shortDescription}">Mô tả ngắn bài học</h3>
+  <div th:utext="${lesson.content}">Nội dung bài học</div>
+
+</div><!--wrapper content.-->
+
+<div th:replace="web/fragments/general :: footer"></div>
+<th:block th:replace="web/fragments/general :: script"/>
+</body>
+</html>

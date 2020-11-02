@@ -1,5 +1,6 @@
 package com.ndong.courseweb.filter.impl;
 
+import com.ndong.courseweb.constant.CourseStatusConstant;
 import com.ndong.courseweb.constant.FilterCodeConstant;
 import com.ndong.courseweb.dto.query_result.NbUserPerCourseIdDTO;
 import com.ndong.courseweb.entity.CategoryEntity;
@@ -57,30 +58,37 @@ public class CourseFilter implements IFilter<CourseEntity> {
     if (filterCode == null || filterCode.equals(FilterCodeConstant.ALL)) {
       if (categoryCode != null) {
         CategoryEntity category = categoryRepository.findOneByCode(categoryCode);
-        if (searchText != null) pages = courseRepository.findByCategoryAndTitleContaining(category, searchText, pageable);
-        else pages = courseRepository.findAllByCategory(category, pageable);
+        if (searchText != null) pages = courseRepository.
+            findByCategoryAndTitleContainingAndStatusNotOrderByOpenTimeDesc
+            (category, searchText, CourseStatusConstant.DELETED, pageable);
+        else pages = courseRepository.findAllByCategoryAndStatusNotOrderByOpenTimeDesc(category, CourseStatusConstant.DELETED, pageable);
       }
       else {
-        if (searchText != null) pages = courseRepository.findByTitleContaining(searchText, pageable);
-        else pages = courseRepository.findAll(pageable);
+        if (searchText != null) pages = courseRepository.findByTitleContainingAndStatusNotOrderByOpenTimeDesc(searchText, CourseStatusConstant.DELETED, pageable);
+        else pages = courseRepository.findByStatusNotOrderByOpenTimeDesc(CourseStatusConstant.DELETED, pageable);
       }
     }
     else switch (filterCode) {
       case FilterCodeConstant.CHEAP:
         if (categoryCode != null) {
           CategoryEntity category = categoryRepository.findOneByCode(categoryCode);
-          if (searchText != null) pages = courseRepository.findByCategoryAndTitleContaining(category, searchText,
+          if (searchText != null) pages = courseRepository.
+              findByCategoryAndTitleContainingAndStatusNot
+              (category, searchText, CourseStatusConstant.DELETED,
               PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
                   Sort.by("price").ascending()));
-          else pages = courseRepository.findAllByCategory(category,
+          else pages = courseRepository.findAllByCategoryAndStatusNot
+              (category, CourseStatusConstant.DELETED,
               PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
                   Sort.by("price").ascending()));
         }
         else {
-          if (searchText != null) pages = courseRepository.findByTitleContaining(searchText,
+          if (searchText != null) pages = courseRepository.
+              findByTitleContainingAndStatusNot
+                  (searchText, CourseStatusConstant.DELETED,
               PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
                   Sort.by("price").ascending()));
-          else pages = courseRepository.findAll(
+          else pages = courseRepository.findByStatusNot(CourseStatusConstant.DELETED,
               PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
                   Sort.by("price").ascending()));
         }
@@ -91,6 +99,7 @@ public class CourseFilter implements IFilter<CourseEntity> {
             map(NbUserPerCourseIdDTO::getCourseId).collect(Collectors.toList());
         courses = courseIds.stream().
             map(courseId -> courseRepository.findById(courseId).orElse(new CourseEntity())).
+            filter(course -> !course.getStatus().equals(CourseStatusConstant.DELETED)).
             collect(Collectors.toList());
         if (categoryCode != null) {
           courses = courses.stream().filter(course -> course.getCategory().getCode().equals(categoryCode)).
@@ -116,6 +125,7 @@ public class CourseFilter implements IFilter<CourseEntity> {
         }
         courses = latelyCourseIds.stream().
             map(courseId -> courseRepository.findById(courseId).orElse(new CourseEntity())).
+            filter(course -> !course.getStatus().equals(CourseStatusConstant.DELETED)).
             collect(Collectors.toList());
         if (searchText != null) {
           courses = courses.stream().
@@ -137,7 +147,9 @@ public class CourseFilter implements IFilter<CourseEntity> {
 
   @Override
   public Integer getTotalPages() {
-    return Math.toIntExact(totalElement / pageable.getPageSize()) + 1;
+    int totalPages = Math.toIntExact(totalElement / pageable.getPageSize());
+    if (pageable.getPageSize() * totalPages < totalElement) totalPages = totalPages + 1;
+    return  totalPages;
   }
 
   @Override

@@ -91,7 +91,7 @@ public class CourseController {
   }
 
   @RequestMapping(path = "/course/{courseCode}/edit", method = RequestMethod.GET)
-  public ModelAndView openNewCourse(@PathVariable String courseCode) {
+  public ModelAndView getEditCourseView(@PathVariable String courseCode) {
     ModelAndView view = new ModelAndView("/web/course/edit-course");
     CourseDTO course = courseService.findOneCourse(courseCode);
     view.addObject(SystemConstant.COURSE_DTO, course);
@@ -99,7 +99,7 @@ public class CourseController {
   }
 
   @RequestMapping(path = "/course/{courseCode}/edit", method = RequestMethod.POST)
-  public ModelAndView openNewCourse(@PathVariable String courseCode, CourseDTO courseDTO) {
+  public ModelAndView editCourse(@PathVariable String courseCode, CourseDTO courseDTO) {
     CourseDTO course = courseService.updateCourse(courseDTO);
     ModelAndView view = new ModelAndView("redirect:/course/" + course.getCode());
     view.addObject(SystemConstant.COURSE_DTO, course);
@@ -127,6 +127,32 @@ public class CourseController {
     return view;
   }
 
+  @RequestMapping(path = "/course/{courseCode}/lesson-{lessonNo}", method = RequestMethod.GET)
+  public ModelAndView getLessonDetail(@PathVariable String courseCode, @PathVariable Integer lessonNo) {
+    ModelAndView view = new ModelAndView("/web/course/lesson-info");
+    LessonDTO lesson = courseService.findOneLesson(courseCode, lessonNo);
+    view.addObject(SystemConstant.LESSON_DTO, lesson);
+    return view;
+  }
+
+  @RequestMapping(path = "/course/{courseCode}/lesson-{lessonNo}/edit", method = RequestMethod.GET)
+  public ModelAndView getEditLessonView(@PathVariable String courseCode, @PathVariable Integer lessonNo) {
+    ModelAndView view = new ModelAndView("/web/course/edit-lesson");
+    CourseDTO course = courseService.findOneCourse(courseCode);
+    LessonDTO lesson = courseService.findOneLesson(course, lessonNo);
+    view.addObject(SystemConstant.COURSE_DTO, course);
+    view.addObject(SystemConstant.LESSON_DTO, lesson);
+    return view;
+  }
+
+  @RequestMapping(path = "/course/{courseCode}/lesson-{lessonNo}/edit", method = RequestMethod.POST)
+  public ModelAndView editLesson(@PathVariable String courseCode, @PathVariable Integer lessonNo, LessonDTO lessonDTO) {
+    LessonDTO lesson = courseService.updateLesson(lessonDTO);
+    ModelAndView view = new ModelAndView("redirect:/course/" + courseCode);
+    view.addObject(SystemConstant.COURSE_DTO, lesson);
+    return view;
+  }
+
   @RequestMapping(path = "/course/{courseCode}", method = RequestMethod.GET)
   public ModelAndView getCourseDetail(@PathVariable String courseCode, HttpSession session) {
     ModelAndView view = new ModelAndView("/web/course/course-info");
@@ -134,7 +160,7 @@ public class CourseController {
     List<LessonDTO> lessons = courseService.listLessons(course.getId());
     CategoryDTO category = categoryService.findByCode(course.getCategoryCode());
     UserDTO author = userService.findOneUser(course.getUserId());
-    List<CourseDTO> relatedCourses = courseService.listRelatedCourses(category.getCode());
+    List<CourseDTO> relatedCourses = courseService.listRelatedCourses(course);
     sessionUtils.pushCourse(course.getId());
     UserDTO user = sessionUtils.getUser();
     if (user != null) user = userService.

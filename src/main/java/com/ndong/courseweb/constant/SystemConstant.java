@@ -6,6 +6,7 @@ public class SystemConstant {
   public static final String CREATE_LESSON_FAILED = "createLessonFailed";
   public static final String LOGIN_FAILED = "loginFailed";
   public static final String USER_DTO = "user";
+  public static final String LESSON_DTO = "lesson";
   public static final String COURSE_AUTHOR_DTO = "author";
   public static final String COURSE_DTO = "course";
   public static final String CATEGORY_DTO = "category";

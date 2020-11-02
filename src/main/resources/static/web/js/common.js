@@ -62,8 +62,17 @@ function useBtnCheckbox() {
   })
 }
 
-function showConfirmModal(message, confirmCallback) {
-  $('#confirmDialog button.confirm').click(confirmCallback);
+function showConfirmModal(title, message, confirmCallback, confirmBtnText) {
+  let confirmBtn = $('#confirmDialog button.confirm');
+  confirmBtn.click(confirmCallback);
+  if (confirmBtnText) confirmBtn.html(confirmBtnText);
+  $('#confirmDialog .modal-title').html(title);
   $('#confirmDialog .modal-body').html(message);
   $('#confirmDialog').modal('show');
+}
+
+function showInformationModal(title, message) {
+  $('#messageDialog .modal-title').html(title);
+  $('#messageDialog .modal-body').html(message);
+  $('#messageDialog').modal('show');
 }

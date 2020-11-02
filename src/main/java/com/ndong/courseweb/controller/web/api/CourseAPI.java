@@ -31,7 +31,8 @@ public class CourseAPI {
   @RequestMapping(path = "/web/api/course/pop-lesson/{courseId}", method = RequestMethod.DELETE)
   public ResponseEntity<LessonDTO> popLesson(@PathVariable Long courseId) {
     LessonDTO lesson = courseService.popLesson(courseId);
-    return new ResponseEntity<>(lesson, HttpStatus.OK);
+    return (lesson != null)? new ResponseEntity<>(lesson, HttpStatus.OK):
+        new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
 

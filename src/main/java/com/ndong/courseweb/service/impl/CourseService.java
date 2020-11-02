@@ -127,6 +127,24 @@ public class CourseService implements ICourseService {
   }
 
   @Override
+  public LessonDTO findOneLesson(String courseCode, Integer lessonNo) {
+    CourseEntity course = courseRepository.findOneByCode(courseCode);
+    return findOneLesson(course.getId(), lessonNo);
+  }
+
+  @Override
+  public LessonDTO findOneLesson(CourseDTO course, Integer lessonNo) {
+    return findOneLesson(course.getId(), lessonNo);
+  }
+
+  @Override
+  public LessonDTO findOneLesson(Long courseId, Integer lessonNo) {
+    LessonId id = new LessonId(courseId, lessonNo);
+    LessonEntity lesson = lessonRepository.findById(id).orElse(new LessonEntity());
+    return modelMapper.map(lesson, LessonDTO.class);
+  }
+
+  @Override
   public List<CourseDTO> listTopPopularCourses(Integer limit) {
     List<NbUserPerCourseIdDTO> nbUserPerCourse = purchaseDetailRepository.countNbUserPerCourseId();
     if (limit == null) limit = SystemConstant.DEFAULT_LIMIT_ITEM;
@@ -152,11 +170,13 @@ public class CourseService implements ICourseService {
   }
 
   @Override
-  public List<CourseDTO> listRelatedCourses(String categoryCode) {
-    CategoryEntity category = categoryRepository.findOneByCode(categoryCode);
-    Page<CourseEntity> courses = courseRepository.findAllByCategoryOrderByOpenTimeDesc(category,
+  public List<CourseDTO> listRelatedCourses(CourseDTO course) {
+    CategoryEntity category = categoryRepository.findOneByCode(course.getCategoryCode());
+    Page<CourseEntity> courses = courseRepository.
+        findAllByCategoryAndIdNotAndStatusNotOrderByOpenTimeDesc
+        (category, course.getId(), CourseStatusConstant.DELETED,
         PageRequest.of(0, 8));
-    return courses.get().map(course -> modelMapper.map(course, CourseDTO.class)).
+    return courses.get().map(element -> modelMapper.map(element, CourseDTO.class)).
         collect(Collectors.toList());
   }
 
@@ -171,6 +191,7 @@ public class CourseService implements ICourseService {
   public LessonDTO popLesson(Long courseId) {
     CourseEntity course = courseRepository.findById(courseId).orElse(new CourseEntity());
     LessonEntity latestLesson = lessonRepository.findTopByCourseOrderByIdDesc(course);
+    if (latestLesson == null) return null;
     lessonRepository.delete(latestLesson);
     return modelMapper.map(latestLesson, LessonDTO.class);
   }
@@ -198,6 +219,16 @@ public class CourseService implements ICourseService {
     if (mediaDTO != null) course.setThumbnail(mediaDTO.getCode());
     course = courseRepository.save(course);
     return modelMapper.map(course, CourseDTO.class);
+  }
+
+  @Override
+  public LessonDTO updateLesson(LessonDTO model) {
+    LessonId id = new LessonId(model.getCourseId(), model.getIdNo());
+    LessonEntity lesson = lessonRepository.findById(id).orElse(new LessonEntity());
+    model.setUploadTime(lesson.getUploadTime());
+    modelMapper.map(model, lesson);
+    lesson = lessonRepository.save(lesson);
+    return modelMapper.map(lesson, LessonDTO.class);
   }
 
   @Override
