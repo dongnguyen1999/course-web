@@ -1,7 +1,6 @@
 package com.ndong.courseweb.controller.admin.api;
 
 import com.ndong.courseweb.dto.CategoryDTO;
-import com.ndong.courseweb.dto.MediaTypeDTO;
 import com.ndong.courseweb.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,15 +18,15 @@ public class CategoryAPI {
   @RequestMapping(path = "/admin/api/category", method = RequestMethod.PUT)
   public ResponseEntity<CategoryDTO> updateCategory(@RequestBody CategoryDTO categoryDTO) {
     CategoryDTO category = categoryService.updateCategory(categoryDTO);
-    return (category != null)? new ResponseEntity<>(category, HttpStatus.OK):
-        new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    return (category != null) ? new ResponseEntity<>(category, HttpStatus.OK)
+        : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @RequestMapping(path = "/admin/api/category", method = RequestMethod.DELETE)
-  public ResponseEntity<List<CategoryDTO>> deleteCategory(@RequestBody Long[] ids){
+  public ResponseEntity<List<CategoryDTO>> deleteCategory(@RequestBody Long[] ids) {
     List<CategoryDTO> mediaTypes = categoryService.deleteCategories(ids);
-    return (mediaTypes != null)? new ResponseEntity<>(mediaTypes, HttpStatus.OK):
-        new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    return (mediaTypes != null) ? new ResponseEntity<>(mediaTypes, HttpStatus.OK)
+        : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @RequestMapping(path = "/admin/api/category", method = RequestMethod.POST)
@@ -38,7 +37,7 @@ public class CategoryAPI {
   @RequestMapping(path = "/admin/api/category", method = RequestMethod.GET)
   public ResponseEntity<CategoryDTO> getCategoryInfo(@RequestParam String code) {
     CategoryDTO category = categoryService.findByCode(code);
-    return (category != null)? new ResponseEntity<>(category, HttpStatus.OK):
-        new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    return (category != null) ? new ResponseEntity<>(category, HttpStatus.OK)
+        : new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 }

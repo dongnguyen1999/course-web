@@ -1,14 +1,11 @@
 package com.ndong.courseweb.interceptor;
 
-import com.ndong.courseweb.constant.SystemConstant;
-import com.ndong.courseweb.dto.UserDTO;
-import com.ndong.courseweb.utils.SessionUtils;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.ndong.courseweb.constant.SystemConstant;
+import com.ndong.courseweb.dto.UserDTO;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
 public class RequireLoginInterceptor implements HandlerInterceptor {

@@ -1,6 +1,5 @@
 package com.ndong.courseweb.interceptor.config;
 
-import com.mysql.cj.log.Log;
 import com.ndong.courseweb.interceptor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

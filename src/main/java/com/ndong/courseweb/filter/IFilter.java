@@ -1,10 +1,7 @@
 package com.ndong.courseweb.filter;
 
-import com.ndong.courseweb.entity.CourseEntity;
-import com.ndong.courseweb.service.ICourseService;
-import org.springframework.data.domain.Pageable;
-
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 
 public interface IFilter<T> {
   void clear();

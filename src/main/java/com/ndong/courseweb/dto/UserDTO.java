@@ -1,11 +1,14 @@
 package com.ndong.courseweb.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.Serializable;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class UserDTO extends AbstractDTO implements Serializable {
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private String username;
   private String password;
   private String fullName;

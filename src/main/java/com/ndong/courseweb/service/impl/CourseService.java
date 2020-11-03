@@ -1,18 +1,31 @@
 package com.ndong.courseweb.service.impl;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.ndong.courseweb.constant.CourseStatusConstant;
 import com.ndong.courseweb.constant.DefaultValueConstant;
-import com.ndong.courseweb.constant.FilterCodeConstant;
 import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.LessonDTO;
 import com.ndong.courseweb.dto.MediaDTO;
 import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.dto.query_result.NbUserPerCourseIdDTO;
-import com.ndong.courseweb.entity.*;
+import com.ndong.courseweb.entity.CategoryEntity;
+import com.ndong.courseweb.entity.CourseEntity;
+import com.ndong.courseweb.entity.LessonEntity;
+import com.ndong.courseweb.entity.PurchaseDetailEntity;
 import com.ndong.courseweb.entity.composite_id.LessonId;
 import com.ndong.courseweb.filter.impl.CourseFilter;
-import com.ndong.courseweb.repository.*;
+import com.ndong.courseweb.repository.CategoryRepository;
+import com.ndong.courseweb.repository.CourseRepository;
+import com.ndong.courseweb.repository.LessonRepository;
+import com.ndong.courseweb.repository.PurchaseDetailRepository;
+import com.ndong.courseweb.repository.UserRepository;
 import com.ndong.courseweb.service.ICourseService;
 import com.ndong.courseweb.service.IMediaService;
 import com.ndong.courseweb.utils.CodeFactory;
@@ -22,15 +35,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class CourseService implements ICourseService {

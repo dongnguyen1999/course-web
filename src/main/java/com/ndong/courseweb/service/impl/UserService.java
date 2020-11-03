@@ -1,7 +1,10 @@
 package com.ndong.courseweb.service.impl;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.ndong.courseweb.constant.UserConstant;
-import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.MediaDTO;
 import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.entity.CourseEntity;
@@ -9,18 +12,11 @@ import com.ndong.courseweb.entity.PurchaseDetailEntity;
 import com.ndong.courseweb.entity.UserEntity;
 import com.ndong.courseweb.repository.CourseRepository;
 import com.ndong.courseweb.repository.UserRepository;
-import com.ndong.courseweb.service.ICourseService;
 import com.ndong.courseweb.service.IMediaService;
 import com.ndong.courseweb.service.IUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {

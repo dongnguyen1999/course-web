@@ -1,5 +1,9 @@
 package com.ndong.courseweb.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import com.ndong.courseweb.dto.CategoryDTO;
 import com.ndong.courseweb.entity.CategoryEntity;
 import com.ndong.courseweb.repository.CategoryRepository;
@@ -7,12 +11,6 @@ import com.ndong.courseweb.service.ICategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoryService implements ICategoryService {

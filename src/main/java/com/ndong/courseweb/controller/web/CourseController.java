@@ -1,7 +1,15 @@
 package com.ndong.courseweb.controller.web;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import com.ndong.courseweb.constant.SystemConstant;
-import com.ndong.courseweb.dto.*;
+import com.ndong.courseweb.dto.AbstractDTO;
+import com.ndong.courseweb.dto.CategoryDTO;
+import com.ndong.courseweb.dto.CourseDTO;
+import com.ndong.courseweb.dto.LessonDTO;
+import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.entity.CourseEntity;
 import com.ndong.courseweb.filter.IFilter;
 import com.ndong.courseweb.service.ICategoryService;
@@ -10,19 +18,11 @@ import com.ndong.courseweb.service.IUserService;
 import com.ndong.courseweb.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class CourseController {
@@ -43,12 +43,11 @@ public class CourseController {
   private SessionUtils sessionUtils;
 
   @RequestMapping(path = "/course", method = RequestMethod.GET)
-  public ModelAndView getCourseList(AbstractDTO getParams){
+  public ModelAndView getCourseList(AbstractDTO getParams) {
     ModelAndView view = new ModelAndView("/web/course/course-list");
-    int page = (getParams.getPage() != null)? getParams.getPage() - 1: 0;
-    int limit = (getParams.getLimit() != null)? getParams.getLimit(): SystemConstant.COURSE_LIMIT_ITEM;
-    List<CourseDTO> courses = courseService.listCourses(
-        getParams.getSearch(), getParams.getFilter(),
+    int page = (getParams.getPage() != null) ? getParams.getPage() - 1 : 0;
+    int limit = (getParams.getLimit() != null) ? getParams.getLimit() : SystemConstant.COURSE_LIMIT_ITEM;
+    List<CourseDTO> courses = courseService.listCourses(getParams.getSearch(), getParams.getFilter(),
         PageRequest.of(page, limit), null);
     getParams.setPage(page);
     getParams.setTotalPages(filter.getTotalPages());
@@ -58,12 +57,11 @@ public class CourseController {
   }
 
   @RequestMapping(path = "/category/{categoryCode}", method = RequestMethod.GET)
-  public ModelAndView getCourseListWithCategory(AbstractDTO getParams, @PathVariable String categoryCode){
+  public ModelAndView getCourseListWithCategory(AbstractDTO getParams, @PathVariable String categoryCode) {
     ModelAndView view = new ModelAndView("/web/course/course-list");
-    int page = (getParams.getPage() != null)? getParams.getPage() - 1: 0;
-    int limit = (getParams.getLimit() != null)? getParams.getLimit(): SystemConstant.COURSE_LIMIT_ITEM;
-    List<CourseDTO> courses = courseService.listCourses(
-        getParams.getSearch(), getParams.getFilter(),
+    int page = (getParams.getPage() != null) ? getParams.getPage() - 1 : 0;
+    int limit = (getParams.getLimit() != null) ? getParams.getLimit() : SystemConstant.COURSE_LIMIT_ITEM;
+    List<CourseDTO> courses = courseService.listCourses(getParams.getSearch(), getParams.getFilter(),
         PageRequest.of(page, limit), categoryCode);
     getParams.setPage(page);
     getParams.setTotalPages(filter.getTotalPages());
@@ -86,7 +84,8 @@ public class CourseController {
     if (course != null) {
       String redirectView = "redirect:/course/" + course.getCode();
       return new ModelAndView(redirectView);
-    } else view.addObject(SystemConstant.OPEN_COURSE_FAILED, true);
+    } else
+      view.addObject(SystemConstant.OPEN_COURSE_FAILED, true);
     return view;
   }
 
@@ -123,7 +122,8 @@ public class CourseController {
     if (lesson != null) {
       String redirectView = "redirect:/course/" + course.getCode();
       return new ModelAndView(redirectView);
-    } else view.addObject(SystemConstant.CREATE_LESSON_FAILED, true);
+    } else
+      view.addObject(SystemConstant.CREATE_LESSON_FAILED, true);
     return view;
   }
 
@@ -163,8 +163,8 @@ public class CourseController {
     List<CourseDTO> relatedCourses = courseService.listRelatedCourses(course);
     sessionUtils.pushCourse(course.getId());
     UserDTO user = sessionUtils.getUser();
-    if (user != null) user = userService.
-        findPermissionOnCourse(user.getUsername(), courseCode);
+    if (user != null)
+      user = userService.findPermissionOnCourse(user.getUsername(), courseCode);
     view.addObject(SystemConstant.USER_DTO, user);
     view.addObject(SystemConstant.COURSE_DTO, course);
     view.addObject(SystemConstant.CATEGORY_DTO, category);

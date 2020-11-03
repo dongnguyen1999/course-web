@@ -2,11 +2,15 @@ package com.ndong.courseweb.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class CourseDTO extends AbstractDTO implements Serializable {
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
+
   private String title;
 
   private String thumbnail;
@@ -118,7 +122,6 @@ public class CourseDTO extends AbstractDTO implements Serializable {
   public void setNextAvailableLessonNo(Integer nextAvailableLessonNo) {
     this.nextAvailableLessonNo = nextAvailableLessonNo;
   }
-
 
   public MultipartFile getThumbnailFile() {
     return thumbnailFile;

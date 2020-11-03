@@ -1,18 +1,17 @@
 package com.ndong.courseweb.controller.admin;
 
+import java.util.List;
+
 import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.dto.CategoryDTO;
 import com.ndong.courseweb.dto.MediaTypeDTO;
 import com.ndong.courseweb.service.ICategoryService;
 import com.ndong.courseweb.service.IMediaTypeService;
-import com.ndong.courseweb.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 public class ManagerPageController {

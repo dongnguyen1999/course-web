@@ -1,17 +1,15 @@
 package com.ndong.courseweb.interceptor;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.dto.CategoryDTO;
 import com.ndong.courseweb.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Component
 public class CourseInterceptor implements HandlerInterceptor {

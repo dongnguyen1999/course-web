@@ -1,11 +1,11 @@
 package com.ndong.courseweb.service;
 
-import com.ndong.courseweb.dto.CategoryDTO;
+import java.util.List;
+
 import com.ndong.courseweb.dto.MediaTypeDTO;
 import com.ndong.courseweb.entity.MediaTypeEntity;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface IMediaTypeService {
   List<MediaTypeDTO> findAll();

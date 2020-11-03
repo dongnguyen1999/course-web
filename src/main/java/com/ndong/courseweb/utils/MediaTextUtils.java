@@ -1,7 +1,5 @@
 package com.ndong.courseweb.utils;
 
-import java.util.Objects;
-
 public class MediaTextUtils {
   public static String avatarPath(String username){
     String pattern =  "/${username}/avatar";

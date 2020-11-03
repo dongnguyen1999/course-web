@@ -1,7 +1,5 @@
 package com.ndong.courseweb.dto.query_result;
 
-import java.util.List;
-
 public class NbUserPerCourseIdDTO {
   private Long courseId;
   private Long numberUser;

@@ -1,19 +1,16 @@
 package com.ndong.courseweb.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.ndong.courseweb.service.IStorageService;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 
 @Service
 

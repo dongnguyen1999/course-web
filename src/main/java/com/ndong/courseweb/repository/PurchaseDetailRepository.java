@@ -1,13 +1,12 @@
 package com.ndong.courseweb.repository;
 
+import java.util.List;
+
 import com.ndong.courseweb.dto.query_result.NbUserPerCourseIdDTO;
 import com.ndong.courseweb.entity.PurchaseDetailEntity;
 import com.ndong.courseweb.entity.composite_id.PurchaseDetailId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.awt.print.Pageable;
-import java.util.List;
 
 public interface PurchaseDetailRepository extends JpaRepository<PurchaseDetailEntity, PurchaseDetailId> {
 

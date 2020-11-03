@@ -1,16 +1,15 @@
 package com.ndong.courseweb.dto;
 
-import com.ndong.courseweb.entity.LessonEntity;
-import com.ndong.courseweb.entity.MediaTypeEntity;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MediaDTO extends AbstractDTO implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
 
   private String caption;
 

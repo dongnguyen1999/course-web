@@ -1,13 +1,13 @@
 package com.ndong.courseweb.service.impl;
 
+import java.io.IOException;
+import java.util.Objects;
+
 import com.ndong.courseweb.dto.MediaDTO;
-import com.ndong.courseweb.dto.MediaTypeDTO;
 import com.ndong.courseweb.entity.CourseEntity;
 import com.ndong.courseweb.entity.MediaEntity;
-import com.ndong.courseweb.entity.MediaTypeEntity;
 import com.ndong.courseweb.entity.UserEntity;
 import com.ndong.courseweb.repository.MediaRepository;
-import com.ndong.courseweb.repository.MediaTypeRepository;
 import com.ndong.courseweb.service.IMediaService;
 import com.ndong.courseweb.service.IMediaTypeService;
 import com.ndong.courseweb.service.IStorageService;
@@ -20,17 +20,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Objects;
-
 @Service
 public class MediaService implements IMediaService {
 
   @Autowired
   private IStorageService storageService;
-
-  @Autowired
-  private MediaTypeRepository mediaTypeRepository;
 
   @Autowired
   private IMediaTypeService mediaTypeService;

@@ -1,22 +1,20 @@
 package com.ndong.courseweb.service.impl;
 
-import com.ndong.courseweb.dto.CategoryDTO;
-import com.ndong.courseweb.dto.MediaTypeDTO;
-import com.ndong.courseweb.entity.CategoryEntity;
-import com.ndong.courseweb.entity.MediaTypeEntity;
-import com.ndong.courseweb.repository.MediaTypeRepository;
-import com.ndong.courseweb.service.IMediaTypeService;
-import com.ndong.courseweb.utils.MediaTextUtils;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import com.ndong.courseweb.dto.MediaTypeDTO;
+import com.ndong.courseweb.entity.MediaTypeEntity;
+import com.ndong.courseweb.repository.MediaTypeRepository;
+import com.ndong.courseweb.service.IMediaTypeService;
+import com.ndong.courseweb.utils.MediaTextUtils;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class MediaTypeService implements IMediaTypeService {

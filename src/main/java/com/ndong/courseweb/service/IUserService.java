@@ -1,8 +1,6 @@
 package com.ndong.courseweb.service;
 
-import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.UserDTO;
-import com.ndong.courseweb.entity.UserEntity;
 
 public interface IUserService {
   UserDTO tryRegisterAccount(UserDTO model);

@@ -8,6 +8,11 @@ import java.util.Objects;
 @Embeddable
 public class PurchaseDetailId implements Serializable {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
+
   private Long userId;
 
   private Long courseId;

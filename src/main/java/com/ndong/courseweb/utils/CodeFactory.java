@@ -1,12 +1,11 @@
 package com.ndong.courseweb.utils;
 
+import java.text.Normalizer;
 import com.ndong.courseweb.dto.CourseDTO;
-import com.ndong.courseweb.dto.MediaDTO;
 import com.ndong.courseweb.entity.CourseEntity;
 import com.ndong.courseweb.entity.MediaEntity;
-import org.springframework.util.DigestUtils;
 
-import java.text.Normalizer;
+import org.springframework.util.DigestUtils;
 
 public class CodeFactory {
   public static String from(MediaEntity media) {

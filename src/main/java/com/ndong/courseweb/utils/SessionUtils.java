@@ -1,17 +1,13 @@
 package com.ndong.courseweb.utils;
 
-import com.ndong.courseweb.constant.SystemConstant;
-import com.ndong.courseweb.dto.CourseDTO;
-import com.ndong.courseweb.dto.UserDTO;
-import com.ndong.courseweb.entity.CourseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.servlet.http.HttpSession;
+import com.ndong.courseweb.constant.SystemConstant;
+import com.ndong.courseweb.dto.UserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class SessionUtils {

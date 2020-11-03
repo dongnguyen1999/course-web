@@ -3,7 +3,6 @@ package com.ndong.courseweb.controller.web;
 import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.UserDTO;
-import com.ndong.courseweb.entity.UserEntity;
 import com.ndong.courseweb.service.ICourseService;
 import com.ndong.courseweb.service.IUserService;
 import com.ndong.courseweb.utils.SessionUtils;
@@ -40,7 +39,8 @@ public class HomeController {
   @RequestMapping(path = "/login", method = RequestMethod.GET)
   public ModelAndView loginPage(@RequestParam(required = false) String nav) {
     ModelAndView view = new ModelAndView("/web/auth/login");
-    if (nav != null) view.addObject(SystemConstant.NAVIGATE_URL, nav);
+    if (nav != null)
+      view.addObject(SystemConstant.NAVIGATE_URL, nav);
     return view;
   }
 
@@ -58,8 +58,7 @@ public class HomeController {
   }
 
   @RequestMapping(path = "/login", method = RequestMethod.POST)
-  public ModelAndView login(UserDTO userDTO,
-                            HttpSession session) {
+  public ModelAndView login(UserDTO userDTO, HttpSession session) {
     ModelAndView view = new ModelAndView("/web/auth/login");
     UserDTO user = userService.findOneUser(userDTO.getUsername(), userDTO.getPassword());
     String navigateUrl = userDTO.getNavigateUrl().orElse("/index");
@@ -67,7 +66,8 @@ public class HomeController {
       sessionUtils.setUser(user);
       String redirectView = "redirect:" + navigateUrl;
       return new ModelAndView(redirectView);
-    } else view.addObject(SystemConstant.LOGIN_FAILED, true);
+    } else
+      view.addObject(SystemConstant.LOGIN_FAILED, true);
     return view;
   }
 
