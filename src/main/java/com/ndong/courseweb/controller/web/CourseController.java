@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.constant.UserConstant;
 import com.ndong.courseweb.dto.AbstractDTO;
@@ -19,6 +17,7 @@ import com.ndong.courseweb.service.ICategoryService;
 import com.ndong.courseweb.service.ICourseService;
 import com.ndong.courseweb.service.IUserService;
 import com.ndong.courseweb.utils.SessionUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;

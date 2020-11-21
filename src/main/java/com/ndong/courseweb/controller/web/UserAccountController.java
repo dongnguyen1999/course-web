@@ -3,7 +3,6 @@ package com.ndong.courseweb.controller.web;
 import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.service.IUserService;
-import com.ndong.courseweb.service.impl.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
