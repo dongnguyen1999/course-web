@@ -2,6 +2,8 @@ package com.ndong.courseweb.constant;
 
 public class SystemConstant {
   public static final String REGISTER_STATUS = "registerStatus";
+  public static final String BALANCE_STATUS = "balanceStatus";
+  public static final String TRANSACTION_STATUS = "transactionStatus";
   public static final String OPEN_COURSE_FAILED = "openCourseFailed";
   public static final String CREATE_LESSON_FAILED = "createLessonFailed";
   public static final String LOGIN_FAILED = "loginFailed";
@@ -19,6 +21,7 @@ public class SystemConstant {
   public static final String NAVIGATE_URL = "navigateUrl";
   public static final String SESSION_LATELY_COURSE_LIST = "latelyCourses";
   public static final int LANDING_LIMIT_ITEM = 6;
+  public static final float COMMISSION_TRANSACTION_FACTOR = 0.2f;
   public static final int COURSE_LIMIT_ITEM = 20;
   public static final int DEFAULT_LIMIT_ITEM = 10;
 

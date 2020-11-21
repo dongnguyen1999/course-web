@@ -49,10 +49,46 @@
   max-width: 25rem;
 }
 
-.form-control {
+.payin-unit {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #131d60;
+}
+
+.payin-unit-view {
+  background-color: white !important;
+}
+
+.payin-unit-view:hover .payin-unit,
+.payin-unit-view:hover .card-icon {
+  color: #FF7B2E;
+}
+
+.payin-unit-view.active .payin-unit,
+.payin-unit-view.active .card-icon {
+  color: #FF7B2E;
+}
+
+.payin-unit-view.active {
+  box-shadow: 0 0 5px #FF7B2E;
+}
+
+.form-control.with-prepend {
   border-radius: 0 5px 5px 0 !important;
   background: white !important;
   box-sizing: border-box;
+}
+
+label {
+  color: #131d60;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+span.coin {
+  margin-left: .6rem;
+  color: #FF7B2E;
+  font-size: 1.4rem;
 }
 
 .form-control:focus {
@@ -88,4 +124,37 @@
 
 .login-switch {
   color: #131d60 !important;
+}
+
+.purchase-course .card-img-thumbnail {
+  flex: 1;
+}
+
+.purchase-course .card-img-thumbnail img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.purchase-course .card-body {
+  flex: 3;
+}
+
+
+.purchase-course .card-title {
+  font-size: 2.5rem;
+  font-weight: bold !important;
+  color: #131d60;
+}
+
+.purchase-course .card-subtitle {
+  font-size: 2rem;
+  color: #FF7B2E;
+}
+
+.low-balance {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #cf3c3c;
 }

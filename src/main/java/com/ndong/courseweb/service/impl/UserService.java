@@ -1,22 +1,30 @@
 package com.ndong.courseweb.service.impl;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.constant.UserConstant;
 import com.ndong.courseweb.dto.MediaDTO;
 import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.entity.CourseEntity;
 import com.ndong.courseweb.entity.PurchaseDetailEntity;
 import com.ndong.courseweb.entity.UserEntity;
+import com.ndong.courseweb.entity.composite_id.PurchaseDetailId;
 import com.ndong.courseweb.repository.CourseRepository;
+import com.ndong.courseweb.repository.PurchaseDetailRepository;
 import com.ndong.courseweb.repository.UserRepository;
+import com.ndong.courseweb.service.ICourseService;
 import com.ndong.courseweb.service.IMediaService;
 import com.ndong.courseweb.service.IUserService;
+import com.ndong.courseweb.utils.SessionUtils;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService implements IUserService {
@@ -31,6 +39,13 @@ public class UserService implements IUserService {
 
   @Autowired
   private CourseRepository courseRepository;
+
+  @Autowired
+  private SessionUtils sessionUtils;
+
+  @Autowired
+  private PurchaseDetailRepository purchaseDetailRepository;
+
 
 
   @Override
@@ -86,6 +101,70 @@ public class UserService implements IUserService {
     UserDTO dto = modelMapper.map(user, UserDTO.class);
     dto.setRole(role);
     return dto;
+  }
+
+  @Override
+  @Transactional
+  public UserDTO tryWithdrawValue(Double value) {
+    UserDTO currentUser = sessionUtils.getUser();
+    UserEntity user = userRepository.findOneByUsername(currentUser.getUsername());
+    if (value > user.getCoin()) return null;
+    try {
+      user.setCoin(user.getCoin() - value);
+      user = userRepository.save(user);
+      return modelMapper.map(user, UserDTO.class);
+    } catch(Exception e) {
+      System.out.println(e.getMessage());
+      return null;
+    }
+  }
+
+  @Override
+  @Transactional
+  public UserDTO tryPayInValue(Double value) {
+    UserDTO currentUser = sessionUtils.getUser();
+    UserEntity user = userRepository.findOneByUsername(currentUser.getUsername());
+    try {
+      user.setCoin(user.getCoin() + value);
+      user = userRepository.save(user);
+      return modelMapper.map(user, UserDTO.class);
+    } catch(Exception e) {
+      System.out.println(e.getMessage());
+      return null;
+    }
+  }
+
+  @Override
+  public Boolean checkBalanceForPurchase(String courseCode) {
+    CourseEntity course = courseRepository.findOneByCode(courseCode);
+    UserDTO currentUser = sessionUtils.getUser();
+    UserEntity user = userRepository.findOneByUsername(currentUser.getUsername());
+    return user.getCoin() >= course.getPrice();
+  }
+
+  @Override
+  @Transactional
+  public Boolean purchaseCourse(String username, String courseCode) {
+    try {
+      CourseEntity course = courseRepository.findOneByCode(courseCode);
+      UserEntity user = userRepository.findOneByUsername(username);
+      PurchaseDetailEntity purchaseDetail = new PurchaseDetailEntity();
+      purchaseDetail.setId(new PurchaseDetailId(user.getId(), course.getId()));
+      purchaseDetail.setCourse(course);
+      purchaseDetail.setUser(user);
+      purchaseDetail.setPrice(course.getPrice());
+      purchaseDetail.setPurchaseDate(new Date(System.currentTimeMillis()));
+      purchaseDetailRepository.save(purchaseDetail);
+      user.setCoin(user.getCoin() - course.getPrice());
+      userRepository.save(user);
+      UserEntity author = course.getUser();
+      author.setCoin(author.getCoin() + course.getPrice()*(1-SystemConstant.COMMISSION_TRANSACTION_FACTOR));
+      userRepository.save(author);
+      return true;
+    } catch(Exception e) {
+      System.out.println(e.getMessage());
+      return false;
+    }
   }
 
 

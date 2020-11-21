@@ -12,6 +12,14 @@
     background: #FF7B2E !important;
 }
 
+.icon-warning, .text-warning {
+    color: #FF7B2E !important;
+}
+
+.icon-danger, .text-danger {
+    color: #cf3c3c !important;
+}
+
 .badge-danger {
     background: #cf3c3c !important;
 }

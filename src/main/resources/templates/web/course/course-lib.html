@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:if="${user.role == 'owner'}">Khóa học đã mua</title>
+  <title th:if="${user.role == 'author'}">Quản lý khóa học</title>
+  <th:block th:replace="web/fragments/general :: meta"/>
+  <th:block th:replace="web/fragments/general :: link"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/course.css}">
+</head>
+<body th:with="requestPort=${#httpServletRequest.requestURL},
+     search=${pagingInfo.search != null && !pagingInfo.search.isEmpty()}? 'search='+${pagingInfo.search}+'&':'',
+     filter=${pagingInfo.code != null}? 'code='+${pagingInfo.code}+'&':''">
+<div th:replace="web/fragments/general :: header"></div>
+
+<div id="wrapper" class="wrapper-content">
+  <div id="page-content-wrapper">
+    <div th:replace="web/fragments/general :: smSearchbox"></div>
+    <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
+      <div class="row w-100 mt-3">
+        <h1 th:if="${user.role == 'owner'}" class="course-lib-title ml">Khóa học đã mua</h1>
+        <h1 th:if="${user.role == 'author'}" class="course-lib-title">Quản lý khóa học</h1>
+      </div>
+      <form id="courseNavForm" class="course-nav row w-100 d-flex flex-row justify-content-between">
+        <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fas fa-search"></i></div>
+            </div>
+            <input name="search" th:value="${pagingInfo.search}" type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Tìm kiếm nhanh">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <select class="custom-select mr-sm-2 form-control" id="inlineFormCustomSelect" name="code">
+            <option th:selected="${pagingInfo.code == null}" value="">Chọn thể loại</option>
+            <th:block th:each="item: ${categories}">
+              <option th:selected="${pagingInfo.code == item.code}" th:value="${item.code}" th:text="${item.name}"></option>
+            </th:block>
+          </select>
+        </div>
+      </form>
+      <div th:unless="${courses.size() > 0}" class="w-100 d-flex flex-column justify-content-center align-items-center" style="height: 50vh">
+        <div class="mt-5 not-found-course-text">Không tìm thấy khóa học nào</div>
+        <a href="/course" class="btn primary outline mt-5">Xem tất cả khóa học</a>
+      </div>
+      <div th:if="${courses.size() > 0}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 w-100">
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3" th:each="course: ${courses}">
+          <!-- Card -->
+          <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top"
+                   th:src="'/resource/' + ${course.thumbnail}"
+                   alt="Card image cap" src="">
+              <a th:href="'/course/' + ${course.code}">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body p-3">
+              <!-- Title -->
+              <a th:href="'/course/' + ${course.code}" href=""><h4 class="card-title title-max-lines-2"
+                                                                   th:text="${course.title}">Khóa học</h4></a>
+              <!-- Title -->
+              <h4 class="card-subtitle mb-1" th:text="${course.price}">5.000.000 VND</h4>
+              <!-- Text -->
+              <div class="card-detail">
+                <div class="card-text mb-0 max-lines-2" th:utext="${course.shortDescription}">Course description</div>
+                <div class="nb-used mb-1" th:text="${course.nbMembers} + ' Học viên'">30 Học viên</div>
+              </div>
+              <!-- Button -->
+              <div class="d-flex justify-content-center">
+                <a href="" th:href="'/course/' + ${course.code}" class="btn btn-primary w-100 m-0 more-detail-btn"><span
+                    class="d-sm-none d-xl-inline">Tìm hiểu thêm</span><span class="d-none d-sm-inline d-xl-none">Xem thêm</span></a>
+              </div>
+            </div><!--Card body.-->
+          </div><!--Card.-->
+        </div><!--Col.-->
+        
+      </div><!--Row cols.-->
+      <div class="row d-flex justify-content-center mt-5 paging-view w-100" th:if="${pagingInfo.totalPages > 1}">
+        <nav aria-label="Course pagination">
+          <ul class="pagination pg-blue" th:with="visiblePage=5">
+            <li class="page-item" th:classappend="${pagingInfo.page == 0}? 'disabled': null">
+              <a class="page-link first" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=1'">First</a>
+            </li>
+            <li class="page-item" th:classappend="${pagingInfo.page == 0}? 'disabled': null"
+                th:with="prevPage=${pagingInfo.page}">
+              <a class="page-link prev" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${prevPage}">Previous</a>
+            </li>
+            <th:block th:if="${pagingInfo.totalPages > visiblePage}"
+                      th:with="headPoint=${visiblePage - 1},
+                      tailPoint=${pagingInfo.totalPages - visiblePage},
+                      start=${pagingInfo.page + 1 - visiblePage / 2},
+                      end=${pagingInfo.page + 1 + visiblePage / 2}">
+              <th:block th:if="${pagingInfo.page >= headPoint}">
+                <li class="page-item">
+                  <a class="page-link disabled">...</a>
+                </li>
+              </th:block>
+              <th:block th:if="${pagingInfo.page < headPoint}" th:each="i: ${#numbers.sequence(1, headPoint+1)}">
+                <li class="page-item" th:classappend="${pagingInfo.page == i - 1}? 'active': null">
+                  <a class="page-link" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${i}"
+                     th:text="${i}">${i}</a>
+                </li>
+              </th:block>
+              <th:block th:if="${pagingInfo.page > tailPoint}"
+                        th:each="i: ${#numbers.sequence(tailPoint+1, pagingInfo.totalPages)}">
+                <li class="page-item" th:classappend="${pagingInfo.page == i - 1}? 'active': null">
+                  <a class="page-link" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${i}"
+                     th:text="${i}">${i}</a>
+                </li>
+              </th:block>
+              <th:block th:if="${headPoint <= pagingInfo.page && pagingInfo.page <= tailPoint}"
+                        th:each="i: ${#numbers.sequence(start, end)}">
+                <li class="page-item" th:classappend="${pagingInfo.page == i - 1}? 'active': null">
+                  <a class="page-link" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${i}"
+                     th:text="${i}">${i}</a>
+                </li>
+              </th:block>
+              <th:block th:if="${pagingInfo.page <= tailPoint}">
+                <li class="page-item">
+                  <a class="page-link disabled">...</a>
+                </li>
+              </th:block>
+            </th:block>
+            <th:block th:if="${pagingInfo.totalPages <= visiblePage}"
+                      th:each="i: ${#numbers.sequence(1, pagingInfo.totalPages)}">
+              <li class="page-item" th:classappend="${pagingInfo.page == i - 1}? 'active': null">
+                <a class="page-link" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${i}"
+                   th:text="${i}">${i}</a>
+              </li>
+            </th:block>
+            <li class="page-item" th:classappend="${pagingInfo.page == pagingInfo.totalPages - 1}? 'disabled': null"
+                th:with="nextPage=${pagingInfo.page+2}">
+              <a class="page-link next" th:href="${requestPort} + '?'+ ${search} + ${filter} +'page=' + ${nextPage}">Next</a>
+            </li>
+            <li class="page-item" th:classappend="${pagingInfo.page == pagingInfo.totalPages - 1}? 'disabled': null">
+              <a class="page-link last"
+                 th:href="${requestPort} + '?' + ${search} + ${filter} + 'page=' + ${pagingInfo.totalPages}">Last</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div th:replace="web/fragments/general :: footer"></div>
+  </div><!--page wrapper content.-->
+</div><!--wrapper content.-->
+
+<!--<h1 th:unless="${session.user}">Welcome!</h1>-->
+<!--<h1 th:if="${session.user}">Welcome: <span th:text="${session.user.fullName}"></span></h1>-->
+<!--<h3>Demo forms:</h3>-->
+<!--<ul>-->
+<!--  <li><a href="/login">Login</a></li>-->
+<!--  <li><a href="/register">Register</a></li>-->
+<!--  <li><a href="/course/new">Open new course</a></li>-->
+<!--  <li><a href="/course/1/new-lesson">Create new lesson for courseId=1</a></li>-->
+<!--  <li><a href="/admin/manage/category">Admin manage category</a></li>-->
+<!--  <li><a href="/admin/manage/media-type">Admin manage media type</a></li>-->
+<!--</ul>-->
+
+<th:block th:replace="web/fragments/general :: script"/>
+<script>
+  $(function () {
+    $('input, select').change(function() {
+      $('#courseNavForm').submit()
+    })
+  })
+</script>
+</body>
+</html>

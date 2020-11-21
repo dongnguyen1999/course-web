@@ -5,7 +5,7 @@ function deleteCourse(courseId) {
     url: `/web/api/course/${courseId}`,
     type: "DELETE",
     success: (response) => {
-      window.location = '/course'
+      window.location = '/account/manage-courses'
     },
     error: (error) => {
       showInformationModal('Xóa bài học thất bại', 'Có gì đó sai sai, có lẽ hệ thống gặp trục trặc vui lòng thử lại sau')

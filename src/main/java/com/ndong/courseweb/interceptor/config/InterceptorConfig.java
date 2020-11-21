@@ -31,12 +31,16 @@ public class InterceptorConfig implements WebMvcConfigurer {
         addPathPatterns("/register");
 
     registry.addInterceptor(requireLoginInterceptor).
-        addPathPatterns("/course/new");
+        addPathPatterns("/course/new").
+        addPathPatterns("/course/*/purchase").
+        addPathPatterns("/account").
+        addPathPatterns("/account/*");
 
-    registry.addInterceptor(courseInterceptor)
-        .addPathPatterns("/course")
-        .addPathPatterns("/course/new")
-        .addPathPatterns("/course/*/edit")
-        .addPathPatterns("/category/*");
+    registry.addInterceptor(courseInterceptor).
+        addPathPatterns("/course").
+        addPathPatterns("/course/new").
+        addPathPatterns("/course/*/edit").
+        addPathPatterns("/category/*").
+        addPathPatterns("/account/*-courses");
   }
 }

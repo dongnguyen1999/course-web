@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Thanh toán khóa học</title>
+  <th:block th:replace="web/fragments/general :: meta" />
+  <th:block th:replace="web/fragments/general :: link"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}" >
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}" >
+
+</head>
+<body>
+<div th:replace="web/fragments/general :: header"></div>
+<div id="wrapper" class="wrapper-content">
+<div class="container">
+  <hr>
+  <div class="card">
+    <article class="card-body">
+      <h1 class="card-title mt-3 text-center">
+        <div class="display-4 form-title">
+          THANH TOÁN KHÓA HỌC
+        </div>
+      </h1>
+      <p class="text-center">Sử dụng coin để thanh toán và sở hữu khóa học</p>
+      <div class="card bg-white mt-3 d-flex flex-row purchase-course">
+        <div class="card-img-thumbnail d-none d-md-block">
+          <img th:src="'/resource/'+${course.thumbnail}" alt="Course thumbnail">
+        </div>
+        <div class="card-body d-flex justify-content-center align-items-start">
+          <h5 class="card-title" th:text="${course.title}">Title</h5>
+          <p class="card-subtitle" th:text="${course.price}">Price</p>
+        </div>
+      </div>
+
+
+      <form id="purchaseForm" action="" method="post" class="container pt-3 pt-md-5 pl-md-5 pr-md-5">
+        <div class="form-group">
+          <label for="transactionValue">Số dư hiện tại:</label>
+          <span class="coin price float-right"><strong th:text="${user.coin}">200000</strong></span>
+        </div>
+        <div class="form-group">
+          <label for="transactionValue">Số tiền thanh toán:</label>
+          <span class="coin price float-right text-danger">- <strong th:text="${course.price}">200000</strong></span>
+        </div>
+        <hr class="w-100">
+        <th:block th:if="${balanceStatus == true}">
+          <div class="form-group">
+            <label for="transactionValue">Số dư sau thanh toán:</label>
+            <span class="coin price float-right"><strong th:text="${user.coin - course.price}">200000</strong></span>
+          </div>
+          <!--Submit button-->
+          <div class="mt-4 mb-2 d-flex flex-row justify-content-center">
+            <button type="submit" class="btn primary">Xác nhận</button>
+            <a th:href="'/course/'+${course.code}" type="submit" class="btn primary ml-5">Hủy</a>
+          </div> <!--form-group.-->
+        </th:block>
+        <th:block th:if="${balanceStatus == false}">
+          <p class="low-balance">Số dư tài khoản không đủ để thực hiện giao dịch<br>Vui lòng nạp thêm tiền để tiếp tục</p>
+          <!--Submit button-->
+          <div class="mt-4 mb-2 d-flex flex-row justify-content-center">
+            <a th:href="'/account/payin?nav=/course/'+${course.code}+'/purchase'" class="btn primary">Nạp tiền</a>
+            <a th:href="'/course/'+${course.code}" type="submit" class="btn primary ml-5">Hủy</a>
+          </div> <!--form-group.-->
+        </th:block>
+      </form>
+
+      <div th:replace="web/fragments/modal :: informationModal(
+        showCondition=${transactionStatus == false},
+        headerColor='bg-danger',
+        title='Nạp tiền thất bại',
+        content='Thanh toán thất bại, có thể lỗi không phải do bạn<br>Vui lòng thử lại sau'
+      )"></div>
+
+      <div th:replace="web/fragments/modal :: informationModal(
+        showCondition=${transactionStatus == true},
+        headerColor='bg-success',
+        title='Nạp tiền thành công',
+        content='Thanh toán hoàn tất, số dư trong tài khoản của bạn đã được cập nhật',
+        navTitle='Trang chủ',
+        navUrl='/index',
+      )"></div>
+
+    </article><!--card-body.-->
+  </div><!--card.-->
+</div><!--container.-->
+</div><!--wrapper content.-->
+
+<div th:replace="web/fragments/general :: footer"></div>
+<th:block th:replace="web/fragments/general :: script"/>
+<script th:src="@{/web/js/validation.js}"></script>
+
+
+<script>
+  $(function() {
+    $('.payin-unit-view').click(function() {
+      $('#transactionValue').val('')
+      if ($(this).hasClass('active')) $(this).removeClass('active')
+      else {
+        $('.payin-unit-view').removeClass('active')
+        $(this).addClass('active')
+        $('#transactionValue').val($(this).find('.card-subtitle').attr('value'))
+      }
+    })
+
+    useSimpleValidation('payInForm')
+    $('#messageDialog').modal()
+  })
+  
+</script>
+
+</body>
+</html>

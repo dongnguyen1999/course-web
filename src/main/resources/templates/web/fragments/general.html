@@ -79,20 +79,19 @@
           <!--suppress ThymeleafVariablesResolveInspection -->
           <th:block th:if="${user != null}">
             <li class="nav-item">
-
-              <a class="nav-link d-lg-none" th:href="${user}" href="">Thông tin tài khoản</a>
+              <a class="nav-link d-lg-none" th:href="${user}" href="/account">Thông tin tài khoản</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-lg-none" href="">Khóa học đã mua</a>
+              <a class="nav-link d-lg-none" href="/account/purchased-courses">Khóa học đã mua</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-lg-none" href="">Quản lý khóa học</a>
+              <a class="nav-link d-lg-none" href="/account/manage-courses">Quản lý khóa học</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-lg-none" href="">Nạp coin</a>
+              <a class="nav-link d-lg-none" href="/account/payin">Nạp coin</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-lg-none" href="">Rút tiền</a>
+              <a class="nav-link d-lg-none" href="/account/withdraw">Rút tiền</a>
             </li>
             <li class="nav-item">
               <a class="nav-link d-lg-none" href="/logout">Đăng xuất</a>
@@ -127,11 +126,12 @@
                 <span class="d-none d-xl-inline-block" th:text="${user.fullName}">Nguyễn Phan Việt Đông</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#"><i class="fas fa-info-circle"></i>Thông tin tài khoản</a>
-                <a class="dropdown-item" href="#"><i class="fas fa-box"></i>Khóa học đã mua</a>
-                <a class="dropdown-item" href="#"><i class="fas fa-box-open"></i>Quản lý khóa học</a>
-                <a class="dropdown-item" href="#"><i class="fab fa-bitcoin"></i>Nạp coin</a>
-                <a class="dropdown-item" href="#"><i class="far fa-credit-card"></i>Rút tiền</a>
+                <a class="dropdown-item" href="/account"><i class="fab fa-bitcoin icon-warning"></i><span class="price text-warning"><strong th:text="${user.coin}"></strong></span></a>
+                <a class="dropdown-item" href="/account"><i class="fas fa-info-circle"></i>Thông tin tài khoản</a>
+                <a class="dropdown-item" href="/account/purchased-courses"><i class="fas fa-box"></i>Khóa học đã mua</a>
+                <a class="dropdown-item" href="/account/manage-courses"><i class="fas fa-box-open"></i>Quản lý khóa học</a>
+                <a class="dropdown-item" href="/account/payin"><i class="fab fa-bitcoin"></i>Nạp coin</a>
+                <a class="dropdown-item" href="/account/withdraw"><i class="far fa-credit-card"></i>Rút tiền</a>
                 <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
               </div>
             </div>

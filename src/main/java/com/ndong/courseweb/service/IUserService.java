@@ -8,4 +8,8 @@ public interface IUserService {
   UserDTO findOneUser(String username);
   UserDTO findOneUser(Long id);
   UserDTO findPermissionOnCourse(String username, String courseCode);
+  UserDTO tryWithdrawValue(Double value);
+  UserDTO tryPayInValue(Double value);
+  Boolean checkBalanceForPurchase(String courseCode);
+  Boolean purchaseCourse(String username, String courseCode);
 }

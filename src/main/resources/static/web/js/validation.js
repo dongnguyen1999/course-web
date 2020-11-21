@@ -34,3 +34,17 @@ function validateImage(required = false) {
     } else showValid(fileInp);
   } else removeValidation(fileInp);
 }
+
+function useSimpleValidation(formId) {
+  let form = $(`#${formId}`);
+  form.submit(function(event){
+    submitForm = form[0].checkValidity();
+    form.addClass('was-validated');
+    //prevent submit and return
+    if (!submitForm) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    return submitForm;
+  });
+}

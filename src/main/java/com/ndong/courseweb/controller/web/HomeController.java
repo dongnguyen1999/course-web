@@ -58,7 +58,7 @@ public class HomeController {
   }
 
   @RequestMapping(path = "/login", method = RequestMethod.POST)
-  public ModelAndView login(UserDTO userDTO, HttpSession session) {
+  public ModelAndView login(UserDTO userDTO) {
     ModelAndView view = new ModelAndView("/web/auth/login");
     UserDTO user = userService.findOneUser(userDTO.getUsername(), userDTO.getPassword());
     String navigateUrl = userDTO.getNavigateUrl().orElse("/index");

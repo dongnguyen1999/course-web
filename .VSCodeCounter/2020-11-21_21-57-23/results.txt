@@ -1,0 +1,51 @@
+Date : 2020-11-21 21:57:23
+Directory : /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates
+Total : 19 files,  2048 codes, 193 comments, 173 blanks, all 2414 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| HTML     |         19 |      2,048 |        193 |        173 |      2,414 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                      | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                         |         19 |      2,048 |        193 |        173 |      2,414 |
+| admin                                                                                                                     |          5 |        334 |         21 |         19 |        374 |
+| admin/fragments                                                                                                           |          3 |        147 |         21 |          8 |        176 |
+| admin/manager                                                                                                             |          2 |        187 |          0 |         11 |        198 |
+| web                                                                                                                       |         14 |      1,714 |        172 |        154 |      2,040 |
+| web/auth                                                                                                                  |          2 |        204 |         14 |         31 |        249 |
+| web/course                                                                                                                |          6 |        801 |         54 |         32 |        887 |
+| web/fragments                                                                                                             |          2 |        292 |         69 |         39 |        400 |
+| web/wallet                                                                                                                |          3 |        246 |          6 |         34 |        286 |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                  | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/admin/fragments/general.html        | HTML     |         23 |          4 |          2 |         29 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/admin/fragments/manager-master.html | HTML     |         68 |          0 |          1 |         69 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/admin/fragments/modal.html          | HTML     |         56 |         17 |          5 |         78 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/admin/manager/category.html         | HTML     |         91 |          0 |          6 |         97 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/admin/manager/media-type.html       | HTML     |         96 |          0 |          5 |        101 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/auth/login.html                 | HTML     |         72 |          4 |          9 |         85 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/auth/register.html              | HTML     |        132 |         10 |         22 |        164 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/course/course-info.html         | HTML     |        254 |         14 |          9 |        277 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/course/course-lib.html          | HTML     |        154 |         18 |          5 |        177 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/course/course-list.html         | HTML     |        164 |         20 |          7 |        191 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/course/edit-course.html         | HTML     |        111 |          1 |          6 |        118 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/course/edit-lesson.html         | HTML     |         98 |          0 |          3 |        101 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/course/lesson-info.html         | HTML     |         20 |          1 |          2 |         23 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/fragments/general.html          | HTML     |        209 |         48 |         32 |        289 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/fragments/modal.html            | HTML     |         83 |         21 |          7 |        111 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/home.html                       | HTML     |        171 |         29 |         18 |        218 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/wallet/payin.html               | HTML     |         81 |          2 |         10 |         93 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/wallet/purchase.html            | HTML     |         98 |          2 |         12 |        112 |
+| /home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/templates/web/wallet/withdraw.html            | HTML     |         67 |          2 |         12 |         81 |
+| Total                                                                                                                     |          |      2,048 |        193 |        173 |      2,414 |
++---------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

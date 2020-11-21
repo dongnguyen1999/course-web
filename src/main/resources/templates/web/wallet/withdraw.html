@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Rút tiền</title>
+  <th:block th:replace="web/fragments/general :: meta" />
+  <th:block th:replace="web/fragments/general :: link"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}" >
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}" >
+
+</head>
+<body>
+<div th:replace="web/fragments/general :: header"></div>
+<div id="wrapper" class="wrapper-content">
+<div class="container">
+  <hr>
+  <div class="card">
+    <article class="card-body mx-auto">
+      <h1 class="card-title mt-3 text-center">
+        <div class="display-4 form-title">
+          RÚT TIỀN KHỎI TÀI KHOẢN
+        </div>
+      </h1>
+      <p class="text-center">Chuyển tiền vào ví điện tử hoặc thẻ tín dụng tín dụng</p>
+      <hr class="w-100">
+      <form id="withDrawForm" action="" method="post" class="container" novalidate>
+        <div class="form-group">
+          <label for="transactionValue">Số dư hiện tại:</label>
+          <span class="coin price"><strong th:text="${user.coin}">200000</strong></span>
+        </div>
+
+        <!--Withdraw value input-->
+        <div class="form-group">
+          <label for="transactionValue">Số tiền rút:</label>
+          <input name="transactionValue" type="number" required min="50000" step="500" class="form-control" id="transactionValue" placeholder="50000">
+          <div class="invalid-feedback">Số tiền rút ít nhất là 50.000VNĐ và phần lẻ nếu có không nhỏ hơn 500 đồng</div>
+        </div>
+
+        <!--Submit button-->
+        <div class="mt-4 mb-2 d-flex justify-content-center">
+          <button type="submit" class="btn primary">RÚT TIỀN</button>
+        </div> <!--form-group.-->
+      </form>
+
+      <div th:replace="web/fragments/modal :: informationModal(
+        showCondition=${transactionStatus == false},
+        headerColor='bg-danger',
+        title='Rút tiền thất bại',
+        content='Số dư trong tài khoản không đủ để thực hiện rút khoảng tiền này'
+      )"></div>
+
+      <div th:replace="web/fragments/modal :: informationModal(
+        showCondition=${transactionStatus == true},
+        headerColor='bg-success',
+        title='Rút tiền thành công',
+        content='Số tiền rút sẽ được chuyển vào ví điện tử hoặc thẻ tín dụng của bạn trong thời gian sớm nhất',
+        navTitle='Trang chủ',
+        navUrl='/index',
+      )"></div>
+
+    </article><!--card-body.-->
+  </div><!--card.-->
+</div><!--container.-->
+</div><!--wrapper content.-->
+
+<div th:replace="web/fragments/general :: footer"></div>
+<th:block th:replace="web/fragments/general :: script"/>
+<script th:src="@{/web/js/validation.js}"></script>
+
+
+<script>
+  $(function() {
+    useSimpleValidation('withDrawForm')
+    $('#messageDialog').modal()
+  })
+  
+
+</script>
+
+</body>
+</html>

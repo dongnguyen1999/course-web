@@ -180,3 +180,9 @@
 }
 
 /*Card list.*/
+
+.course-lib-title {
+  color: #131d60;
+  font-size: 2.5rem;
+  font-weight: bold;
+}

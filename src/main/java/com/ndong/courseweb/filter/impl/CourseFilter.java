@@ -49,6 +49,25 @@ public class CourseFilter implements IFilter<CourseEntity> {
   }
 
   @Override
+  public List<CourseEntity> filter(List<CourseEntity> courses, Pageable pageable, String categoryCode, String search) {
+    clear();
+    this.pageable = pageable;
+    int offset, limit;
+    if (categoryCode != null && !categoryCode.isBlank()) {
+      courses = courses.stream().filter(course -> course.getCategory().getCode().equals(categoryCode)).
+        collect(Collectors.toList());
+    }
+    if (search != null) {
+      courses = courses.stream().filter(course -> course.getTitle().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
+    }
+    totalElement = (long) courses.size();
+    offset = pageable.getPageNumber() * pageable.getPageSize();
+    limit = pageable.getPageSize();
+    courses = courses.subList(offset, Math.min(offset + limit, courses.size()));
+    return courses;
+  }
+
+  @Override
   public List<CourseEntity> filter(String searchText, String filterCode, Pageable pageable, String categoryCode) {
     clear();
     this.pageable = pageable;

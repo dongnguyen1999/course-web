@@ -27,7 +27,8 @@
           Content
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn primary" data-dismiss="modal">Đóng</button>
+          <a type="button" class="btn primary" th:if="${navTitle != null}" th:text="${navTitle}" th:href="${navUrl}"></a>
+          <button type="button" class="btn primary" data-dismiss="modal" th:text="${cancelTitle}?:'Đóng'">Đóng</button>
         </div>
       </div>
     </div>

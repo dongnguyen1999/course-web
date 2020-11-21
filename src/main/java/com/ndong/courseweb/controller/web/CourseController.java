@@ -1,10 +1,13 @@
 package com.ndong.courseweb.controller.web;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import com.ndong.courseweb.constant.SystemConstant;
+import com.ndong.courseweb.constant.UserConstant;
 import com.ndong.courseweb.dto.AbstractDTO;
 import com.ndong.courseweb.dto.CategoryDTO;
 import com.ndong.courseweb.dto.CourseDTO;
@@ -154,7 +157,7 @@ public class CourseController {
   }
 
   @RequestMapping(path = "/course/{courseCode}", method = RequestMethod.GET)
-  public ModelAndView getCourseDetail(@PathVariable String courseCode, HttpSession session) {
+  public ModelAndView getCourseDetail(@PathVariable String courseCode) {
     ModelAndView view = new ModelAndView("/web/course/course-info");
     CourseDTO course = courseService.findOneCourse(courseCode);
     List<LessonDTO> lessons = courseService.listLessons(course.getId());
@@ -172,6 +175,63 @@ public class CourseController {
     view.addObject(SystemConstant.LESSON_DTO_LIST, lessons);
     view.addObject(SystemConstant.RELATED_COURSE_DTO_LIST, relatedCourses);
     return view;
+  }
+
+  @RequestMapping(path = "/course/{courseCode}/purchase", method = RequestMethod.GET)
+  public ModelAndView confirmPurchase(@PathVariable String courseCode) {
+    UserDTO currentUser = sessionUtils.getUser();
+    UserDTO user = userService.findPermissionOnCourse(currentUser.getUsername(), courseCode);
+    List<String> excludes = Arrays.asList(UserConstant.ROLE_ADMIN, UserConstant.ROLE_AUTHOR, UserConstant.ROLE_OWNER);
+    if (excludes.contains(user.getRole())) return new ModelAndView("redirect:/course/" + courseCode);
+    ModelAndView view = new ModelAndView("web/wallet/purchase");
+    view.addObject(SystemConstant.COURSE_DTO, courseService.findOneCourse(courseCode));
+    view.addObject(SystemConstant.BALANCE_STATUS, userService.checkBalanceForPurchase(courseCode));
+    return view;
+  }
+
+  @RequestMapping(path = "/course/{courseCode}/purchase", method = RequestMethod.POST)
+  public ModelAndView purchase(@PathVariable String courseCode) {
+    UserDTO currentUser = sessionUtils.getUser();
+    UserDTO user = userService.findPermissionOnCourse(currentUser.getUsername(), courseCode);
+    List<String> excludes = Arrays.asList(UserConstant.ROLE_ADMIN, UserConstant.ROLE_AUTHOR, UserConstant.ROLE_OWNER);
+    if (excludes.contains(user.getRole())) return new ModelAndView("redirect:/course/" + courseCode);
+    ModelAndView view = new ModelAndView("web/wallet/purchase");
+    Boolean balanceStatus = userService.checkBalanceForPurchase(courseCode);
+    if (balanceStatus) {
+      userService.purchaseCourse(user.getUsername(), courseCode);
+      return new ModelAndView("redirect:/course/" + courseCode);
+    } else {
+      view.addObject(SystemConstant.COURSE_DTO, courseService.findOneCourse(courseCode));
+      view.addObject(SystemConstant.BALANCE_STATUS, balanceStatus);
+      return view;
+    }
+  }
+
+  private ModelAndView getCourseLib(String userRole, CategoryDTO categoryDTO) {
+    ModelAndView view = new ModelAndView("/web/course/course-lib");
+    UserDTO user = sessionUtils.getUser();
+    user.setRole(userRole);
+    view.addObject(SystemConstant.USER_DTO, user);
+    int page = (categoryDTO.getPage() != null) ? categoryDTO.getPage() - 1 : 0;
+    int limit = (categoryDTO.getLimit() != null) ? categoryDTO.getLimit() : SystemConstant.COURSE_LIMIT_ITEM;
+    List<CourseDTO> courses = new ArrayList<>();
+    if (userRole.equals(UserConstant.ROLE_OWNER)) courses = courseService.listPurchasedCourses(user.getUsername(), PageRequest.of(page, limit), categoryDTO.getCode(), categoryDTO.getSearch());
+    else if (userRole.equals(UserConstant.ROLE_AUTHOR)) courses = courseService.listManagedCourses(user.getUsername(), PageRequest.of(page, limit), categoryDTO.getCode(), categoryDTO.getSearch());
+    categoryDTO.setPage(page);
+    categoryDTO.setTotalPages(filter.getTotalPages());
+    view.addObject(SystemConstant.PAGING_INFO, categoryDTO);
+    view.addObject(SystemConstant.COURSE_DTO_LIST, courses);
+    return view;
+  }
+
+  @RequestMapping(path = "/account/purchased-courses", method = RequestMethod.GET)
+  public ModelAndView getPurchasedCourses(CategoryDTO categoryDTO) {
+    return getCourseLib(UserConstant.ROLE_OWNER, categoryDTO);
+  }
+
+  @RequestMapping(path = "/account/manage-courses", method = RequestMethod.GET)
+  public ModelAndView getManagedCourses(CategoryDTO categoryDTO) {
+    return getCourseLib(UserConstant.ROLE_AUTHOR, categoryDTO);
   }
 
 }

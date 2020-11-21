@@ -59,11 +59,11 @@
               </tbody>
             </table>
           </div>
-          <button th:unless="${(course.status == 'deleted') ||
+          <a th:href="'/course/'+${course.code}+'/purchase'" th:unless="${(course.status == 'deleted') ||
                     (user != null && (user.role == 'owner' || user.role == 'author'))}"
                   type="button"
                   class="btn primary outline mt-4">MUA NGAY
-          </button>
+          </a>
           <button th:if="${user != null && user.role == 'owner'}"
                   type="button"
                   class="btn primary outline mt-4 disabled">ĐÃ MUA
@@ -87,6 +87,7 @@
         showCondition=true,
         headerColor='bg-danger'
       )"></div>
+      
 
     </section>
     <!--Section: Block Content-->
@@ -269,6 +270,7 @@
         completeCourse($('section.course-info').attr('id'));
       }, 'Xác nhận')
     })
+
   })
 </script>
 </body>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Nạp tiền</title>
+  <th:block th:replace="web/fragments/general :: meta" />
+  <th:block th:replace="web/fragments/general :: link"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/general.css}" >
+  <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}" >
+
+</head>
+<body th:with="navTitle=${navigateUrl}? 'Tiếp tục': 'Trang chủ'">
+<div th:replace="web/fragments/general :: header"></div>
+<div id="wrapper" class="wrapper-content">
+<div class="container">
+  <hr>
+  <div class="card">
+    <article class="card-body">
+      <h1 class="card-title mt-3 text-center">
+        <div class="display-4 form-title">
+          NẠP TIỀN VÀO TÀI KHOẢN
+        </div>
+      </h1>
+      <p class="text-center">Chọn mệnh giá nạp và thanh toán để nhận được số tiền tương ứng vào tài khoản</p>
+      <form id="payInForm" action="" method="post" class="container" novalidate>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 feature-list"
+          th:with="units = ${ {'20000', '50000', '100000', '500000', '1000000', '2000000'} }">
+            <!--Col-->
+            <div class="col mt-4 col mt-4 pl-5 pl-sm-3 pr-5 pr-sm-3" th:each="unit : ${units}">
+              <div class="card p-2 payin-unit-view">
+                <div class="card-icon ml-3">
+                  <i class="fab fa-bitcoin"></i>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-subtitle payin-unit mb-0" th:value="${unit}" th:text="${unit}">20000</h5>
+                </div>
+              </div>
+            </div><!--Col.-->
+        </div>
+        <input id="transactionValue" class="d-none" type="number" name="transactionValue" required>
+        <input th:if="${navigateUrl}" type="hidden" name="navigateUrl" th:value="${navigateUrl}">
+        <!--Submit button-->
+        <div class="mt-4 mb-2 d-flex justify-content-center">
+          <button type="submit" class="btn primary">NẠP TIỀN</button>
+        </div> <!--form-group.-->
+      </form>
+
+      <div th:replace="web/fragments/modal :: informationModal(
+        showCondition=${transactionStatus == false},
+        headerColor='bg-danger',
+        title='Nạp tiền thất bại',
+        content='Thanh toán thất bại, có thể lỗi không phải do bạn<br>Vui lòng thử lại sau'
+      )"></div>
+
+      <div th:replace="web/fragments/modal :: informationModal(
+        showCondition=${transactionStatus == true},
+        headerColor='bg-success',
+        title='Nạp tiền thành công',
+        content='Thanh toán hoàn tất, số dư trong tài khoản của bạn đã được cập nhật',
+        navTitle=${navTitle},
+        navUrl=${navigateUrl},
+      )"></div>
+
+    </article><!--card-body.-->
+  </div><!--card.-->
+</div><!--container.-->
+</div><!--wrapper content.-->
+
+<div th:replace="web/fragments/general :: footer"></div>
+<th:block th:replace="web/fragments/general :: script"/>
+<script th:src="@{/web/js/validation.js}"></script>
+
+
+<script>
+  $(function() {
+    $('.payin-unit-view').click(function() {
+      $('#transactionValue').val('')
+      if ($(this).hasClass('active')) $(this).removeClass('active')
+      else {
+        $('.payin-unit-view').removeClass('active')
+        $(this).addClass('active')
+        $('#transactionValue').val($(this).find('.card-subtitle').attr('value'))
+      }
+    })
+
+    useSimpleValidation('payInForm')
+    $('#messageDialog').modal()
+  })
+  
+</script>
+
+</body>
+</html>

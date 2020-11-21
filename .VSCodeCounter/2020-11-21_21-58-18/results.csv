@@ -1,0 +1,14 @@
+"filename", "language", "CSS", "JavaScript", "comment", "blank", "total"
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/css/course-info.css", "CSS", 92, 0, 0, 23, 115
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/css/course.css", "CSS", 149, 0, 6, 34, 189
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/css/edit-course.css", "CSS", 63, 0, 2, 13, 78
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/css/edit-lesson.css", "CSS", 29, 0, 0, 8, 37
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/css/general.css", "CSS", 537, 0, 27, 144, 708
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/css/register.css", "CSS", 130, 0, 0, 30, 160
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/js/common.js", "JavaScript", 0, 71, 1, 6, 78
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/js/course-crud.js", "JavaScript", 0, 42, 0, 2, 44
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/js/course-form-validation.js", "JavaScript", 0, 18, 2, 2, 22
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/js/image-picker.js", "JavaScript", 0, 71, 0, 4, 75
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/js/register-form-validation.js", "JavaScript", 0, 137, 8, 21, 166
+"/home/ndong/Documents/Java-Programming/spring/course-web/src/main/resources/static/web/js/validation.js", "JavaScript", 0, 45, 1, 4, 50
+"Total", "-", 1000, 384, 47, 291, 1722

@@ -2,6 +2,7 @@ package com.ndong.courseweb.service.impl;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -19,6 +20,7 @@ import com.ndong.courseweb.entity.CategoryEntity;
 import com.ndong.courseweb.entity.CourseEntity;
 import com.ndong.courseweb.entity.LessonEntity;
 import com.ndong.courseweb.entity.PurchaseDetailEntity;
+import com.ndong.courseweb.entity.UserEntity;
 import com.ndong.courseweb.entity.composite_id.LessonId;
 import com.ndong.courseweb.filter.impl.CourseFilter;
 import com.ndong.courseweb.repository.CategoryRepository;
@@ -254,5 +256,41 @@ public class CourseService implements ICourseService {
       System.out.println(e.getMessage());
       return null;
     }
+  }
+
+  
+
+  @Override
+  public List<CourseDTO> listPurchasedCourses(String username, Pageable pageable, String categoryCode, String search) {
+    UserEntity user = userRepository.findOneByUsername(username);
+    Set<PurchaseDetailEntity> details = user.getPurchaseDetailEntitySet();
+    List<CourseEntity> courses = details.stream().
+      sorted((detail1, detail2) -> detail1.getPurchaseDate().compareTo(detail2.getPurchaseDate())).
+      map(detail -> courseRepository.getOne(detail.getId().getCourseId())).collect(Collectors.toList());
+    Collections.reverse(courses);
+    return courseFilter.filter(courses, pageable, categoryCode, search).stream().
+      map(course -> modelMapper.map(course, CourseDTO.class)).
+      map(dto -> {
+        dto.setNbMembers(purchaseDetailRepository.countByCourseId(dto.getId()));
+        return dto;
+      }).
+      collect(Collectors.toList());
+  }
+
+  @Override
+  public List<CourseDTO> listManagedCourses(String username, Pageable pageable, String categoryCode, String search) {
+    UserEntity user = userRepository.findOneByUsername(username);
+    List<CourseEntity> courses = new ArrayList<>(user.getCourseEntitySet());
+    courses = courses.stream().sorted((course1, course2) -> course1.getOpenTime().compareTo(course2.getOpenTime())).
+      filter(course -> !course.getStatus().equals(CourseStatusConstant.DELETED)).
+      collect(Collectors.toList());
+    Collections.reverse(courses);
+    return courseFilter.filter(courses, pageable, categoryCode, search).stream().
+      map(course -> modelMapper.map(course, CourseDTO.class)).
+      map(dto -> {
+        dto.setNbMembers(purchaseDetailRepository.countByCourseId(dto.getId()));
+        return dto;
+      }).
+      collect(Collectors.toList());
   }
 }
