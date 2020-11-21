@@ -16,7 +16,6 @@ import com.ndong.courseweb.entity.composite_id.PurchaseDetailId;
 import com.ndong.courseweb.repository.CourseRepository;
 import com.ndong.courseweb.repository.PurchaseDetailRepository;
 import com.ndong.courseweb.repository.UserRepository;
-import com.ndong.courseweb.service.ICourseService;
 import com.ndong.courseweb.service.IMediaService;
 import com.ndong.courseweb.service.IUserService;
 import com.ndong.courseweb.utils.SessionUtils;
