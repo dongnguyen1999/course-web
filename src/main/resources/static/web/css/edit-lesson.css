@@ -1,6 +1,6 @@
 
 .card-img-thumbnail {
-    height: 18rem;
+    height: 15rem;
     object-fit: cover;
 }
 
@@ -10,11 +10,16 @@
 }
 
 .card-subtitle {
-    color: #cf3c3c;
+    color: #FF7B2E;
+    font-weight: bold;
 }
 
 .card-title {
     color: #131d60;
+}
+
+.card-title:hover {
+    text-decoration: underline;
 }
 
 .checkbox {
@@ -33,4 +38,47 @@
 
 .checkbox.checked i {
     display: inline;
+}
+
+.lesson-list .card-header {
+    color: white;
+    background-color: #131d60;
+    font-weight: bold;
+}
+
+.lesson-list .list-group-item {
+    color: black;
+}
+
+
+.lesson-list .list-group-item.disabled {
+    color: #6c757d;
+}
+
+.lesson-list .list-group-item.active {
+    color: black;
+    font-weight: bold;
+    background-color: #b2ecf2;
+    border-color: #131d60;
+}
+
+.lesson-content .lesson-no {
+    font-weight: bold;
+    font-size: 3rem;
+    color: #131d60;
+}
+
+.lesson-content .title {
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: #131d60;
+}
+
+.author a {
+    color: black;
+}
+
+.author a:hover {
+    color: #131d60;
+    -webkit-text-stroke: 1px #131d60;
 }

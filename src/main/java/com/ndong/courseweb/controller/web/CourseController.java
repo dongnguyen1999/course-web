@@ -91,6 +91,8 @@ public class CourseController {
     return view;
   }
 
+  
+
   @RequestMapping(path = "/course/{courseCode}/edit", method = RequestMethod.GET)
   public ModelAndView getEditCourseView(@PathVariable String courseCode) {
     ModelAndView view = new ModelAndView("/web/course/edit-course");
@@ -111,7 +113,9 @@ public class CourseController {
   public ModelAndView getCreateLessonForm(@PathVariable String courseCode) {
     ModelAndView view = new ModelAndView("/web/course/edit-lesson");
     CourseDTO course = courseService.findOneCourse(courseCode);
+    List<LessonDTO> lessons = courseService.listLessons(course.getId());
     view.addObject(SystemConstant.COURSE_DTO, course);
+    view.addObject(SystemConstant.LESSON_DTO_LIST, lessons);
     return view;
   }
 
@@ -133,7 +137,18 @@ public class CourseController {
   public ModelAndView getLessonDetail(@PathVariable String courseCode, @PathVariable Integer lessonNo) {
     ModelAndView view = new ModelAndView("/web/course/lesson-info");
     LessonDTO lesson = courseService.findOneLesson(courseCode, lessonNo);
+    UserDTO user = sessionUtils.getUser();
+    if (user != null) user = userService.findPermissionOnCourse(user.getUsername(), courseCode);
+    if ((user == null || user.getRole() == null) && !lesson.getEnableFreeTrial())
+      return new ModelAndView("redirect:/course/"+courseCode);
+    CourseDTO course = courseService.findOneCourse(courseCode);
+    List<LessonDTO> lessons = courseService.listLessons(course.getId());
+    UserDTO author = userService.findOneUser(course.getUserId());
+    view.addObject(SystemConstant.USER_DTO, user);
+    view.addObject(SystemConstant.COURSE_DTO, course);
     view.addObject(SystemConstant.LESSON_DTO, lesson);
+    view.addObject(SystemConstant.COURSE_AUTHOR_DTO, author);
+    view.addObject(SystemConstant.LESSON_DTO_LIST, lessons);
     return view;
   }
 
@@ -142,8 +157,13 @@ public class CourseController {
     ModelAndView view = new ModelAndView("/web/course/edit-lesson");
     CourseDTO course = courseService.findOneCourse(courseCode);
     LessonDTO lesson = courseService.findOneLesson(course, lessonNo);
+    List<LessonDTO> lessons = courseService.listLessons(course.getId());
+    UserDTO user = sessionUtils.getUser();
+    if (user != null) user = userService.findPermissionOnCourse(user.getUsername(), courseCode);
+    view.addObject(SystemConstant.USER_DTO, user);
     view.addObject(SystemConstant.COURSE_DTO, course);
     view.addObject(SystemConstant.LESSON_DTO, lesson);
+    view.addObject(SystemConstant.LESSON_DTO_LIST, lessons);
     return view;
   }
 

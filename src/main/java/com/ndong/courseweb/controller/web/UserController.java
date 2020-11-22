@@ -8,7 +8,6 @@ import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.service.ICourseService;
 import com.ndong.courseweb.service.IUserService;
-import com.ndong.courseweb.utils.SessionUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +25,6 @@ public class UserController {
 
   @Autowired
   private ICourseService courseService;
-
-  @Autowired
-  private SessionUtils sessionUtils;
 
   @RequestMapping(path = "/account/payin", method = RequestMethod.GET)
   public ModelAndView getPayInView(@RequestParam(required = false) String nav) {

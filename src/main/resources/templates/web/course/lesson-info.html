@@ -5,15 +5,95 @@
   <title th:text="'Bài ' + ${lesson.idNo} + ': ' + ${lesson.title}">Bài học</title>
   <th:block th:replace="web/fragments/general :: meta"/>
   <th:block th:replace="web/fragments/general :: link"/>
-  <link rel="stylesheet" th:href="@{/web/css/course-info.css}">
+  <link rel="stylesheet" th:href="@{/web/css/edit-lesson.css}">
 </head>
 <body>
 <div th:replace="web/fragments/general :: header"></div>
 <!--/*@thymesVar id="user" type="com.ndong.courseweb.dto.UserDTO"*/-->
 <div id="wrapper" class="wrapper-content">
-  <h1 th:text="'Bài ' + ${lesson.idNo} + ': ' + ${lesson.title}">Bài 1: Bài học</h1>
-  <h3 th:utext="${lesson.shortDescription}">Mô tả ngắn bài học</h3>
-  <div th:utext="${lesson.content}">Nội dung bài học</div>
+  
+    <!-- Page Content -->
+    <div class="container">
+  
+      <div class="row">
+  
+        <!-- Post Content Column -->
+        <div class="col-lg-8 lesson-content">
+  
+          <!-- Title -->
+          <h2 class="mt-4 mb-0 lesson-no" th:text="'Bài '+${lesson.idNo}+':'">Bài 1:</h2>
+          <h1 class="mt-0 title" th:text="${lesson.title}">Post Title</h1>
+          <div class="d-flex flex-row justify-content-between">
+            <!-- Author -->
+          <p class="lead author">
+            by
+            <a th:href="'/profile/' + ${author.username}" th:text="${author.fullName}">Author</a>
+          </p>
+          <!-- Time -->
+          <p th:text="${lesson.uploadTime}">Posted on January 1, 2019 at 12:00 PM</p>  
+          </div>
+  
+          <hr>
+  
+          <!-- Post Content -->
+          <p class="lead short-description" th:utext="${lesson.shortDescription}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
+          
+          <p th:utext="${lesson.content}">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate corporis labore rem delectus. Ipsam voluptatem cupiditate eum, similique suscipit corrupti possimus pariatur animi. Optio accusantium, cumque ut nisi officia illum perspiciatis odit fugit corporis ad fuga maiores voluptatum quam quisquam laudantium eum quo dolorem animi asperiores earum molestias totam hic veniam! Nisi, minima voluptatibus hic iste ut, dignissimos, consequuntur doloribus commodi eius omnis iure fuga officiis aliquam sit velit similique? Ipsum, quisquam illo impedit natus qui alias at ratione beatae accusamus aperiam inventore aut! Voluptates rerum natus odio quos consectetur laudantium deleniti laborum doloremque inventore, libero mollitia voluptas non veritatis.
+          </p>
+          
+  
+          <hr>
+  
+          
+  
+        </div>
+  
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+          <div class="card d-none d-md-block my-4 course-item">
+            <img class="card-img-top card-img-thumbnail" th:src="'/resource/' + ${course.thumbnail}" src=""
+                 alt="Course thumbnail">
+            <div class="card-body">
+              <a th:href="'/course/'+${course.code}"><h3 class="card-title font-weight-bold" th:text="${course.title}">Title</h3></a>
+              <h4 class="card-subtitle" th:text="${course.price != 0}? ${course.price}: 'Miễn phí'">
+                10000 VND</h4>
+              <hr>
+              <div class="card-detail">
+                <div class="card-text mb-1 max-lines-3" th:utext="${course.shortDescription}">Course short description</div>
+              </div>
+              <div class="d-flex justify-content-center">
+                <a th:href="'/course/'+${course.code}+'/purchase'" type="button" class="btn primary outline" th:classappend="${!(user == null || user.role == null)}?'d-none':''">MUA NGAY
+                </a>
+              </div>
+              
+            </div>
+          </div>
+  
+          <!-- Side Widget -->
+          <div class="card my-4 lesson-list" th:if="${lessons.size() > 0}">
+            <h5 class="card-header">Danh sách bài học</h5>
+            <div class="card-body overflow-auto p-0" style="max-height: 30rem;">
+              <div class="list-group">
+                <a th:each="item : ${lessons}" class="list-group-item list-group-item-action" 
+                  th:text="${item.idNo} + '. ' + ${item.title}" 
+                  th:href="'/course/'+${course.code}+'/lesson-'+${lesson.idNo}" 
+                  th:classappend="|${(item.idNo == lesson.idNo) ?'active':''} ${((user == null || user.role == null) && (item.enableFreeTrial == false)) ?'disabled':''}|"
+                  >
+                  1. Cras justo odio
+                </a>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+      <!-- /.row -->
+  
+    </div>
+    <!-- /.container -->
+  
 
 </div><!--wrapper content.-->
 

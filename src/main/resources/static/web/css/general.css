@@ -105,9 +105,9 @@
     display: flex;
 }
 
-.btn-toggle-menu {
+/* .btn-toggle-menu {
 
-}
+} */
 
 /*landing intro*/
 #intro {
@@ -189,7 +189,8 @@
     height: 5.8rem;
 }
 
-.course-list .max-lines-3 {
+.course-list .max-lines-3,
+.course-item .max-lines-3 {
     text-overflow: ellipsis;
     word-wrap: break-word;
     overflow: hidden;
@@ -668,9 +669,9 @@ btn-menu {
     color: #008000;
 }
 
-.normal-letter {
+/* .normal-letter {
 
-}
+} */
 
 /*simple logo.*/
 
