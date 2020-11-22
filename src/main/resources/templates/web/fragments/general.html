@@ -79,7 +79,7 @@
           <!--suppress ThymeleafVariablesResolveInspection -->
           <th:block th:if="${user != null}">
             <li class="nav-item">
-              <a class="nav-link d-lg-none" th:href="${user}" href="/account">Thông tin tài khoản</a>
+              <a class="nav-link d-lg-none" th:href="'/profile/'+${user.username}">Thông tin tài khoản</a>
             </li>
             <li class="nav-item">
               <a class="nav-link d-lg-none" href="/account/purchased-courses">Khóa học đã mua</a>
@@ -126,8 +126,8 @@
                 <span class="d-none d-xl-inline-block" th:text="${user.fullName}">Nguyễn Phan Việt Đông</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/account"><i class="fab fa-bitcoin icon-warning"></i><span class="price text-warning"><strong th:text="${user.coin}"></strong></span></a>
-                <a class="dropdown-item" href="/account"><i class="fas fa-info-circle"></i>Thông tin tài khoản</a>
+                <a class="dropdown-item" th:href="'/profile/'+${user.username}"><i class="fab fa-bitcoin icon-warning"></i><span class="price text-warning"><strong th:text="${user.coin}"></strong></span></a>
+                <a class="dropdown-item" th:href="'/profile/'+${user.username}"><i class="fas fa-info-circle"></i>Thông tin tài khoản</a>
                 <a class="dropdown-item" href="/account/purchased-courses"><i class="fas fa-box"></i>Khóa học đã mua</a>
                 <a class="dropdown-item" href="/account/manage-courses"><i class="fas fa-box-open"></i>Quản lý khóa học</a>
                 <a class="dropdown-item" href="/account/payin"><i class="fab fa-bitcoin"></i>Nạp coin</a>

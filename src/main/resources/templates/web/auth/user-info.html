@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${author.fullName}">Khóa học</title>
+  <th:block th:replace="web/fragments/general :: meta"/>
+  <th:block th:replace="web/fragments/general :: link"/>
+  <link rel="stylesheet" th:href="@{/web/css/course-info.css}">
+</head>
+<body>
+<div th:replace="web/fragments/general :: header"></div>
+<!--/*@thymesVar id="user" type="com.ndong.courseweb.dto.UserDTO"*/-->
+<div id="wrapper" class="wrapper-content">
+  <div class="container pt-4">
+    <!--Section: Block Content-->
+    <section class="mb-5 course-info">
+      <div class="row">
+        <div class="col-md-6 mb-4 mb-md-0">
+          <div id="mdb-lightbox-ui"></div>
+          <div class="mdb-lightbox">
+            <div class="col-12 mb-0">
+              <div class="d-flex justify-content-center align-content-center">
+                <div class="avatar-view view overlay rounded-circle z-depth-1 d-flex justify-content-center align-items-center">
+                  <img src="" th:src="${author.avatar != null}? '/resource/' + ${author.avatar}: '/web/img/default-avatar.png'"
+                       class="img-fluid z-depth-1 thumbnail" style="height: 400px;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 course-info p-4 p-sm-3">
+          <h2 class="title" th:text="${author.fullName}">Nguyen Viet Dong</h2>
+          <p th:if="${author.role == 'current-user'}"><span class="mr-1 price text-warning">Số dư TK: <strong th:text="${author.coin}">1200000 VND</strong></span></p>
+          <div class="table-responsive profile-info">
+            <table class="table table-sm table-borderless mb-0">
+              <tbody>
+              <tr class="status-code">
+                <th class="p-0 w-25" scope="row"><strong>Chức vụ:</strong></th>
+                <td class="p-0">
+                  <span class="badge badge-warning" th:if="${author.statusCode == 'admin'}">Quản trị viên</span>
+                  <span class="badge badge-danger" th:if="${author.statusCode == 'banned'}">Bị hạn chế</span>
+                  <span class="badge badge-info" th:if="${author.statusCode == 'normal-user'}">Thành viên</span>
+                </td>
+              </tr>
+              <tr class="birth" th:if="${author.birth != null}">
+                <th class="p-0 w-25" scope="row"><strong>Ngày sinh:</strong></th>
+                <td class="p-0 birthday" th:text="${author.birth}">100</td>
+              </tr>
+              <tr class="email" th:if="${author.email != null}">
+                <th class="p-0 w-25" scope="row"><strong>Email:</strong></th>
+                <td class="p-0" th:text="${author.email}">100</td>
+              </tr>
+              <tr class="phone" th:if="${author.phone != null}">
+                <th class="p-0 w-25" scope="row"><strong>Số điện thoại:</strong></th>
+                <td class="p-0" th:text="${author.phone}">100</td>
+              </tr>
+              <tr class="nb-courses">
+                <th class="p-0 w-25" scope="row"><strong>Số khóa học:</strong></th>
+                <td class="p-0" th:text="${author.nbCourses}">100</td>
+              </tr>
+              <tr class="nb-members">
+                <th class="p-0 w-25" scope="row"><strong>Số học viên:</strong></th>
+                <td class="p-0"><a href="" th:text="${author.nbMembers}">100</a></td>
+              </tr>
+              </tbody>
+            </table>
+            <div th:if="${author.workExperienceInfo != null}" class="pt-1 work-experience-info" th:utext="${author.workExperienceInfo}">Lorem ipsum dolor sit amet
+              consectetur
+              adipisicing elit.
+            </div>
+            <a href="/account/edit-profile" th:if="${author.role == 'current-user'}"
+                  type="button"
+                  class="btn primary outline mt-4">Chỉnh sửa thông tin
+            </a>
+          </div>
+          
+        </div>
+      </div>
+
+    </section>
+    <!--Section: Block Content-->
+    <section th:if="${courses.size() > 0}">
+      <hr>
+      <h4 class="related-course-title pl-4 pl-sm-0" th:text="'Khóa học hay của '+${author.fullName}+':'">Khóa học</h4>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 course-list mb-5">
+        <div class="col mt-4 pl-5 pr-5 pl-sm-3 pr-sm-3" th:each="item: ${courses}">
+          <!-- Card -->
+          <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+              <img class="card-img-top"
+                   th:src="'/resource/' + ${item.thumbnail}"
+                   alt="Course thumbnail">
+              <a th:href="'/course/' + ${item.code}">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body p-3">
+              <!-- Title -->
+              <a href="" th:href="'/course/' + ${item.code}"><h4 class="card-title title-max-lines-3"
+                                                                 th:text="${item.title}">Course title</h4></a>
+              <!-- Title -->
+              <h4 class="card-subtitle" th:text="${item.price}">5.000.000 VND</h4>
+              <!-- Text -->
+            </div><!--Card body.-->
+          </div><!--Card.-->
+        </div><!--Col.-->
+      </div><!--Course list.-->
+    </section>
+    <!--Section: Block Content-->
+  </div><!--container.-->
+</div><!--wrapper content.-->
+
+<div th:replace="web/fragments/general :: footer"></div>
+<th:block th:replace="web/fragments/general :: script"/>
+<script type="text/javascript" th:src="@{/vendor/dateformat/date.format.js}"></script>
+<script>
+  $(function(){
+    $('td.birthday').each(function () {
+      let timestamp = $(this).html();
+      let date = new Date(timestamp);
+      $(this).html(dateFormat(date, "dd/mm/yyyy"));
+    })
+  })  
+</script>
+</body>
+</html>

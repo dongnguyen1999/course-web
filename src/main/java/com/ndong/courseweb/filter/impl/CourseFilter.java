@@ -61,9 +61,11 @@ public class CourseFilter implements IFilter<CourseEntity> {
       courses = courses.stream().filter(course -> course.getTitle().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
     }
     totalElement = (long) courses.size();
-    offset = pageable.getPageNumber() * pageable.getPageSize();
-    limit = pageable.getPageSize();
-    courses = courses.subList(offset, Math.min(offset + limit, courses.size()));
+    if (this.pageable != null) {
+      offset = pageable.getPageNumber() * pageable.getPageSize();
+      limit = pageable.getPageSize();
+      courses = courses.subList(offset, Math.min(offset + limit, courses.size()));
+    }
     return courses;
   }
 

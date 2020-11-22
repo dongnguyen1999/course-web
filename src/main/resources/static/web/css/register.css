@@ -79,7 +79,8 @@
   box-sizing: border-box;
 }
 
-label {
+#withdrawForm label,
+#payInForm label {
   color: #131d60;
   font-size: 1.2rem;
   font-weight: bold;

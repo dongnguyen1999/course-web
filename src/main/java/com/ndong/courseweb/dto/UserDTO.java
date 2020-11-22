@@ -21,9 +21,27 @@ public class UserDTO extends AbstractDTO implements Serializable {
   private Double coin;
   private MultipartFile avatarFile;
   private String role;
+  private Long nbMembers;
+  private Long nbCourses;
 
   public String getRole() {
     return role;
+  }
+
+  public Long getNbMembers() {
+    return nbMembers;
+  }
+
+  public void setNbMembers(Long nbMembers) {
+    this.nbMembers = nbMembers;
+  }
+
+  public Long getNbCourses() {
+    return nbCourses;
+  }
+
+  public void setNbCourses(Long nbCourses) {
+    this.nbCourses = nbCourses;
   }
 
   public void setRole(String role) {

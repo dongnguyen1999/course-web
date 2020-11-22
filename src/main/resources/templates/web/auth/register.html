@@ -2,7 +2,8 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Đăng ký</title>
+  <title th:unless="${user != null}">Đăng ký</title>
+  <title th:if="${user != null}">Cập nhật thông tin</title>
   <th:block th:replace="web/fragments/general :: meta"/>
   <th:block th:replace="web/fragments/general :: link"/>
   <link rel="stylesheet" type="text/css" th:href="@{/web/css/register.css}">
@@ -17,25 +18,30 @@
     <div class="card">
       <article class="card-body mx-auto">
         <h1 class="card-title mt-3 text-center">
-          <div class="display-4 form-title">
+          <div th:unless="${user != null}" class="display-4 form-title">
             ĐĂNG KÝ MỘT TÀI KHOẢN
           </div>
+          <div th:if="${user != null}" class="display-4 form-title">
+            CẬP NHẬT THÔNG TIN TÀI KHOẢN
+          </div>
         </h1>
-        <p class="text-center">Bắt đầu bằng việc tạo tài khoản miễn phí</p>
-        <form id="registerForm" action="/register" method="post" class="needs-validation col-md-4" novalidate
+        <p th:unless="${user != null}" class="text-center">Bắt đầu bằng việc tạo tài khoản miễn phí</p>
+        <p th:if="${user != null}" class="text-center">Cập nhật thông tin người dùng đã đăng ký</p>
+        <form id="registerForm" action="" method="post" class="needs-validation col-md-4" novalidate
               enctype="multipart/form-data">
           <!--Avatar image-->
           <label class="mt-4 mb-4 avatar-container position-relative" for="avatarInput" role="button">
-            <img id="user-image" class="img-fluid border border-dark image-preview z-depth-1 avatar"
-                 src="" th:src="@{/web/img/default-avatar.png}" defSrc="/web/img/default-avatar.png"
-                 alt="default avatar">
+            <img id="user-image" class="img-fluid border border-dark image-preview z-depth-1 avatar" src="" 
+                th:src="${user != null && user.avatar != null}? '/resource/'+${user.avatar}: '/web/img/default-avatar.png'" 
+                th:defSrc="${user != null && user.avatar != null}? '/resource/'+${user.avatar}: '/web/img/default-avatar.png'"
+                alt="default avatar">
             <i class="d-none position-absolute fas fa-camera" id="camera-icon"></i>
             <input class="form-control hide is-invalid" id="avatarInput" type="file" name="avatarFile">
             <div class="invalid-feedback text-center avatar-feedback"></div>
           </label>
 
           <!--Username input-->
-          <div class="form-row mb-2">
+          <div class="form-row mb-2" th:if="${user == null}">
             <div class="form-group input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -52,13 +58,13 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-user-plus"></i> </span>
               </div>
-              <input name="fullName" class="form-control with-prepend" placeholder="*Tên đầy đủ" type="text" required>
+              <input th:value="${user != null}?${user.fullName}:''" name="fullName" class="form-control with-prepend" placeholder="*Tên đầy đủ" type="text" required>
               <div class="invalid-feedback">Tên đầy đủ không được bỏ trống</div>
             </div> <!--form-group.-->
           </div>
 
           <!--Password input-->
-          <div class="form-row mb-2">
+          <div class="form-row mb-2" th:if="${user == null}">
             <div class="form-group input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
@@ -69,7 +75,7 @@
           </div>
 
           <!--Confirm password input-->
-          <div class="form-row mb-2">
+          <div class="form-row mb-2" th:if="${user == null}">
             <div class="form-group input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
@@ -86,7 +92,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
               </div>
-              <input name="email" class="form-control with-prepend no-required" placeholder="Email" type="email">
+              <input th:value="${user != null && user.email != null}?${user.email}:''" name="email" class="form-control with-prepend no-required" placeholder="Email" type="email">
               <div class="invalid-feedback"></div>
             </div> <!--form-group.-->
           </div>
@@ -100,7 +106,7 @@
               <span class="input-group-text bg-light phone-prefix" style="max-width: 100rem;">
             +84
             </span>
-              <input name="phone" class="form-control with-prepend no-required" placeholder="Số điện thoại" type="text">
+              <input th:value="${user != null && user.phone != null}?${user.phone}:''" name="phone" class="form-control with-prepend no-required" placeholder="Số điện thoại" type="text">
               <div class="invalid-feedback"></div>
             </div> <!--form-group.-->
           </div>
@@ -112,7 +118,7 @@
                 <span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
               </div>
 
-              <input name="birth" class="form-control with-prepend no-required" type="date" placeholder="dd-mm-yyyy" value="">
+              <input th:value="${user != null && user.birth != null}?${user.birth}:''" name="birth" class="form-control with-prepend no-required" type="date" placeholder="dd-mm-yyyy" value="">
 
             </div> <!--form-group.-->
           </div>
@@ -123,20 +129,20 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-star"></i> </span>
               </div>
-              <textarea name="workExperienceInfo" class="form-control with-prepend no-required" placeholder="Vài dòng về bản thân"
+              <textarea th:utext="${user != null && user.workExperienceInfo != null}?${user.workExperienceInfo}:''" name="workExperienceInfo" class="form-control with-prepend no-required" placeholder="Vài dòng về bản thân"
                         type="text"></textarea>
             </div> <!--form-group.-->
           </div>
 
           <!--Submit button-->
           <div class="mb-2">
-            <button type="submit" class="btn btn-primary btn-block">ĐĂNG KÝ TÀI KHOẢN</button>
+            <button type="submit" th:text="${user != null}?'CẬP NHẬT THÔNG TIN': 'ĐĂNG KÝ TÀI KHOẢN'" class="btn btn-primary btn-block"></button>
           </div> <!--form-group.-->
 
-          <p class="text-center">Đã có tài khoản? <a class="login-switch" href="/login">Đăng nhập</a></p>
+          <p th:unless="${user != null}" class="text-center">Đã có tài khoản? <a class="login-switch" href="/login">Đăng nhập</a></p>
         </form>
 
-        <div th:replace="web/fragments/modal :: registerModal(registerStatus=${registerStatus})"></div>
+        <div th:unless="${user != null}" th:replace="web/fragments/modal :: registerModal(registerStatus=${registerStatus})"></div>
 
 
       </article><!--card-body.-->
@@ -150,12 +156,19 @@
 <script th:src="@{/web/js/register-form-validation.js}"></script>
 <script th:src="@{/web/js/image-picker.js}"></script>
 
-<script th:replace="web/fragments/modal :: registerModalController(registerStatus=${registerStatus})"></script>
+<script th:unless="${user != null}" th:replace="web/fragments/modal :: registerModalController(registerStatus=${registerStatus})"></script>
 
-<script>
+<script th:unless="${user != null}">
   $(function () {
-    useValidation();
     setAvatarPicker();
+    useValidation();
+  })
+</script>
+
+<script th:if="${user != null}">
+  $(function(){
+    setAvatarPicker();
+    useValidation(false);
   })
 </script>
 

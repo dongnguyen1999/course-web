@@ -23,7 +23,7 @@ function setAvatarPicker() {
     });
 
   $('#avatarInput').change(function () {
-    clientLoadImage(this, '/web/img/default-avatar.png');
+    clientLoadImage(this, $('.image-preview').attr('defSrc'));
   })
 }
 

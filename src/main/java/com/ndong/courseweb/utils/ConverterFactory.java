@@ -24,7 +24,7 @@ public class ConverterFactory {
   }
 
   public static Converter<String, Date> stringToDate() {
-    return stringToDate("dd/MM/yyyy");
+    return stringToDate("yyyy-MM-dd");
   }
 
   public static Converter<String, String> stringToString(String prefix, String suffix) {

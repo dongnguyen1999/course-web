@@ -1,6 +1,7 @@
 package com.ndong.courseweb.service.impl;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -164,6 +165,37 @@ public class UserService implements IUserService {
       System.out.println(e.getMessage());
       return false;
     }
+  }
+
+  @Override
+  public UserDTO queryForProfile(String username) {
+    UserEntity user = userRepository.findOneByUsername(username);
+    UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+    List<CourseEntity> courses = new ArrayList<>(user.getCourseEntitySet());
+    Long nbMembers = courses.stream().map(course -> purchaseDetailRepository.countByCourseId(course.getId())).
+      reduce(0L, Long::sum);
+    userDTO.setNbCourses((long) courses.size());
+    userDTO.setNbMembers(nbMembers);
+    UserDTO currentUser = sessionUtils.getUser();
+    if(currentUser != null && currentUser.getUsername().equals(user.getUsername())) userDTO.setRole(UserConstant.ROLE_CURRENT);
+    return userDTO;
+  }
+
+  @Override
+  public UserDTO updateUser(UserDTO model) {
+    UserDTO currentUser = sessionUtils.getUser();
+    UserEntity user = userRepository.findOneByUsername(currentUser.getUsername());
+    model.setId(user.getId());
+    model.setUsername(user.getUsername());
+    model.setPassword(user.getPassword());
+    model.setAvatar(user.getAvatar());
+    model.setCoin(user.getCoin());
+    model.setStatusCode(user.getStatusCode());
+    modelMapper.map(model, user);
+    MediaDTO mediaDTO = mediaService.saveAvatar(model.getAvatarFile(), user);
+    if (mediaDTO != null) user.setAvatar(mediaDTO.getCode());
+    user = userRepository.save(user);
+    return modelMapper.map(user, UserDTO.class);
   }
 
 

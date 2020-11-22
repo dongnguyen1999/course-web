@@ -6,6 +6,7 @@ public class SystemConstant {
   public static final String TRANSACTION_STATUS = "transactionStatus";
   public static final String OPEN_COURSE_FAILED = "openCourseFailed";
   public static final String CREATE_LESSON_FAILED = "createLessonFailed";
+  public static final String EDIT_PROFILE_FAILED = "editProfileFailed";
   public static final String LOGIN_FAILED = "loginFailed";
   public static final String USER_DTO = "user";
   public static final String LESSON_DTO = "lesson";
@@ -24,6 +25,8 @@ public class SystemConstant {
   public static final float COMMISSION_TRANSACTION_FACTOR = 0.2f;
   public static final int COURSE_LIMIT_ITEM = 20;
   public static final int DEFAULT_LIMIT_ITEM = 10;
+  public static final int RELATED_COURSE_LIMIT_ITEM = 8;
+  public static final int BEST_COURSE_LIMIT_ITEM = 12;
 
 
 }

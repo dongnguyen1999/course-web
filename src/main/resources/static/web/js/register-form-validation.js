@@ -152,15 +152,47 @@ function registerFormValidation(event) {
   return submitForm;
 }
 
-function useValidation() {
-  $('input[type="file"]').change(function () {
-    validateImage();
-  });
-  $('input[name="username"]').keyup(validateUsername);
-  $('input[name="password"]').keyup(validatePassword);
-  $('input[name="fullName"]').keyup(validateFullName);
-  $('#confirm-password').keyup(validateConfirmPassword);
-  $('input[name="email"]').keyup(validateEmail);
-  $('input[name="phone"]').keyup(validatePhone);
-  $('#registerForm').submit(registerFormValidation);
+function limitFormValidation(event) {
+  submitForm = true;
+  //Validate avatar
+  validateImage();
+
+  //Validate full name
+  validateFullName();
+
+  //Validate email if it is not empty
+  validateEmail()
+
+  //Validate phone if it is not empty
+  validatePhone();
+
+  //prevent submit and return
+  if (!submitForm) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  return submitForm;
+}
+
+function useValidation(full=true) {
+  if (full) {
+    $('input[type="file"]').change(function () {
+      validateImage();
+    });
+    $('input[name="username"]').keyup(validateUsername);
+    $('input[name="password"]').keyup(validatePassword);
+    $('input[name="fullName"]').keyup(validateFullName);
+    $('#confirm-password').keyup(validateConfirmPassword);
+    $('input[name="email"]').keyup(validateEmail);
+    $('input[name="phone"]').keyup(validatePhone);
+    $('#registerForm').submit(registerFormValidation);
+  } else {
+    $('input[type="file"]').change(function () {
+      validateImage();
+    });
+    $('input[name="fullName"]').keyup(validateFullName);
+    $('input[name="email"]').keyup(validateEmail);
+    $('input[name="phone"]').keyup(validatePhone);
+    $('#registerForm').submit(limitFormValidation);
+  }
 }

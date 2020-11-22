@@ -25,4 +25,5 @@ public interface ICourseService {
   CourseDTO deleteCourse(Long courseId);
   List<CourseDTO> listPurchasedCourses(String username, Pageable pageable, String categoryCode, String search);
   List<CourseDTO> listManagedCourses(String username, Pageable pageable, String categoryCode, String search);
+  List<CourseDTO> listManagedCourses(String username);
 }

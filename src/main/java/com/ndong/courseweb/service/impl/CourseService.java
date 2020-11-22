@@ -183,7 +183,7 @@ public class CourseService implements ICourseService {
     Page<CourseEntity> courses = courseRepository.
         findAllByCategoryAndIdNotAndStatusNotOrderByOpenTimeDesc
         (category, course.getId(), CourseStatusConstant.DELETED,
-        PageRequest.of(0, 8));
+        PageRequest.of(0, SystemConstant.RELATED_COURSE_LIMIT_ITEM));
     return courses.get().map(element -> modelMapper.map(element, CourseDTO.class)).
         collect(Collectors.toList());
   }
@@ -293,4 +293,11 @@ public class CourseService implements ICourseService {
       }).
       collect(Collectors.toList());
   }
+
+  @Override
+  public List<CourseDTO> listManagedCourses(String username) {
+    return listManagedCourses(username, null, null, null);
+  }
+
+  
 }

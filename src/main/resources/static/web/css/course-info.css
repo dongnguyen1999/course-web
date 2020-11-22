@@ -112,3 +112,13 @@ img.thumbnail {
   flex: 1;
 }
 
+.avatar-view {
+  width: 20rem;
+  height: 20rem;
+}
+
+.profile-info th,
+.profile-info td,
+.profile-info .work-experience-info {
+  font-size: 1.2rem;
+}
