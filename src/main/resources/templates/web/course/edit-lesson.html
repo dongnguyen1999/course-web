@@ -150,13 +150,13 @@
           </div>
   
           <!-- Side Widget -->
-          <div class="card my-4 lesson-list" th:if="${lessons.size() > 0}">
+          <div class="card my-4 lesson-list" th:if="${(lesson != null) && (lessons.size() > 0)}">
             <h5 class="card-header">Danh sách bài học</h5>
             <div class="card-body overflow-auto p-0" style="max-height: 30rem;">
               <div class="list-group">
                 <a th:each="item : ${lessons}" class="list-group-item list-group-item-action" 
                   th:text="${item.idNo} + '. ' + ${item.title}" 
-                  th:href="'/course/'+${course.code}+'/lesson-'+${lesson.idNo}+'/edit'" 
+                  th:href="'/course/'+${course.code}+'/lesson-'+${item.idNo}+'/edit'" 
                   th:classappend="|${(item.idNo == lesson.idNo) ?'active':''} ${((user == null || user.role == null) && (item.enableFreeTrial == false)) ?'disabled':''}|"
                   >
                   1. Cras justo odio
