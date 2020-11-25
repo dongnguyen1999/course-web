@@ -8,6 +8,10 @@
     margin: 0;
 }
 
+.spinner-border {
+    color: #131d60;
+}
+
 .badge-warning {
     background: #FF7B2E !important;
 }

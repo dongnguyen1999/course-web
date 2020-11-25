@@ -29,6 +29,11 @@ public class StorageService implements IStorageService {
     if (!storeDir.exists()) storageReady = storeDir.mkdirs();
     if (storageReady) {
       File dest = new File( storeDir.getPath() + File.separator + filename);
+      int counter = 1;
+      while (dest.exists()) {
+        dest = new File( storeDir.getPath() + File.separator + filename + "(" + counter + ")");
+        counter ++;
+      }
       file.transferTo(dest);
       return dest.getPath();
     }

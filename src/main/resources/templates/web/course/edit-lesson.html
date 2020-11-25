@@ -67,7 +67,7 @@
         </div>
         <button class="btn primary outline m-5 d-none d-md-block" type="submit" th:text="${lesson != null}? 'CẬP NHẬT BÀI HỌC': 'THÊM BÀI HỌC MỚI'">THÊM BÀI HỌC MỚI</button>
       </div>
-    </div><!--row.-->
+    </div>row.-->
     <!-- <div class="row d-flex justify-content-center m-2">
       <button class="btn primary outline d-block d-md-none" type="submit" th:text="${lesson != null}? 'CẬP NHẬT BÀI HỌC': 'THÊM BÀI HỌC MỚI'">THÊM BÀI HỌC MỚI</button>
     </div>
@@ -78,20 +78,20 @@
         title='Thêm bài học thất bại',
         content='Có gì đó sai sai<br>Có thể do hệ thống quá tải, vui lòng thử lại sau'
       )"></div>
-</div>container. --> -->
+</div>container. -->
 
 
     <!-- Page Content -->
     <div class="container">
       <form id="createLessonForm" action="" method="post" novalidate>
-        <input type="hidden" name="courseId" th:value="${course.id}">
-        <input th:if="${lesson != null}" type="hidden" name="idNo" th:value="${lesson.idNo}">
+        <input id="courseId" type="hidden" name="courseId" th:value="${course.id}">
+        <input id="lessonNo" th:if="${lesson != null}" type="hidden" name="idNo" th:value="${lesson.idNo}">
       <div class="row">
-  
+        
         <!-- Post Content Column -->
         <div class="col-lg-8 lesson-content">
   
-          <div class="form-group">
+          <div class="form-group mt-3">
             <label class="control-label" for="title">Tựa đề bài học:</label>
             <input type="text" class="form-control" id="title" name="title" required
                    th:placeholder="'Bài học ' + ${course.nextAvailableLessonNo}"
@@ -123,8 +123,26 @@
           </div>
           <div class="form-group">
             <label class="control-label" for="content">Nội dung bài học</label>
-            <textarea class="form-control" id="content" name="content" th:text="${lesson != null}? ${lesson.content}: ''"></textarea>
+            <textarea class="form-control" id="content" name="content" th:text="${lesson != null}? ${lesson.content}: ''">
+          
+              <!-- <figure class="media">
+                <oembed url="https://www.youtube.com/watch?v=N1t6X4p6Q74"></oembed>
+                <p style="text-align:center;">A caption goes here...</p>
+              </figure> -->
+              
+
+              <!-- <figure class="image">
+                <img src="data:image/jpeg;base64,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" alt="...">
+                <figcaption>A caption goes here...</figcaption>
+              </figure> -->
+            </textarea>
           </div>
+
+          <!-- <video width="320" height="240" controls>
+            <source src="http://localhost:8080/web/video-doremon.mp4" type="video/mp4">
+            >
+          Your browser does not support the video tag.
+          </video>  -->
           
   
         </div><!-- left content -->
@@ -146,6 +164,45 @@
                 <button class="btn primary outline" type="submit" th:text="${lesson != null}? 'CẬP NHẬT BÀI HỌC': 'THÊM BÀI HỌC MỚI'">THÊM BÀI HỌC MỚI</button>
               </div>
               
+            </div>
+          </div>
+
+          <!-- Side Widget -->
+          <div id="mediaLibrary" class="card my-4 lesson-list" th:if="${lesson == null}">
+            <h5 class="card-header d-flex flex-row justify-content-between">
+              <span>Thư viện Media</span>
+              <button class="btn upload-btn" data-toggle="tooltip" title="Tải lên tập tin đa phương tiện"><i class="fas fa-upload"></i></button>
+            </h5>
+            <div class="card-body overflow-auto p-0" style="max-height: 30rem;">
+              <div class="list-group loading-span">
+              </div>
+              <div class="list-group item-list">
+              </div>
+            </div>
+          </div>
+
+          <!-- Side Widget -->
+          <div id="mediaLibrary" class="card my-4 lesson-list position-sticky" th:if="${(lesson != null) && (lessons.size() > 0)}">
+            <h5 class="card-header d-flex flex-row justify-content-between">
+              <span>Thư viện Media</span>
+              <button class="btn upload-btn" data-toggle="tooltip" title="Tải lên tập tin đa phương tiện"><i class="fas fa-upload"></i></button>
+            </h5>
+            <div class="card-body overflow-auto p-0" style="max-height: 30rem;">
+              <div class="list-group loading-span">
+              </div>
+              <div class="list-group item-list">
+                <!-- <a id="${mediaId}" href="" class="list-group-item list-group-item-action d-flex flex-row justify-content-between">  
+                  <div class="d-flex flex-column">
+                  <span>${mediaName}</span>
+                  <span class="text-muted">${mediaType}</span>
+                  </div>
+                  <img class="media-preview" src="${mediaPreviewSrc}" alt="media-preview">
+                  <div class="item-list-btn-view">
+                    <div class="badge badge-warning insert-btn" data-toggle="tooltip" title="Chèn vào nội dung"><i class="fas fa-link"></i></div>
+                    <div class="badge badge-danger delete-btn" data-toggle="tooltip" title="Xóa tệp"><i class="fas fa-times"></i></div>
+                  </div>
+              </a> -->
+              </div>
             </div>
           </div>
   
@@ -173,26 +230,98 @@
         <button class="btn primary outline d-block d-md-none" type="submit" th:text="${lesson != null}? 'CẬP NHẬT BÀI HỌC': 'THÊM BÀI HỌC MỚI'">THÊM BÀI HỌC MỚI</button>
       </div>
     </form>
+    <!-- upload modal -->
+    <div class="modal fade" id="uploadMediaModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Chọn file tải lên</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="" id="uploadMediaForm" novalidate enctype="multipart/form-data">
+            <input type="hidden" name="courseId" th:value="${course.id}">
+            <input th:if="${lesson != null}" type="hidden" name="lessonNo" th:value="${lesson.idNo}">
+            <div class="modal-body mx-3 ">
+              <div class="d-none">
+                <span class="media-type-extensions" th:each="type : ${mediaTypes}" th:extension="${type.extension}"></span>
+              </div>
+              <div class="md-form mb-3">
+                <div class="input-group media-upload">
+                  <input name="rawFile" type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01">
+                  <label class="custom-file-label" for="inputGroupFile01">Chọn tệp</label>
+                  <div class="invalid-feedback mt-3"></div>
+                </div>
+              </div>
+
+              <div class="md-form">
+                <input type="text" class="form-control pl-2 pr-2" id="caption" placeholder="Chú thích mặc định" name="caption" data-toggle="tooltip" title="Chú thích mặc định sẽ dùng khi chèn tệp vào nội dung">
+              </div>
+
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center border-top-0">
+              <button class="btn outline upload-confirm-btn">Tải lên</button>
+            </div>
+          </form>
+          
+        </div>
+      </div>
     </div>
-    <!-- /.container -->
+
+    <!-- upload modal. -->
+  </div>
+  <!-- /.container -->
 
 
 </div><!--wrapper content.-->
 
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script"/>
-<script src="https://cdn.ckeditor.com/4.15.0/basic/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/4.15.0/basic/ckeditor.js"></script> -->
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script> -->
+<script th:src="@{/vendor/ckeditor5/build/ckeditor.js}"></script>
 <script th:src="@{/web/js/common.js}"></script>
+<script th:src="@{/web/js/ckeditor-creator.js}"></script>
+<script th:src="@{/web/js/media-lib.js}"></script>
+<script th:src="@{/web/js/validation.js}"></script>
+<script th:src="@{/web/js/upload-media-form-validation.js}"></script>
 <script th:replace="web/fragments/modal :: informationModalController(showCondition=${createLessonFailed == true})"></script>
 
 <script>
-  CKEDITOR.replace('shortDescription');
-  CKEDITOR.replace('content', {
-    height: '45rem',
-  });
+  // CKEDITOR.replace('shortDescription');
+  // CKEDITOR.replace('content', {
+  //   height: '45rem',
+  // });
+
+  // Replace content area with ckeditor 5
+  createMinCkeditor('shortDescription');
+  createFullCkeditor('content');
+
   $(function () {
     useBtnCheckbox();
+    useValidation();
     simpleFormValidation('createLessonForm');
+    $('.upload-btn').click(function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      $('#uploadMediaModal').modal('show');
+    })
+
+    $('.insert-btn').click(function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      const content = '<video width="320" height="240" controls><source src="http://localhost:8080/web/video-doremon.mp4" type="video/mp4">Your browser does not support the video tag.</video> ';
+      const viewFragment = editor.data.processor.toView( content );
+      const modelFragment = editor.data.toModel( viewFragment );
+
+      editor.model.insertContent( modelFragment );
+    })
+
+    
   })
 </script>
 </body>

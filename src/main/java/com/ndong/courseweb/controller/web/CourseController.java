@@ -10,11 +10,13 @@ import com.ndong.courseweb.dto.AbstractDTO;
 import com.ndong.courseweb.dto.CategoryDTO;
 import com.ndong.courseweb.dto.CourseDTO;
 import com.ndong.courseweb.dto.LessonDTO;
+import com.ndong.courseweb.dto.MediaTypeDTO;
 import com.ndong.courseweb.dto.UserDTO;
 import com.ndong.courseweb.entity.CourseEntity;
 import com.ndong.courseweb.filter.IFilter;
 import com.ndong.courseweb.service.ICategoryService;
 import com.ndong.courseweb.service.ICourseService;
+import com.ndong.courseweb.service.IMediaTypeService;
 import com.ndong.courseweb.service.IUserService;
 import com.ndong.courseweb.utils.SessionUtils;
 
@@ -43,6 +45,9 @@ public class CourseController {
 
   @Autowired
   private SessionUtils sessionUtils;
+
+  @Autowired
+  private IMediaTypeService mediaTypeService;
 
   @RequestMapping(path = "/course", method = RequestMethod.GET)
   public ModelAndView getCourseList(AbstractDTO getParams) {
@@ -114,8 +119,10 @@ public class CourseController {
     ModelAndView view = new ModelAndView("/web/course/edit-lesson");
     CourseDTO course = courseService.findOneCourse(courseCode);
     List<LessonDTO> lessons = courseService.listLessons(course.getId());
+    List<MediaTypeDTO> mediaTypes = mediaTypeService.findAll();
     view.addObject(SystemConstant.COURSE_DTO, course);
     view.addObject(SystemConstant.LESSON_DTO_LIST, lessons);
+    view.addObject(SystemConstant.MEDIA_TYPE_DTO_LIST, mediaTypes);
     return view;
   }
 
@@ -157,6 +164,7 @@ public class CourseController {
     ModelAndView view = new ModelAndView("/web/course/edit-lesson");
     CourseDTO course = courseService.findOneCourse(courseCode);
     LessonDTO lesson = courseService.findOneLesson(course, lessonNo);
+    List<MediaTypeDTO> mediaTypes = mediaTypeService.findAll();
     List<LessonDTO> lessons = courseService.listLessons(course.getId());
     UserDTO user = sessionUtils.getUser();
     if (user != null) user = userService.findPermissionOnCourse(user.getUsername(), courseCode);
@@ -164,6 +172,7 @@ public class CourseController {
     view.addObject(SystemConstant.COURSE_DTO, course);
     view.addObject(SystemConstant.LESSON_DTO, lesson);
     view.addObject(SystemConstant.LESSON_DTO_LIST, lessons);
+    view.addObject(SystemConstant.MEDIA_TYPE_DTO_LIST, mediaTypes);
     return view;
   }
 

@@ -40,6 +40,7 @@
 
 img.thumbnail {
   box-shadow: 0 0 3px #5d687f;
+  object-fit: cover;
 }
 
 .lesson-list .lesson-no {
@@ -115,6 +116,10 @@ img.thumbnail {
 .avatar-view {
   width: 20rem;
   height: 20rem;
+}
+
+.avatar-view img {
+  object-fit: cover;
 }
 
 .profile-info th,

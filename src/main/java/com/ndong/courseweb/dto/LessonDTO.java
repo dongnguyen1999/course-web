@@ -3,6 +3,8 @@ package com.ndong.courseweb.dto;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import com.ndong.courseweb.constant.DefaultValueConstant;
+
 public class LessonDTO extends AbstractDTO implements Serializable {
 
     /**
@@ -25,6 +27,13 @@ public class LessonDTO extends AbstractDTO implements Serializable {
     private Integer duration;
 
     private Boolean enableFreeTrial;
+
+    public static LessonDTO createDefault() {
+        LessonDTO lesson = new LessonDTO();
+        lesson.setTitle(DefaultValueConstant.LESON_TITLE);
+        lesson.setEnableFreeTrial(false);
+        return lesson;
+    }
 
     public Integer getIdNo() {
         return idNo;

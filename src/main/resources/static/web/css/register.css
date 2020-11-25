@@ -80,7 +80,8 @@
 }
 
 #withdrawForm label,
-#payInForm label {
+#payInForm label,
+#purchaseForm label {
   color: #131d60;
   font-size: 1.2rem;
   font-weight: bold;

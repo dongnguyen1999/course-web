@@ -82,3 +82,72 @@
     color: #131d60;
     -webkit-text-stroke: 1px #131d60;
 }
+
+/* media library */
+
+.upload-btn {
+    padding: 0;
+    margin: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #b2ecf2;
+    color: black;
+}
+
+.modal-title {
+    color: #131d60;
+}
+
+#uploadMediaForm .custom-file-label {
+    border: solid 1px #ced4da;
+}
+
+.media-upload input.is-valid+label {
+    border: solid 1px #28a745 !important;
+}
+
+.media-upload input.is-invalid+label {
+    border: solid 1px #dc3545 !important;
+}
+
+.media-preview, .loading-container {
+    width: 4rem;
+    height: 3rem;
+    object-fit: cover;
+}
+
+#mediaLibrary .item-list-btn-view {
+    position: absolute;
+    display: none;
+    right: .5rem;
+    top: -.1rem;
+}
+
+#mediaLibrary .item-list-btn-view .delete-btn {
+    margin-left: .2rem;
+}
+
+#mediaLibrary .list-group-item:hover .item-list-btn-view {
+    display: block;
+}
+
+figure img {
+    width: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+figure figcaption {
+    text-align: center;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.lesson-content {
+    background-color: white;
+    margin-top: 1.5rem;
+}
+
+.ck-editor__editable {
+    max-height: 45rem;
+}

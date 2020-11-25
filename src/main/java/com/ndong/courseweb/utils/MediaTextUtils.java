@@ -1,5 +1,7 @@
 package com.ndong.courseweb.utils;
 
+import com.ndong.courseweb.entity.composite_id.LessonId;
+
 public class MediaTextUtils {
   public static String avatarPath(String username){
     String pattern =  "/${username}/avatar";
@@ -26,6 +28,13 @@ public class MediaTextUtils {
   public static String thumbnailCaption(Long id){
     String pattern = "@Thumbnail(${courseId})";
     return pattern.replace("${courseId}", id.toString());
+  }
+
+  public static String mediaPath(String username, LessonId lessonId) {
+    String pattern =  "/${username}/course/${courseId}/${lessonNo}";
+    return pattern.replace("${username}", username).
+      replace("${courseId}", lessonId.getCourseId().toString()).
+      replace("${lessonNo}", lessonId.getNo().toString());
   }
 
   public static String getExtension(String filename) {

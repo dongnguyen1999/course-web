@@ -4,8 +4,10 @@ function courseFormValidation(event) {
   validateImage(true);
 
   let form = $('#editCourseForm');
-  submitForm = form[0].checkValidity();
+  let isOk = form[0].checkValidity();
   form.addClass('was-validated');
+  if (submitForm) submitForm = isOk;
+  
   //prevent submit and return
   if (!submitForm) {
     event.preventDefault();

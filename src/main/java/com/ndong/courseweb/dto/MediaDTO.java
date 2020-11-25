@@ -2,6 +2,8 @@ package com.ndong.courseweb.dto;
 
 import java.io.Serializable;
 
+import com.ndong.courseweb.entity.composite_id.LessonId;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class MediaDTO extends AbstractDTO implements Serializable {
@@ -19,7 +21,13 @@ public class MediaDTO extends AbstractDTO implements Serializable {
 
   private String mediaTypeCode;
 
-  private Long lessonId;
+  private String mediaTypeName;
+
+  private String filename;
+
+  private LessonId lessonId;
+
+  private Long courseId;
 
   private Integer lessonNo;
 
@@ -27,6 +35,46 @@ public class MediaDTO extends AbstractDTO implements Serializable {
 
   public String getCode() {
     return code;
+  }
+
+  public Integer getLessonNo() {
+    return lessonNo;
+  }
+
+  public void setLessonNo(Integer lessonNo) {
+    this.lessonNo = lessonNo;
+  }
+
+  public Long getCourseId() {
+    return courseId;
+  }
+
+  public void setCourseId(Long courseId) {
+    this.courseId = courseId;
+  }
+
+  public LessonId getLessonId() {
+    return lessonId;
+  }
+
+  public void setLessonId(LessonId lessonId) {
+    this.lessonId = lessonId;
+  }
+
+  public String getMediaTypeName() {
+    return mediaTypeName;
+  }
+
+  public void setMediaTypeName(String mediaTypeName) {
+    this.mediaTypeName = mediaTypeName;
+  }
+
+  public String getFilename() {
+    return filename;
+  }
+
+  public void setFilename(String filename) {
+    this.filename = filename;
   }
 
   public void setCode(String code) {
@@ -65,19 +113,4 @@ public class MediaDTO extends AbstractDTO implements Serializable {
     this.mediaTypeCode = mediaTypeCode;
   }
 
-  public Long getLessonId() {
-    return lessonId;
-  }
-
-  public void setLessonId(Long lessonId) {
-    this.lessonId = lessonId;
-  }
-
-  public Integer getLessonNo() {
-    return lessonNo;
-  }
-
-  public void setLessonNo(Integer lessonNo) {
-    this.lessonNo = lessonNo;
-  }
 }

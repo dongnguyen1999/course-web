@@ -76,3 +76,15 @@ function showInformationModal(title, message) {
   $('#messageDialog .modal-body').html(message);
   $('#messageDialog').modal('show');
 }
+
+function getFileName(filePath){
+  if (filePath) {
+    let startIndex = (filePath.indexOf('\\') >= 0 ? filePath.lastIndexOf('\\') : filePath.lastIndexOf('/'));
+    let filename = filePath.substring(startIndex);
+    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+        filename = filename.substring(1);
+    }
+    return filename;
+  }
+  return undefined;
+}
