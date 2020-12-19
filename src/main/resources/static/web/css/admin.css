@@ -1,0 +1,21 @@
+ul.dropdown-menu {
+  padding: 0;
+}
+
+hr.dropdown-divider {
+  margin: 0;
+}
+
+ul.dropdown-menu li a.dropdown-item {
+  padding: .3rem !important;
+}
+
+ul.dropdown-menu li {
+  display: flex;
+  justify-content: center;
+}
+
+a.navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+}

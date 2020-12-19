@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ManagerPageController {
+public class AdminHomeController {
 
   @Autowired
   private ICategoryService categoryService;
@@ -22,9 +22,16 @@ public class ManagerPageController {
   @Autowired
   private IMediaTypeService mediaTypeService;
 
+
+  @RequestMapping(path = "/admin", method = RequestMethod.GET)
+  public ModelAndView getAdminHome() {
+    ModelAndView view = new ModelAndView("/web/admin");
+    return view;
+  }
+
   @RequestMapping(path = "/admin/manage/category", method = RequestMethod.GET)
   public ModelAndView getListCategory() {
-    ModelAndView view = new ModelAndView("/admin/manager/category");
+    ModelAndView view = new ModelAndView("/web/manager/category");
     List<CategoryDTO> categories = categoryService.findAll();
     view.addObject(SystemConstant.CATEGORY_DTO_LIST, categories);
     return view;
@@ -32,7 +39,7 @@ public class ManagerPageController {
 
   @RequestMapping(path = "/admin/manage/media-type", method = RequestMethod.GET)
   public ModelAndView getListMediaType() {
-    ModelAndView view = new ModelAndView("/admin/manager/media-type");
+    ModelAndView view = new ModelAndView("/web/manager/media-type");
     List<MediaTypeDTO> mediaTypes = mediaTypeService.findAll();
     view.addObject(SystemConstant.MEDIA_TYPE_DTO_LIST, mediaTypes);
     return view;

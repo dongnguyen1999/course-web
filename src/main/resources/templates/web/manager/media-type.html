@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Quản lý loại tệp</title>
+  <th:block th:replace="web/fragments/general :: meta"/>
+  <th:block th:replace="web/fragments/general :: link"/>
+  <link rel="stylesheet" th:href="@{/web/css/admin.css}">
+  <link rel="stylesheet" th:href="@{/web/css/manager.css}">
+</head>
+<body>
+<div th:replace="web/fragments/general :: header"></div>
+
+<div id="wrapper" class="wrapper-content">
+  <div id="page-content-wrapper">
+    <div class="container pt-4">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Navbar brand -->
+          <a class="navbar-brand" href="#">Quản lý loại tập tin</a>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Quay lại</a>
+            </li>
+          </ul>
+          
+          <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+
+      <div class="table-responsive">
+        <table class="table table-striped border">
+          <thead class="thead-dark">
+          <tr>
+            <th class="align-middle" style="width: 5%;">
+              <button id="new-btn" type="button" class="btn btn-outline-light table-btn" aria-label="Thêm loại tệp"
+                      title="Thêm loại tệp">
+                <i class="fas fa-plus"></i>
+              </button>
+            </th>
+            <th class="align-middle" style="width: 10%;">Id</th>
+            <th class="align-middle" style="width: 25%;">Tên loại tệp</th>
+            <th class="align-middle" style="width: 25%;">Mã loại tệp</th>
+            <th class="align-middle" style="width: 20%;">Phần mở rộng</th>
+            <th class="align-middle text-right" style="width: 15%;">
+              <button id="delete-all-btn" type="button" class="btn btn-outline-light table-btn" aria-label="Xóa các loại tệp được chọn"
+                      title="Xóa các loại tệp được chọn" message="Bạn có chắc muốn xóa tất cả các loại tệp được chọn">
+                <i class="fas fa-times"></i>
+              </button>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:id="${mediaType.id}" th:each="mediaType: ${mediaTypes}">
+            <td class="align-middle" style="width: 5%;">
+              <button type="button" class="btn btn-outline-dark table-btn checkbox" aria-label="Chọn"
+                      title="Chọn">
+                <i class="fas fa-check"></i>
+              </button>
+            </td>
+            <td class="align-middle" style="width: 10%;">
+              <span class="id" th:text="${mediaType.id}">Id</span>
+            </td>
+            <td class="align-middle editable" style="width: 25%;">
+              <span class="name" th:text="${mediaType.name}">Tên loại tệp</span>
+              <input class="form-control name hide" type="text" th:value="${mediaType.name}">
+            </td>
+            <td class="align-middle editable" style="width: 25%;">
+              <span class="code" th:text="${mediaType.code}">Mã loại tệp</span>
+              <input class="form-control code hide" type="text" th:value="${mediaType.code}">
+              <div class="invalid-feedback">
+                Mã loại đã tồn tại trên hệ thống
+              </div>
+            </td>
+            <td class="align-middle editable" style="width: 20%;">
+              <span class="extension" th:text="${mediaType.extension}">Phần mở rộng</span>
+              <input class="form-control extension hide" type="text" th:value="${mediaType.extension}">
+            </td>
+            <td class="align-middle text-right" style="width: 15%;">
+              <button type="button" class="btn btn-outline-dark table-btn edit-btn" aria-label="Chỉnh sửa loại tệp"
+                      title="Chỉnh sửa loại tệp">
+                <i class="fas fa-edit"></i>
+                <span class="font-weight-bold">OK</span>
+              </button>
+              <button type="button" class="btn btn-outline-dark table-btn delete-btn" aria-label="Xóa loại tệp"
+                      title="Xóa loại tệp" th:message="'Bạn có chắc muốn xóa loại tệp ' + ${mediaType.name}">
+                <i class="fas fa-times"></i>
+              </button>
+            </td>
+          </tr>
+    
+          </tbody>
+        </table>
+      </div>
+      <div th:replace="web/fragments/modal :: confirmModal(
+            title='Xác nhận xóa loại tệp',
+            confirmBtnText='Xóa luôn',
+            cancelBtnText='Quay lại'
+          )"></div>
+    
+    </div>
+  </div><!--page wrapper content.-->
+</div><!--wrapper content.-->
+
+
+<div th:replace="web/fragments/general :: footer"></div>
+<th:block th:replace="web/fragments/general :: script"/>
+<script th:src="@{/web/js/common.js}"></script>
+<script th:src="@{/web/js/inline-editable.js}"></script>
+
+<script>
+  $(function (){
+    useBtnCheckbox();
+    setEditButtons('MEDIA_TYPE');
+    setAddNewButtons('MEDIA_TYPE');
+    setDeleteButtons('MEDIA_TYPE');
+  })
+</script>
+
+</body>
+</html>

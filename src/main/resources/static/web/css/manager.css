@@ -1,0 +1,34 @@
+.table-btn {
+  width: 2rem !important;
+  height: 2rem !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important; 
+  padding: 0;
+  margin: 0;
+}
+
+.btn-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox i {
+  display: none;
+}
+
+.checkbox.checked i {
+  display: block;
+}
+
+.edit-btn span {
+  display: none;
+}
+
+.edit-btn.editing i {
+  display: none;
+}
+.edit-btn.editing span {
+  display: inline;
+}
