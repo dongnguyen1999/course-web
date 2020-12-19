@@ -34,28 +34,28 @@ public class CourseWebApplication {
     return mapper;
   }
 
-  @Bean
-  public YouTube getYoutubeService() throws GeneralSecurityException, IOException {
-    final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-    Credential credential = authorize(httpTransport);
-    return new YouTube.Builder(httpTransport, YoutubeApiConstant.JSON_FACTORY, credential)
-            .setApplicationName(YoutubeApiConstant.APPLICATION_NAME)
-            .build();
-  }
-
-  private Credential authorize(final NetHttpTransport httpTransport) throws IOException {
-    // Load client secrets.
-    InputStream in = new FileInputStream(YoutubeApiConstant.CLIENT_SECRETS);
-    GoogleClientSecrets clientSecrets =
-            GoogleClientSecrets.load(YoutubeApiConstant.JSON_FACTORY, new InputStreamReader(in));
-    // Build flow and trigger user authorization request.
-    GoogleAuthorizationCodeFlow flow =
-            new GoogleAuthorizationCodeFlow.Builder(httpTransport, YoutubeApiConstant.JSON_FACTORY, clientSecrets, YoutubeApiConstant.SCOPES)
-                    .build();
-    Credential credential =
-            new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
-    return credential;
-  }
+//  @Bean
+//  public YouTube getYoutubeService() throws GeneralSecurityException, IOException {
+//    final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+//    Credential credential = authorize(httpTransport);
+//    return new YouTube.Builder(httpTransport, YoutubeApiConstant.JSON_FACTORY, credential)
+//            .setApplicationName(YoutubeApiConstant.APPLICATION_NAME)
+//            .build();
+//  }
+//
+//  private Credential authorize(final NetHttpTransport httpTransport) throws IOException {
+//    // Load client secrets.
+//    InputStream in = new FileInputStream(YoutubeApiConstant.CLIENT_SECRETS);
+//    GoogleClientSecrets clientSecrets =
+//            GoogleClientSecrets.load(YoutubeApiConstant.JSON_FACTORY, new InputStreamReader(in));
+//    // Build flow and trigger user authorization request.
+//    GoogleAuthorizationCodeFlow flow =
+//            new GoogleAuthorizationCodeFlow.Builder(httpTransport, YoutubeApiConstant.JSON_FACTORY, clientSecrets, YoutubeApiConstant.SCOPES)
+//                    .build();
+//    Credential credential =
+//            new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+//    return credential;
+//  }
 
   public static void main(String[] args) {
     SpringApplication.run(CourseWebApplication.class, args);

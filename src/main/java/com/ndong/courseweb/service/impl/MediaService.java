@@ -28,7 +28,7 @@ import com.ndong.courseweb.utils.CodeFactory;
 import com.ndong.courseweb.utils.MediaTextUtils;
 import com.ndong.courseweb.utils.SessionUtils;
 
-import com.ndong.courseweb.utils.YoutubeApiUtils;
+//import com.ndong.courseweb.utils.YoutubeApiUtils;
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +60,8 @@ public class MediaService implements IMediaService {
   @Autowired
   private SessionUtils sessionUtils;
 
-  @Autowired
-  private YoutubeApiUtils youtubeApiUtils;
+//  @Autowired
+//  private YoutubeApiUtils youtubeApiUtils;
 
   @Override
   public MediaDTO saveAvatar(MultipartFile file, UserEntity user) {
@@ -147,8 +147,9 @@ public class MediaService implements IMediaService {
     } else if (media.getMediaType().getCode().contains(SystemConstant.VIDEO_MEDIA_CODE)) {
       try {
         String videoId = MediaTextUtils.getYoutubeMediaId(media.getSource());
-        String thumbnailUrl = youtubeApiUtils.getThumbnailImageLink(videoId);
-        return youtubeApiUtils.getThumbnailResource(thumbnailUrl);
+//        Youtube API
+//        String thumbnailUrl = youtubeApiUtils.getThumbnailImageLink(videoId);
+//        return youtubeApiUtils.getThumbnailResource(thumbnailUrl);
       } catch (Exception e) {
         System.out.println(e.getMessage());
         return null;
@@ -212,8 +213,9 @@ public class MediaService implements IMediaService {
       media.setMediaType(mediaType);
       media.setLesson(lesson);
       if (mediaType.getCode().contains(SystemConstant.VIDEO_MEDIA_CODE)) {
-        String videoId = youtubeApiUtils.upload(file, media.getCaption());
-        media.setSource(videoId + File.separator + filename);
+//        Youtube API
+//        String videoId = youtubeApiUtils.upload(file, media.getCaption());
+//        media.setSource(videoId + File.separator + filename);
       } else {
         UserDTO currentUser = sessionUtils.getUser();
         String path = MediaTextUtils.mediaPath(currentUser.getUsername(), lesson.getId());
