@@ -51,6 +51,9 @@ public class MediaAPI {
       lesson = courseService.tryCreateNewLesson(newLesson);
     }
     MediaDTO media = mediaService.uploadMedia(mediaDTO, lesson);
+    if (media != null && media.isVideo()) {
+
+    }
     if (media != null) return new ResponseEntity<>(media, HttpStatus.OK);
     else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }

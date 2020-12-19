@@ -21,6 +21,8 @@ public class SystemConstant {
   public static final String MEDIA_TYPE_DTO_LIST = "mediaTypes";
   public static final String NAVIGATE_URL = "navigateUrl";
   public static final String SESSION_LATELY_COURSE_LIST = "latelyCourses";
+  public static final String IMAGE_MEDIA_CODE = "image";
+  public static final String VIDEO_MEDIA_CODE = "video";
   public static final int LANDING_LIMIT_ITEM = 6;
   public static final float COMMISSION_TRANSACTION_FACTOR = 0.2f;
   public static final int COURSE_LIMIT_ITEM = 20;

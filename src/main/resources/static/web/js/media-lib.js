@@ -57,12 +57,18 @@ function renderMediaListLoading(mediaName, processingState) {
 
 function renderMediaListItem(media) {
     console.log(media);
-    mediaId = media.id;
-    mediaName = media.filename;
-    mediaType = media.mediaTypeName;
+    let mediaId = media.id;
+    let mediaName = media.filename;
+    let mediaType = media.mediaTypeName;
+    let mediaTypeCode = media.mediaTypeCode;
     src = `/resource/${media.code}`;
     caption = media.caption;
     mediaPreviewSrc = src;
+    if (mediaTypeCode.includes('video')) {
+        let videoSource = media.source
+        let videoId = videoSource.substring(0, videoSource.lastIndexOf("/"));
+        src = `youtu.be/${videoId}`
+    }
     if (mediaPreviewSrc === undefined) mediaPreviewSrc = '/web/img/default-avatar.png';
     return (
         `<a href="" class="list-group-item list-group-item-action d-flex flex-row justify-content-between">` +
@@ -70,9 +76,9 @@ function renderMediaListItem(media) {
             `<span>${mediaName}</span>` +
             `<span class="text-muted">${mediaType}</span>` +
             '</div>' +
-            `<img class="media-preview" src="${mediaPreviewSrc}" alt="media-preview">` +
+            `<img class="media-preview" src="${mediaPreviewSrc}" alt="Đang xử lý">` +
             '<div class="item-list-btn-view">' +
-                `<div class="badge badge-warning insert-btn" src="${src}" caption="${caption}" data-toggle="tooltip" title="Chèn vào nội dung"><i class="fas fa-link"></i></div>` +
+                `<div class="badge badge-warning insert-btn" src="${src}" caption="${caption}" mediaTypeCode="${mediaTypeCode}" data-toggle="tooltip" title="Chèn vào nội dung"><i class="fas fa-link"></i></div>` +
                 `<div id="${mediaId}" class="badge badge-danger delete-btn" data-toggle="tooltip" title="Xóa tệp"><i class="fas fa-times"></i></div>` +
             '</div>' +
         '</a>'
@@ -124,8 +130,17 @@ function setInsertBtn() {
         event.stopPropagation();
         let src = $(this).attr('src');
         let caption = $(this).attr('caption');
-        let captionView = caption != null?`<figcaption>${caption}</figcaption>`:'<figcaption>Nhập chú thích cho hình ảnh</figcaption>';
-        const content = `<figure class="image"><img src="${src}" alt="Kết nối không ổn định hoặc hình ảnh đã bị xóa">${captionView}</figure>`;
+        let mediaTypeCode = $(this).attr('mediaTypeCode');
+        let captionView
+        let content
+        if (mediaTypeCode.includes("image")) {
+            captionView = caption != null?`<figcaption>${caption}</figcaption>`:'<figcaption>Nhập chú thích cho hình ảnh</figcaption>';
+            content = `<figure class="image"><img src="${src}" alt="Kết nối không ổn định hoặc hình ảnh đã bị xóa">${captionView}</figure>`;
+        } else if (mediaTypeCode.includes("video")) {
+            captionView = caption != null?`<p style="text-align:center;">${caption}</p>`:'<p style="text-align:center;">Nhập chú thích cho hình ảnh</p>';
+            content = `<figure class="media"><oembed url="${src}"></oembed>${captionView}</figure>`;
+        }
+
         console.log(content);
         const viewFragment = editor.data.processor.toView( content );
         const modelFragment = editor.data.toModel( viewFragment );

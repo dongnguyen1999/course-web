@@ -2,11 +2,13 @@ package com.ndong.courseweb.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.dto.LessonDTO;
 import com.ndong.courseweb.dto.MediaDTO;
 import com.ndong.courseweb.dto.UserDTO;
@@ -19,7 +21,6 @@ import com.ndong.courseweb.entity.composite_id.LessonId;
 import com.ndong.courseweb.repository.LessonRepository;
 import com.ndong.courseweb.repository.MediaRepository;
 import com.ndong.courseweb.repository.MediaTypeRepository;
-import com.ndong.courseweb.service.ICourseService;
 import com.ndong.courseweb.service.IMediaService;
 import com.ndong.courseweb.service.IMediaTypeService;
 import com.ndong.courseweb.service.IStorageService;
@@ -27,6 +28,7 @@ import com.ndong.courseweb.utils.CodeFactory;
 import com.ndong.courseweb.utils.MediaTextUtils;
 import com.ndong.courseweb.utils.SessionUtils;
 
+import com.ndong.courseweb.utils.YoutubeApiUtils;
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,9 @@ public class MediaService implements IMediaService {
 
   @Autowired
   private SessionUtils sessionUtils;
+
+  @Autowired
+  private YoutubeApiUtils youtubeApiUtils;
 
   @Override
   public MediaDTO saveAvatar(MultipartFile file, UserEntity user) {
@@ -107,25 +112,44 @@ public class MediaService implements IMediaService {
   }
 
   @Override
-  public Boolean cleanCourseMedia(CourseEntity course) {
+  public void cleanCourseMedia(CourseEntity course) {
     try {
       UserEntity author = course.getUser();
       String path = MediaTextUtils.courseDirectory(author.getUsername(), course.getId());
-      return storageService.delete(path);
+      storageService.deleteByRelativePath(path);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return false;
+  }
+
+  @Override
+  public void cleanLessonMedia(LessonEntity lesson) {
+    try {
+      UserEntity author = lesson.getCourse().getUser();
+      String path = MediaTextUtils.mediaPath(author.getUsername(), lesson.getId());
+      storageService.deleteByRelativePath(path);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public byte[] loadResource(String code) {
     MediaEntity media = mediaRepository.findOneByCode(code);
-    if (media.getMediaType().getCode().contains("image")) {
+    if (media.getMediaType().getCode().contains(SystemConstant.IMAGE_MEDIA_CODE)) {
       Resource resource = storageService.load(media.getSource());
       try {
         return IOUtils.toByteArray(resource.getInputStream());
       } catch (IOException e) {
+        System.out.println(e.getMessage());
+        return null;
+      }
+    } else if (media.getMediaType().getCode().contains(SystemConstant.VIDEO_MEDIA_CODE)) {
+      try {
+        String videoId = MediaTextUtils.getYoutubeMediaId(media.getSource());
+        String thumbnailUrl = youtubeApiUtils.getThumbnailImageLink(videoId);
+        return youtubeApiUtils.getThumbnailResource(thumbnailUrl);
+      } catch (Exception e) {
         System.out.println(e.getMessage());
         return null;
       }
@@ -160,6 +184,8 @@ public class MediaService implements IMediaService {
     try {
       MediaEntity media = mediaRepository.getOne(mediaId);
       MediaDTO dto = modelMapper.map(media, MediaDTO.class);
+      if (media.getMediaType().getCode().contains(SystemConstant.IMAGE_MEDIA_CODE))
+        storageService.deleteByPath(media.getSource());
       mediaRepository.delete(media);
       return dto;
     } catch (Exception e) {
@@ -174,9 +200,10 @@ public class MediaService implements IMediaService {
       return null;
     try {
       String filename = model.getRawFile().getOriginalFilename();
+      assert filename != null;
       String extension = filename.substring(filename.lastIndexOf(".") + 1);
       MediaTypeEntity mediaType = mediaTypeRepository.findTopByExtensionContaining(extension);
-      LessonEntity lesson = new LessonEntity();
+      LessonEntity lesson;
       if (lessonDTO != null)
         lesson = lessonRepository.getOne(new LessonId(lessonDTO.getCourseId(), lessonDTO.getIdNo()));
       else
@@ -184,9 +211,14 @@ public class MediaService implements IMediaService {
       MediaEntity media = modelMapper.map(model, MediaEntity.class);
       media.setMediaType(mediaType);
       media.setLesson(lesson);
-      UserDTO currentUser = sessionUtils.getUser();
-      String path = MediaTextUtils.mediaPath(currentUser.getUsername(), lesson.getId());
-      media.setSource(storageService.store(file, path));
+      if (mediaType.getCode().contains(SystemConstant.VIDEO_MEDIA_CODE)) {
+        String videoId = youtubeApiUtils.upload(file, media.getCaption());
+        media.setSource(videoId + File.separator + filename);
+      } else {
+        UserDTO currentUser = sessionUtils.getUser();
+        String path = MediaTextUtils.mediaPath(currentUser.getUsername(), lesson.getId());
+        media.setSource(storageService.store(file, path));
+      }
       media.setCode(CodeFactory.from(media));
       media = mediaRepository.save(media);
       return modelMapper.map(media, MediaDTO.class);

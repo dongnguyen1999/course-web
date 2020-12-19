@@ -131,6 +131,10 @@
     display: block;
 }
 
+figure {
+    margin-bottom: 0 !important;
+}
+
 figure img {
     width: 100%;
     padding-left: 3rem;
@@ -150,4 +154,10 @@ figure figcaption {
 
 .ck-editor__editable {
     max-height: 45rem;
+}
+
+oembed {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

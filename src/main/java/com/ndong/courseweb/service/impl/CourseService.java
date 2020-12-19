@@ -200,8 +200,10 @@ public class CourseService implements ICourseService {
     CourseEntity course = courseRepository.findById(courseId).orElse(new CourseEntity());
     LessonEntity latestLesson = lessonRepository.findTopByCourseOrderByIdDesc(course);
     if (latestLesson == null) return null;
+    LessonDTO dto = modelMapper.map(latestLesson, LessonDTO.class);
+    mediaService.cleanLessonMedia(latestLesson);
     lessonRepository.delete(latestLesson);
-    return modelMapper.map(latestLesson, LessonDTO.class);
+    return dto;
   }
 
   @Override

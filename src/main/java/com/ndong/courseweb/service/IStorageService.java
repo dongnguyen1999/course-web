@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface IStorageService {
   String store(MultipartFile file, String path) throws IOException;
-  Boolean delete(String path) throws IOException;
+  Boolean deleteByRelativePath(String path) throws IOException;
+  Boolean deleteByPath(String path) throws IOException;
   Resource load(String filename);
 }

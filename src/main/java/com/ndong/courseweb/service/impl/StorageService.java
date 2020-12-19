@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class StorageService implements IStorageService {
 
-  private static final String STORAGE_LOCATION = "/data/upload";
+  public static final String STORAGE_LOCATION = "/data/upload";
 
   @Autowired
   private ResourceLoader resourceLoader;
@@ -41,7 +41,17 @@ public class StorageService implements IStorageService {
   }
 
   @Override
-  public Boolean delete(String path) throws IOException {
+  public Boolean deleteByPath(String path) throws IOException {
+    File file = new File(path);
+    if (file.exists()) {
+      FileUtils.forceDelete(file);
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public Boolean deleteByRelativePath(String path) throws IOException {
     File dir = new File(STORAGE_LOCATION + File.separator + path);
     if (dir.exists()) {
       FileUtils.deleteDirectory(dir);

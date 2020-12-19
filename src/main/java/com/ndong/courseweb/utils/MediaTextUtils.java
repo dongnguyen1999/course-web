@@ -45,4 +45,13 @@ public class MediaTextUtils {
       return "";
     }
   }
+
+  public static String getYoutubeMediaId(String videoSource) {
+    return videoSource.substring(0, videoSource.lastIndexOf("/"));
+  }
+
+  public static String getYoutubeMediaLink(String videoSource) {
+    String videoId = getYoutubeMediaId(videoSource);
+    return "youtu.be/" + videoId;
+  }
 }

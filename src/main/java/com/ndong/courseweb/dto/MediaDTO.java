@@ -2,6 +2,7 @@ package com.ndong.courseweb.dto;
 
 import java.io.Serializable;
 
+import com.ndong.courseweb.constant.SystemConstant;
 import com.ndong.courseweb.entity.composite_id.LessonId;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -111,6 +112,14 @@ public class MediaDTO extends AbstractDTO implements Serializable {
 
   public void setMediaTypeCode(String mediaTypeCode) {
     this.mediaTypeCode = mediaTypeCode;
+  }
+
+  public boolean isImage() {
+    return getMediaTypeCode().contains(SystemConstant.IMAGE_MEDIA_CODE);
+  }
+
+  public boolean isVideo() {
+    return getMediaTypeCode().contains(SystemConstant.VIDEO_MEDIA_CODE);
   }
 
 }

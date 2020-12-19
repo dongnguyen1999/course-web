@@ -5,6 +5,7 @@ import java.util.List;
 import com.ndong.courseweb.dto.LessonDTO;
 import com.ndong.courseweb.dto.MediaDTO;
 import com.ndong.courseweb.entity.CourseEntity;
+import com.ndong.courseweb.entity.LessonEntity;
 import com.ndong.courseweb.entity.UserEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +14,8 @@ public interface IMediaService {
   MediaDTO saveAvatar(MultipartFile file);
   MediaDTO saveThumbnail(MultipartFile file);
   MediaDTO saveThumbnail(MultipartFile file, CourseEntity course);
-  Boolean cleanCourseMedia(CourseEntity course);
+  void cleanCourseMedia(CourseEntity course);
+  void cleanLessonMedia(LessonEntity lesson);
   byte[] loadResource(String code);
   List<MediaDTO> listMedia(Long courseId, Integer lessonNo);
   MediaDTO uploadMedia(MediaDTO model);

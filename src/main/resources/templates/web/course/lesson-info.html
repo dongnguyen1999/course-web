@@ -6,6 +6,11 @@
   <th:block th:replace="web/fragments/general :: meta"/>
   <th:block th:replace="web/fragments/general :: link"/>
   <link rel="stylesheet" th:href="@{/web/css/edit-lesson.css}">
+  <style>
+    figure.media + p {
+      margin-top: -2rem;
+    }
+  </style>
 </head>
 <body>
 <div th:replace="web/fragments/general :: header"></div>
@@ -99,5 +104,20 @@
 
 <div th:replace="web/fragments/general :: footer"></div>
 <th:block th:replace="web/fragments/general :: script"/>
+<script async charset="utf-8" src="//cdn.embedly.com/widgets/platform.js"></script>
+
+<script>
+  document.querySelectorAll( 'oembed[url]' ).forEach( element => {
+      // Create the <a href="..." class="embedly-card"></a> element that Embedly uses
+      // to discover the media.
+      const anchor = document.createElement( 'a' );
+
+      anchor.setAttribute( 'href', element.getAttribute( 'url' ) );
+      anchor.className = 'embedly-card';
+
+      element.appendChild( anchor );
+  } );
+</script>
+
 </body>
 </html>
