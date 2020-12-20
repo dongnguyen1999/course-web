@@ -1,5 +1,6 @@
 package com.ndong.courseweb.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.ndong.courseweb.dto.query_result.NbUserPerCourseIdDTO;
@@ -18,5 +19,15 @@ public interface PurchaseDetailRepository extends JpaRepository<PurchaseDetailEn
 
   @Query("select count(pd.user.id) from PurchaseDetailEntity pd where pd.course.id = ?1")
   Long countByCourseId(Long courseId);
+
+  List<PurchaseDetailEntity> findByPurchaseDate(Date purchaseDate);
+
+  List<PurchaseDetailEntity> findByPurchaseDateLessThan(Date to);
+
+  List<PurchaseDetailEntity> findByPurchaseDateGreaterThanEqual(Date from);
+
+  List<PurchaseDetailEntity> findByPurchaseDateGreaterThanEqualAndPurchaseDateLessThan(Date from, Date to);
+
+
 
 }

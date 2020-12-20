@@ -19,3 +19,7 @@ a.navbar-brand {
   font-size: 2rem;
   font-weight: bold;
 }
+
+h6.chart-header {
+  color: #131d60 !important;
+}

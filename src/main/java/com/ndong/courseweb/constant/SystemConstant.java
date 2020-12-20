@@ -29,6 +29,7 @@ public class SystemConstant {
   public static final int DEFAULT_LIMIT_ITEM = 10;
   public static final int RELATED_COURSE_LIMIT_ITEM = 8;
   public static final int BEST_COURSE_LIMIT_ITEM = 12;
-
+  public static final int REVENUE_CHART_NB_MONTH = 12;
+  public static final int ACCESS_CHART_NB_MONTH = 6;
 
 }
