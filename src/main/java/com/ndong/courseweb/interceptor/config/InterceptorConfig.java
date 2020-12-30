@@ -24,6 +24,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
   @Autowired
   private EditCoursePermissionIntercepter editCoursePermissionIntercepter;
 
+  @Autowired
+  private RequireAdminInterceptor requireAdminInterceptor;
+
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(webInterceptor).
@@ -39,8 +42,14 @@ public class InterceptorConfig implements WebMvcConfigurer {
         addPathPatterns("/course/*/edit").
         addPathPatterns("/course/*/lesson-*/edit").
         addPathPatterns("/course/*/purchase").
+        addPathPatterns("/admin/manage/*").
+        addPathPatterns("/admin").
         addPathPatterns("/account").
         addPathPatterns("/account/*");
+    
+    registry.addInterceptor(requireAdminInterceptor).
+        addPathPatterns("/admin").
+        addPathPatterns("/admin/manage/*");
 
     registry.addInterceptor(editCoursePermissionIntercepter).
         addPathPatterns("/course/*/new-lesson").

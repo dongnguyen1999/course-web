@@ -173,14 +173,11 @@ function deleteSelected(itemType){
     data: JSON.stringify(data),
     dataType: 'json',
     success: function (response) {
-      if (response === true) {
-        data.forEach(function (id) {
-          $(`#${id}`).remove();
-        })
-      }
+      location.reload();
     },
     error: function (error) {
       console.log(error)
+      $('#messageDialog').modal('show')
     },
   });
 }
@@ -197,12 +194,11 @@ function deleteCurrent(trId, itemType) {
     data: JSON.stringify([trId]),
     dataType: 'json',
     success: function (response) {
-      if (response === true){
-        $(`#${trId}`).remove();
-      }
+      location.reload();
     },
     error: function (error) {
       console.log(error)
+      $('#messageDialog').modal('show')
     },
   });
 }

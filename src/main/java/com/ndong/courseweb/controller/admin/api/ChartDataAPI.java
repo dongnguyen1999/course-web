@@ -64,7 +64,7 @@ public class ChartDataAPI {
   }
 
   @RequestMapping(path = "/admin/api/chart/average-revenue", method = RequestMethod.GET)
-  public ResponseEntity<Double> getAverageRevenue() {
+  public ResponseEntity<Long> getAverageRevenue() {
     Date date = new Date(System.currentTimeMillis());
     LocalDate localDate = date.toLocalDate();
     Double average = 0D;
@@ -74,7 +74,7 @@ public class ChartDataAPI {
       average += purchaseDetailService.computeRevenue(purchaseDetailService.countPurchase(start, end));
       localDate = localDate.minusMonths(1);
     }
-    return new ResponseEntity<>(average/SystemConstant.REVENUE_CHART_NB_MONTH, HttpStatus.OK);
+    return new ResponseEntity<>(Math.round(average/SystemConstant.REVENUE_CHART_NB_MONTH), HttpStatus.OK);
   }
 
   @RequestMapping(path = "/admin/api/chart/access", method = RequestMethod.GET)

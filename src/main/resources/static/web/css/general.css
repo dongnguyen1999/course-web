@@ -24,7 +24,7 @@
     color: #cf3c3c !important;
 }
 
-.badge-danger {
+.badge-danger, .bg-danger {
     background: #cf3c3c !important;
 }
 

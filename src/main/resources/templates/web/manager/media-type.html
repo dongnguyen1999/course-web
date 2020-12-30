@@ -102,6 +102,13 @@
             confirmBtnText='Xóa luôn',
             cancelBtnText='Quay lại'
           )"></div>
+
+      <div th:replace="web/fragments/modal :: informationModal(
+        showCondition=true,
+        headerColor='bg-danger',
+        title='Xóa loại tập tin thất bại',
+        content='Không thể xóa loại tập tin do tồn tại ít nhất một tài nguyên đa phương tiện thuộc loại này trong hệ thống!',
+      )"></div>
     
     </div>
   </div><!--page wrapper content.-->

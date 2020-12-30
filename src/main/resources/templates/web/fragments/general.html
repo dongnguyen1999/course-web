@@ -63,6 +63,9 @@
           <li class="nav-item">
             <a class="nav-link contact" href="/index#contactInfo">Liên hệ</a>
           </li>
+          <li class="nav-item" th:if="${user != null && user.statusCode == 'admin'}">
+            <a class="nav-link manage" href="/admin">Quản lý</a>
+          </li>
           <!--          login or register for anonymous-->
           <th:block th:if="${user == null}">
             <li class="nav-item">

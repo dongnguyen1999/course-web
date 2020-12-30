@@ -96,6 +96,13 @@
             confirmBtnText='Xóa luôn',
             cancelBtnText='Quay lại'
           )"></div>
+
+      <div th:replace="web/fragments/modal :: informationModal(
+        showCondition=true,
+        headerColor='bg-danger',
+        title='Xóa thể loại thất bại',
+        content='Không thể xóa thể loại do tồn tại ít nhất một khóa học thuộc thể loại này trong hệ thống!',
+      )"></div>
     
     </div>
 
